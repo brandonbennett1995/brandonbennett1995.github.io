@@ -10,7 +10,7 @@ format:
     self-contained: true
     toc: true
     toc-depth: 3
-    toc-location: right
+    toc-location: left
     toc-title: "Grand Questions"
     number-sections: true
     code-fold: true

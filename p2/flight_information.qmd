@@ -12,7 +12,7 @@ format:
     page-layout: full
     toc-depth: 3
     toc-expand: true
-    toc-location: right
+    toc-location: left
     toc-title: "Grand Questions"
     toc: true
     number-sections: true
