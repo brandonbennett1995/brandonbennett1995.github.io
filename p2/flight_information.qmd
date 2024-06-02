@@ -56,13 +56,34 @@ import plotly.express as px
 
 ## Cleaning
 
-Here is the raw data
+Here is a quick sample of the data that was provided.
 
 ```{python}
 url = 'https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json'
 df = pd.read_json(url)
 df.head()
 ```
+
+Let's start by getting some more info on the data.
+
+```{python}
+# This lets us see a general overview of what we're working with
+df.info()
+```
+
+Maybe just a bit more.
+
+```{python}
+# This lets us see a general overview of what we're working with
+df.describe()
+```
+
+So there are a couple of things we need to do here:
+
+    1. Standardize the data format (Some numbers have decimals when they shouldn't)
+    2. Handle any missing values
+    3. Get rid of any duplicate data
+    4. Get rid of any unnecessary columns
 
 ```{python}
 # Drop any unneeded columns
@@ -89,9 +110,6 @@ df.rename(columns=new_headers, inplace=True)
 
 # Save the columns in a variable
 col_list = df.columns.values
-
-# This lets us see a general overview of what we're working with
-df.info()
 
 # Here we check out our text data and see if there are corrections to be made
 df.code.value_counts(dropna=False)
@@ -156,6 +174,7 @@ df.month = pd.Categorical(
 df.pivot_table(values='code', index='year', columns='month', aggfunc='count')
 ```
 
+Let's see what our data looks like now!
 
 ```{python}
 # Here we fill our na values with np.nan
@@ -168,6 +187,7 @@ df.isna().sum()
 # And here is a sample row with our na value in it
 df.query('@pd.isna(late_aircraft_delays)').head(1)
 ```
+
 
 ## By Airport
 
