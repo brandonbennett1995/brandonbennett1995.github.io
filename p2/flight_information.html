@@ -3277,19 +3277,26 @@ window.Quarto = {
 
 <section id="elevator-pitch" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="elevator-pitch">Elevator Pitch</h2>
-<p><em>paste your elevator pitch here</em> <em>A SHORT (4-5 SENTENCES) PARAGRAPH THAT <code>DESCRIBES KEY INSIGHTS</code> TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.</em></p>
+<ol type="1">
+<li><em>Which airport has the worst delays?</em></li>
+<li><em>What is the best month to fly if you want to avoid delays of any length?</em> <!-- 3. According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. Your job is to create a new column that calculates the total number of flights delayed by weather (both severe and mild). You will need to replace all the missing values in the Late Aircraft variable with the mean. Show your work by printing the first 5 rows of data in a table. Use these three rules for your calculations:
+    a. 100% of delayed flights in the Weather category are due to weather
+    b. 30% of all delayed flights in the Late-Arriving category are due to weather.
+    c. From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%.
+4. Using the new weather variable calculated above, create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph. --></li>
+</ol>
 </section>
 <section id="cleaning" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="cleaning"><span class="header-section-number">1</span> Cleaning</h2>
 <p>Here is the raw data</p>
-<div id="3dd1efbe" class="cell" data-execution_count="2">
+<div id="a71be44a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json&#39;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>df <span class="op">=</span> pd.read_json(url)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="49">
 <div>
 <div>
 
@@ -3418,6 +3425,106 @@ window.Quarto = {
 <td>4326</td>
 <td>91552</td>
 </tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>SFO</td>
+<td>San Francisco, CA: San Francisco International</td>
+<td>January</td>
+<td>2005.0</td>
+<td>10274</td>
+<td>798</td>
+<td>733</td>
+<td>1166</td>
+<td>7</td>
+<td>114</td>
+<td>2816</td>
+<td>41570.0</td>
+<td>47705</td>
+<td>60380.0</td>
+<td>247</td>
+<td>7373</td>
+<td>157275</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>SLC</td>
+<td>Salt Lake City, UT: Salt Lake City International</td>
+<td>January</td>
+<td>2005.0</td>
+<td>12000</td>
+<td>817</td>
+<td>564</td>
+<td>864</td>
+<td>13</td>
+<td>270</td>
+<td>2525</td>
+<td>36252.0</td>
+<td>30557</td>
+<td>35977.0</td>
+<td>327</td>
+<td>27219</td>
+<td>130332</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ATL</td>
+<td>Atlanta, GA: Hartsfield-Jackson Atlanta Intern...</td>
+<td>Febuary</td>
+<td>2005.0</td>
+<td>33702</td>
+<td>1288</td>
+<td>-999</td>
+<td>6104</td>
+<td>2</td>
+<td>399</td>
+<td>9195</td>
+<td>86876.0</td>
+<td>86698</td>
+<td>321969.0</td>
+<td>36</td>
+<td>31944</td>
+<td>527523</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>DEN</td>
+<td>Denver, CO: Denver International</td>
+<td>Febuary</td>
+<td>2005.0</td>
+<td>11480</td>
+<td>729</td>
+<td>432</td>
+<td>581</td>
+<td>4</td>
+<td>42</td>
+<td>1788</td>
+<td>33205.0</td>
+<td>26228</td>
+<td>16864.0</td>
+<td>271</td>
+<td>2781</td>
+<td>79349</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>IAD</td>
+<td>Washington, DC: Washington Dulles International</td>
+<td>Febuary</td>
+<td>2005.0</td>
+<td>10042</td>
+<td>284</td>
+<td>631</td>
+<td>691</td>
+<td>4</td>
+<td>28</td>
+<td>1639</td>
+<td>15573.0</td>
+<td>39840</td>
+<td>NaN</td>
+<td>169</td>
+<td>1359</td>
+<td>78878</td>
+</tr>
 </tbody>
 </table>
 
@@ -3425,7 +3532,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="0696f496" class="cell" data-execution_count="3">
+<div id="ead9bff7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Drop any unneeded columns</span></span>
@@ -3448,12 +3555,12 @@ window.Quarto = {
 <span id="cb2-18"><a href="#cb2-18"></a>    <span class="st">&#39;minutes_delayed_weather&#39;</span>: <span class="st">&#39;weather_time&#39;</span>, </span>
 <span id="cb2-19"><a href="#cb2-19"></a>    <span class="st">&#39;minutes_delayed_total&#39;</span>: <span class="st">&#39;total_time&#39;</span></span>
 <span id="cb2-20"><a href="#cb2-20"></a>}</span>
-<span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a>df.rename(columns<span class="op">=</span>new_headers, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-23"><a href="#cb2-23"></a></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Save the columns in a variable</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>col_list <span class="op">=</span> df.columns.values</span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a>df.rename(columns<span class="op">=</span>new_headers, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># Save the columns in a variable</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>col_list <span class="op">=</span> df.columns.values</span>
+<span id="cb2-25"><a href="#cb2-25"></a></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co"># This lets us see a general overview of what we&#39;re working with</span></span>
 <span id="cb2-27"><a href="#cb2-27"></a>df.info()</span>
 <span id="cb2-28"><a href="#cb2-28"></a></span>
 <span id="cb2-29"><a href="#cb2-29"></a><span class="co"># Here we check out our text data and see if there are corrections to be made</span></span>
@@ -3543,7 +3650,7 @@ Data columns (total 16 columns):
 dtypes: float64(3), int64(10), object(3)
 memory usage: 115.6+ KB</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="50">
 <div>
 <div>
 
@@ -3754,7 +3861,7 @@ memory usage: 115.6+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="825d3188" class="cell" data-execution_count="4">
+<div id="2f8582e6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Here we fill our na values with np.nan</span></span>
@@ -3767,7 +3874,7 @@ memory usage: 115.6+ KB</code></pre>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="co"># And here is a sample row with our na value in it</span></span>
 <span id="cb4-9"><a href="#cb4-9"></a>df.query(<span class="st">&#39;@pd.isna(late_aircraft_delays)&#39;</span>).head(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="51">
 <div>
 <div>
 
@@ -3826,7 +3933,7 @@ memory usage: 115.6+ KB</code></pre>
 <h2 data-number="2" class="anchored" data-anchor-id="by-airport"><span class="header-section-number">2</span> By Airport</h2>
 <p><em>Which airport has the worst delays?</em></p>
 <p>Here we seperate the relevant columns from our DataFrame. We then will compute the ratio of delayed flights to total flights and also find the minutes per delay. Afterwards we will group them and average them by airport. Graphing the data provides us with some significant insight about which airport is best and which is worst. When it comes to your likelihood of having your flight delayed, San Francisco has over a <span class="math inline">\(\frac{1}{4}\)</span> chance of delaying your flight. However, you have a slightly lower chance of having a longer wait time at Chicago O’Hare. I personally would take a lower chance at a longer delay, so I say San Francisco is has the worst delays.</p>
-<div id="c784ccac" class="cell" data-execution_count="5">
+<div id="ff8c879a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>worst <span class="op">=</span> (</span>
@@ -3877,9 +3984,9 @@ memory usage: 115.6+ KB</code></pre>
 <span id="cb5-46"><a href="#cb5-46"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="a546674f-5beb-421f-809d-83d60639bf11" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("a546674f-5beb-421f-809d-83d60639bf11")) {                    Plotly.newPlot(                        "a546674f-5beb-421f-809d-83d60639bf11",                        [{"alignmentgroup":"True","customdata":[[0.2016491706595049],[0.18578165063091606],[0.19516054362206298],[0.22881193714994072],[0.18970811505017884],[0.2606124006385618],[0.1440633818983923]],"hovertemplate":"Airport=%{x}\u003cbr\u003eAverage Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.2016491706595049,0.18578165063091606,0.19516054362206298,0.22881193714994072,0.18970811505017884,0.2606124006385618,0.1440633818983923],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["ATL","DEN","IAD","ORD","SAN","SFO","SLC"],"xaxis":"x","y":[59.370105684707724,52.954839900480124,60.194677258463614,66.3430436233577,47.0416531309433,61.05917084795491,49.415215452974735],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Airport"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Time (Minutes)"},"range":[40,70],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Airport Delay Averages by Location"}},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="b95aeb75-4170-463b-bc60-c7f306261c3a" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("b95aeb75-4170-463b-bc60-c7f306261c3a")) {                    Plotly.newPlot(                        "b95aeb75-4170-463b-bc60-c7f306261c3a",                        [{"alignmentgroup":"True","customdata":[[0.2016491706595049],[0.18578165063091606],[0.19516054362206298],[0.22881193714994072],[0.18970811505017884],[0.2606124006385618],[0.1440633818983923]],"hovertemplate":"Airport=%{x}\u003cbr\u003eAverage Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.2016491706595049,0.18578165063091606,0.19516054362206298,0.22881193714994072,0.18970811505017884,0.2606124006385618,0.1440633818983923],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["ATL","DEN","IAD","ORD","SAN","SFO","SLC"],"xaxis":"x","y":[59.370105684707724,52.954839900480124,60.194677258463614,66.3430436233577,47.0416531309433,61.05917084795491,49.415215452974735],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Airport"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Time (Minutes)"},"range":[40,70],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Airport Delay Averages by Location"}},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('a546674f-5beb-421f-809d-83d60639bf11');
+var gd = document.getElementById('b95aeb75-4170-463b-bc60-c7f306261c3a');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -3905,7 +4012,7 @@ if (outputEl) {{
 </div>
 </div>
 <p>As the average of a dataset can be swayed by the extremities that are included, I have also decided to include the median of the dataset. Fortunately for us, this shows that there weren’t too many extreme outliers involved and rather shows some consistency. Once again, San Francisco is shown to have the highest chance of a delay, while O’Hare is not far behind, but with slightly longer delay times.</p>
-<div id="aff13050" class="cell" data-execution_count="6">
+<div id="b02cbdc2" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -3938,9 +4045,9 @@ if (outputEl) {{
 <span id="cb6-28"><a href="#cb6-28"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="b80864c1-b3bf-4961-acd0-81278e7a4fb5" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("b80864c1-b3bf-4961-acd0-81278e7a4fb5")) {                    Plotly.newPlot(                        "b80864c1-b3bf-4961-acd0-81278e7a4fb5",                        [{"alignmentgroup":"True","customdata":[[0.19527632427782954],[0.18331568231831968],[0.1921591239271236],[0.22226116788848996],[0.18576383318686857],[0.2529612991228102],[0.1343903131909326]],"hovertemplate":"Airport=%{x}\u003cbr\u003eMedian Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.19527632427782954,0.18331568231831968,0.1921591239271236,0.22226116788848996,0.18576383318686857,0.2529612991228102,0.1343903131909326],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["ATL","DEN","IAD","ORD","SAN","SFO","SLC"],"xaxis":"x","y":[58.40925449054776,52.273663904104936,59.77177216319552,66.40363289623835,46.43366553742301,60.18095135014747,48.01976458243374],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Airport"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Median Time (Minutes)"},"range":[40,70],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Median Airport Delays by Location"}},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="d29c070e-59d4-493a-b045-0d2f257eb961" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d29c070e-59d4-493a-b045-0d2f257eb961")) {                    Plotly.newPlot(                        "d29c070e-59d4-493a-b045-0d2f257eb961",                        [{"alignmentgroup":"True","customdata":[[0.19527632427782954],[0.18331568231831968],[0.1921591239271236],[0.22226116788848996],[0.18576383318686857],[0.2529612991228102],[0.1343903131909326]],"hovertemplate":"Airport=%{x}\u003cbr\u003eMedian Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.19527632427782954,0.18331568231831968,0.1921591239271236,0.22226116788848996,0.18576383318686857,0.2529612991228102,0.1343903131909326],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["ATL","DEN","IAD","ORD","SAN","SFO","SLC"],"xaxis":"x","y":[58.40925449054776,52.273663904104936,59.77177216319552,66.40363289623835,46.43366553742301,60.18095135014747,48.01976458243374],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Airport"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Median Time (Minutes)"},"range":[40,70],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Median Airport Delays by Location"}},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('b80864c1-b3bf-4961-acd0-81278e7a4fb5');
+var gd = document.getElementById('d29c070e-59d4-493a-b045-0d2f257eb961');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -3970,7 +4077,7 @@ if (outputEl) {{
 <h2 data-number="3" class="anchored" data-anchor-id="by-month"><span class="header-section-number">3</span> By Month</h2>
 <p><em>What is the best month to fly if you want to avoid delays of any length?</em></p>
 <p>Surprising almost no one, December has the highest chances of getting your flight delayed. Old man Winter sure can be harsh on planes and the data backs that up nicely. I think the most shocking thing for me was that summer has the longest delays on average. I would think that these are not related to maintainence, or weather, like in the winter, but could dealing with other passengers cause this much delay in our travels? If you want to have minimal delays of any kind, April or October are your best bet! These make sense, as school is in session for most families and the weather isn’t too extreme.</p>
-<div id="593fafea" class="cell" data-execution_count="7">
+<div id="9fa03ddd" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>by_month <span class="op">=</span> (</span>
@@ -4014,9 +4121,9 @@ if (outputEl) {{
 <span id="cb7-39"><a href="#cb7-39"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="d26bc277-1efe-44b5-9bb8-f504f72104c4" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d26bc277-1efe-44b5-9bb8-f504f72104c4")) {                    Plotly.newPlot(                        "d26bc277-1efe-44b5-9bb8-f504f72104c4",                        [{"alignmentgroup":"True","customdata":[[0.21602187774779344],[0.21564973692523456],[0.19951330474344917],[0.17901876502001474],[0.18612779136525687],[0.23952997171780416],[0.225044851906852],[0.2008988869250297],[0.15847327232945876],[0.17335321482452096],[0.16104031993743423],[0.2552489202421074]],"hovertemplate":"=%{x}\u003cbr\u003eAverage Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.21602187774779344,0.21564973692523456,0.19951330474344917,0.17901876502001474,0.18612779136525687,0.23952997171780416,0.225044851906852,0.2008988869250297,0.15847327232945876,0.17335321482452096,0.16104031993743423,0.2552489202421074],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["January","February","March","April","May","June","July","August","September","October","November","December"],"xaxis":"x","y":[57.473489135361724,56.5241616379821,55.90084247853573,54.79522682071909,55.89661078333258,60.954466892015084,60.885142624970015,57.61256246632442,53.4467935864672,52.74768767445284,54.096189647941856,59.173179221409555],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Time (Minutes)"},"range":[50,62],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Airport Delay Averages by Month"}},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="d06244bd-dd0d-41b4-b894-b27f2617214b" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d06244bd-dd0d-41b4-b894-b27f2617214b")) {                    Plotly.newPlot(                        "d06244bd-dd0d-41b4-b894-b27f2617214b",                        [{"alignmentgroup":"True","customdata":[[0.21602187774779344],[0.21564973692523456],[0.19951330474344917],[0.17901876502001474],[0.18612779136525687],[0.23952997171780416],[0.225044851906852],[0.2008988869250297],[0.15847327232945876],[0.17335321482452096],[0.16104031993743423],[0.2552489202421074]],"hovertemplate":"=%{x}\u003cbr\u003eAverage Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.21602187774779344,0.21564973692523456,0.19951330474344917,0.17901876502001474,0.18612779136525687,0.23952997171780416,0.225044851906852,0.2008988869250297,0.15847327232945876,0.17335321482452096,0.16104031993743423,0.2552489202421074],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["January","February","March","April","May","June","July","August","September","October","November","December"],"xaxis":"x","y":[57.473489135361724,56.5241616379821,55.90084247853573,54.79522682071909,55.89661078333258,60.954466892015084,60.885142624970015,57.61256246632442,53.4467935864672,52.74768767445284,54.096189647941856,59.173179221409555],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Time (Minutes)"},"range":[50,62],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Airport Delay Averages by Month"}},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('d26bc277-1efe-44b5-9bb8-f504f72104c4');
+var gd = document.getElementById('d06244bd-dd0d-41b4-b894-b27f2617214b');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -4042,7 +4149,7 @@ if (outputEl) {{
 </div>
 </div>
 <p>Once again I’ve included the median times and, like before, it seems to corraborate the averages pretty closely. April and October are your best choices!</p>
-<div id="9f3c3798" class="cell" data-execution_count="8">
+<div id="c9e6c84f" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -4075,9 +4182,9 @@ if (outputEl) {{
 <span id="cb8-28"><a href="#cb8-28"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="d2a01e3d-d8af-49b8-8f1b-42c74ee4bd5f" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d2a01e3d-d8af-49b8-8f1b-42c74ee4bd5f")) {                    Plotly.newPlot(                        "d2a01e3d-d8af-49b8-8f1b-42c74ee4bd5f",                        [{"alignmentgroup":"True","customdata":[[0.21041666666666667],[0.20980385882955235],[0.18639495110083346],[0.17443174682908452],[0.18213371664972128],[0.23999531259155094],[0.22149575590731818],[0.19396195202646815],[0.14364018621414626],[0.1544548505033305],[0.1536789297658863],[0.24229995979091273]],"hovertemplate":"=%{x}\u003cbr\u003eMedian Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.21041666666666667,0.20980385882955235,0.18639495110083346,0.17443174682908452,0.18213371664972128,0.23999531259155094,0.22149575590731818,0.19396195202646815,0.14364018621414626,0.1544548505033305,0.1536789297658863,0.24229995979091273],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["January","February","March","April","May","June","July","August","September","October","November","December"],"xaxis":"x","y":[56.12579821200511,55.7508826125331,55.22206703910614,53.64752252252252,55.67629482071713,60.71871469812979,60.18952234206471,57.48707197763802,53.535768645357685,53.13331515812432,53.46945269410267,57.54364089775561],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Median Time (Minutes)"},"range":[50,62],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Median Airport Delays by Month"}},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="a210473b-045b-48ee-b25a-55c0e92039ab" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("a210473b-045b-48ee-b25a-55c0e92039ab")) {                    Plotly.newPlot(                        "a210473b-045b-48ee-b25a-55c0e92039ab",                        [{"alignmentgroup":"True","customdata":[[0.21041666666666667],[0.20980385882955235],[0.18639495110083346],[0.17443174682908452],[0.18213371664972128],[0.23999531259155094],[0.22149575590731818],[0.19396195202646815],[0.14364018621414626],[0.1544548505033305],[0.1536789297658863],[0.24229995979091273]],"hovertemplate":"=%{x}\u003cbr\u003eMedian Time (Minutes)=%{y}\u003cbr\u003ePercent Delayed=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.21041666666666667,0.20980385882955235,0.18639495110083346,0.17443174682908452,0.18213371664972128,0.23999531259155094,0.22149575590731818,0.19396195202646815,0.14364018621414626,0.1544548505033305,0.1536789297658863,0.24229995979091273],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1f}","x":["January","February","March","April","May","June","July","August","September","October","November","December"],"xaxis":"x","y":[56.12579821200511,55.7508826125331,55.22206703910614,53.64752252252252,55.67629482071713,60.71871469812979,60.18952234206471,57.48707197763802,53.535768645357685,53.13331515812432,53.46945269410267,57.54364089775561],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Median Time (Minutes)"},"range":[50,62],"tickformat":".0f"},"coloraxis":{"colorbar":{"title":{"text":"Percent Delayed"},"tickformat":".0%"},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Median Airport Delays by Month"}},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('d2a01e3d-d8af-49b8-8f1b-42c74ee4bd5f');
+var gd = document.getElementById('a210473b-045b-48ee-b25a-55c0e92039ab');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -4109,7 +4216,7 @@ if (outputEl) {{
 <li><label><input type="checkbox"><em>Create a new column that calculates the total number of flights delayed by weather (both severe and mild)</em></label></li>
 <li><label><input type="checkbox"><em>Create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.</em></label></li>
 </ul>
-<div id="fdb9b6e2" class="cell" data-execution_count="9">
+<div id="e84bef2c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>months <span class="op">=</span> [<span class="st">&#39;April&#39;</span>, <span class="st">&#39;May&#39;</span>, <span class="st">&#39;June&#39;</span>, <span class="st">&#39;July&#39;</span>, <span class="st">&#39;August&#39;</span>]</span>
@@ -4158,9 +4265,9 @@ if (outputEl) {{
 <span id="cb9-44"><a href="#cb9-44"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="606fb663-59de-40bc-a34b-9c392b269373" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("606fb663-59de-40bc-a34b-9c392b269373")) {                    Plotly.newPlot(                        "606fb663-59de-40bc-a34b-9c392b269373",                        [{"alignmentgroup":"True","hovertemplate":"Airport=%{x}\u003cbr\u003ePercent=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.34773257575757577,0.3169757575757576,0.3010113636363636,0.3696280303030303,0.2788469696969697,0.3710924242424243,0.2900931818181818],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1%}","x":["ATL","DEN","IAD","ORD","SAN","SFO","SLC"],"xaxis":"x","y":[0.34773257575757577,0.3169757575757576,0.3010113636363636,0.3696280303030303,0.2788469696969697,0.3710924242424243,0.2900931818181818],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Airport"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Percent"},"range":[0.25,0.4],"tickformat":".0%"},"coloraxis":{"colorbar":{"title":{"text":"Percent"}},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"showscale":false},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Percent of Total Delays caused by Weather"}},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="5282eb96-0fd9-43de-92f6-df4d698a3adb" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("5282eb96-0fd9-43de-92f6-df4d698a3adb")) {                    Plotly.newPlot(                        "5282eb96-0fd9-43de-92f6-df4d698a3adb",                        [{"alignmentgroup":"True","hovertemplate":"Airport=%{x}\u003cbr\u003ePercent=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0.34773257575757577,0.3169757575757576,0.3010113636363636,0.3696280303030303,0.2788469696969697,0.3710924242424243,0.2900931818181818],"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","texttemplate":"%{y:.1%}","x":["ATL","DEN","IAD","ORD","SAN","SFO","SLC"],"xaxis":"x","y":[0.34773257575757577,0.3169757575757576,0.3010113636363636,0.3696280303030303,0.2788469696969697,0.3710924242424243,0.2900931818181818],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Airport"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Percent"},"range":[0.25,0.4],"tickformat":".0%"},"coloraxis":{"colorbar":{"title":{"text":"Percent"}},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"showscale":false},"legend":{"tracegroupgap":0},"barmode":"relative","title":{"text":"Percent of Total Delays caused by Weather"}},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('606fb663-59de-40bc-a34b-9c392b269373');
+var gd = document.getElementById('5282eb96-0fd9-43de-92f6-df4d698a3adb');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -4704,7 +4811,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-35"><a href="#cb10-35"></a><span class="co">---</span></span>
 <span id="cb10-36"><a href="#cb10-36"></a></span>
 <span id="cb10-39"><a href="#cb10-39"></a><span class="in">```{python}</span></span>
-<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#| label: libraries</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#| label: Import ibraries</span></span>
 <span id="cb10-41"><a href="#cb10-41"></a><span class="co">#| include: false</span></span>
 <span id="cb10-42"><a href="#cb10-42"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-43"><a href="#cb10-43"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -4714,364 +4821,366 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-47"><a href="#cb10-47"></a></span>
 <span id="cb10-48"><a href="#cb10-48"></a><span class="fu">## Elevator Pitch {.unnumbered}</span></span>
 <span id="cb10-49"><a href="#cb10-49"></a></span>
-<span id="cb10-50"><a href="#cb10-50"></a></span>
-<span id="cb10-51"><a href="#cb10-51"></a>  _paste your elevator pitch here_</span>
-<span id="cb10-52"><a href="#cb10-52"></a>  _A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS._</span>
-<span id="cb10-53"><a href="#cb10-53"></a></span>
-<span id="cb10-54"><a href="#cb10-54"></a></span>
-<span id="cb10-55"><a href="#cb10-55"></a><span class="fu">## Cleaning</span></span>
-<span id="cb10-56"><a href="#cb10-56"></a></span>
-<span id="cb10-57"><a href="#cb10-57"></a>Here is the raw data</span>
+<span id="cb10-50"><a href="#cb10-50"></a><span class="ss">1. </span>*Which airport has the worst delays?*</span>
+<span id="cb10-51"><a href="#cb10-51"></a><span class="ss">2. </span>*What is the best month to fly if you want to avoid delays of any length?*</span>
+<span id="cb10-52"><a href="#cb10-52"></a><span class="co">&lt;!-- 3. According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. Your job is to create a new column that calculates the total number of flights delayed by weather (both severe and mild). You will need to replace all the missing values in the Late Aircraft variable with the mean. Show your work by printing the first 5 rows of data in a table. Use these three rules for your calculations:</span></span>
+<span id="cb10-53"><a href="#cb10-53"></a><span class="co">    a. 100% of delayed flights in the Weather category are due to weather</span></span>
+<span id="cb10-54"><a href="#cb10-54"></a><span class="co">    b. 30% of all delayed flights in the Late-Arriving category are due to weather.</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a><span class="co">    c. From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%.</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">4. Using the new weather variable calculated above, create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph. --&gt;</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a></span>
 <span id="cb10-58"><a href="#cb10-58"></a></span>
-<span id="cb10-61"><a href="#cb10-61"></a><span class="in">```{python}</span></span>
-<span id="cb10-62"><a href="#cb10-62"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json&#39;</span></span>
-<span id="cb10-63"><a href="#cb10-63"></a>df <span class="op">=</span> pd.read_json(url)</span>
-<span id="cb10-64"><a href="#cb10-64"></a>df.head()</span>
-<span id="cb10-65"><a href="#cb10-65"></a><span class="in">```</span></span>
-<span id="cb10-66"><a href="#cb10-66"></a></span>
-<span id="cb10-67"><a href="#cb10-67"></a></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="in">```{python}</span></span>
-<span id="cb10-71"><a href="#cb10-71"></a><span class="co"># Drop any unneeded columns</span></span>
-<span id="cb10-72"><a href="#cb10-72"></a>df.drop(columns<span class="op">=</span>[<span class="st">&#39;airport_name&#39;</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-73"><a href="#cb10-73"></a></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="co"># Rename the columns for my own sanity</span></span>
-<span id="cb10-75"><a href="#cb10-75"></a>new_headers <span class="op">=</span> {</span>
-<span id="cb10-76"><a href="#cb10-76"></a>    <span class="st">&#39;airport_code&#39;</span>: <span class="st">&#39;code&#39;</span>,</span>
-<span id="cb10-77"><a href="#cb10-77"></a>    <span class="st">&#39;num_of_flights_total&#39;</span>: <span class="st">&#39;total_flights&#39;</span>,</span>
-<span id="cb10-78"><a href="#cb10-78"></a>    <span class="st">&#39;num_of_delays_carrier&#39;</span>: <span class="st">&#39;carrier_delays&#39;</span>, </span>
-<span id="cb10-79"><a href="#cb10-79"></a>    <span class="st">&#39;num_of_delays_late_aircraft&#39;</span>: <span class="st">&#39;late_aircraft_delays&#39;</span>, </span>
-<span id="cb10-80"><a href="#cb10-80"></a>    <span class="st">&#39;num_of_delays_nas&#39;</span>: <span class="st">&#39;nas_delays&#39;</span>, </span>
-<span id="cb10-81"><a href="#cb10-81"></a>    <span class="st">&#39;num_of_delays_security&#39;</span>: <span class="st">&#39;security_delays&#39;</span>, </span>
-<span id="cb10-82"><a href="#cb10-82"></a>    <span class="st">&#39;num_of_delays_weather&#39;</span>: <span class="st">&#39;weather_delays&#39;</span>,</span>
-<span id="cb10-83"><a href="#cb10-83"></a>    <span class="st">&#39;num_of_delays_total&#39;</span>: <span class="st">&#39;total_delays&#39;</span>,</span>
-<span id="cb10-84"><a href="#cb10-84"></a>    <span class="st">&#39;minutes_delayed_carrier&#39;</span>: <span class="st">&#39;carrier_time&#39;</span>, </span>
-<span id="cb10-85"><a href="#cb10-85"></a>    <span class="st">&#39;minutes_delayed_late_aircraft&#39;</span>: <span class="st">&#39;late_aircraft_time&#39;</span>, </span>
-<span id="cb10-86"><a href="#cb10-86"></a>    <span class="st">&#39;minutes_delayed_nas&#39;</span>: <span class="st">&#39;nas_time&#39;</span>, </span>
-<span id="cb10-87"><a href="#cb10-87"></a>    <span class="st">&#39;minutes_delayed_security&#39;</span>: <span class="st">&#39;security_time&#39;</span>, </span>
-<span id="cb10-88"><a href="#cb10-88"></a>    <span class="st">&#39;minutes_delayed_weather&#39;</span>: <span class="st">&#39;weather_time&#39;</span>, </span>
-<span id="cb10-89"><a href="#cb10-89"></a>    <span class="st">&#39;minutes_delayed_total&#39;</span>: <span class="st">&#39;total_time&#39;</span></span>
-<span id="cb10-90"><a href="#cb10-90"></a>}</span>
-<span id="cb10-91"><a href="#cb10-91"></a></span>
-<span id="cb10-92"><a href="#cb10-92"></a>df.rename(columns<span class="op">=</span>new_headers, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-93"><a href="#cb10-93"></a></span>
-<span id="cb10-94"><a href="#cb10-94"></a><span class="co"># Save the columns in a variable</span></span>
-<span id="cb10-95"><a href="#cb10-95"></a>col_list <span class="op">=</span> df.columns.values</span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="fu">## Cleaning</span></span>
+<span id="cb10-60"><a href="#cb10-60"></a></span>
+<span id="cb10-61"><a href="#cb10-61"></a>Here is the raw data</span>
+<span id="cb10-62"><a href="#cb10-62"></a></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="in">```{python}</span></span>
+<span id="cb10-66"><a href="#cb10-66"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json&#39;</span></span>
+<span id="cb10-67"><a href="#cb10-67"></a>df <span class="op">=</span> pd.read_json(url)</span>
+<span id="cb10-68"><a href="#cb10-68"></a>df.head(<span class="dv">10</span>)</span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="in">```</span></span>
+<span id="cb10-70"><a href="#cb10-70"></a></span>
+<span id="cb10-71"><a href="#cb10-71"></a></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="in">```{python}</span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co"># Drop any unneeded columns</span></span>
+<span id="cb10-76"><a href="#cb10-76"></a>df.drop(columns<span class="op">=</span>[<span class="st">&#39;airport_name&#39;</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-77"><a href="#cb10-77"></a></span>
+<span id="cb10-78"><a href="#cb10-78"></a><span class="co"># Rename the columns for my own sanity</span></span>
+<span id="cb10-79"><a href="#cb10-79"></a>new_headers <span class="op">=</span> {</span>
+<span id="cb10-80"><a href="#cb10-80"></a>    <span class="st">&#39;airport_code&#39;</span>: <span class="st">&#39;code&#39;</span>,</span>
+<span id="cb10-81"><a href="#cb10-81"></a>    <span class="st">&#39;num_of_flights_total&#39;</span>: <span class="st">&#39;total_flights&#39;</span>,</span>
+<span id="cb10-82"><a href="#cb10-82"></a>    <span class="st">&#39;num_of_delays_carrier&#39;</span>: <span class="st">&#39;carrier_delays&#39;</span>, </span>
+<span id="cb10-83"><a href="#cb10-83"></a>    <span class="st">&#39;num_of_delays_late_aircraft&#39;</span>: <span class="st">&#39;late_aircraft_delays&#39;</span>, </span>
+<span id="cb10-84"><a href="#cb10-84"></a>    <span class="st">&#39;num_of_delays_nas&#39;</span>: <span class="st">&#39;nas_delays&#39;</span>, </span>
+<span id="cb10-85"><a href="#cb10-85"></a>    <span class="st">&#39;num_of_delays_security&#39;</span>: <span class="st">&#39;security_delays&#39;</span>, </span>
+<span id="cb10-86"><a href="#cb10-86"></a>    <span class="st">&#39;num_of_delays_weather&#39;</span>: <span class="st">&#39;weather_delays&#39;</span>,</span>
+<span id="cb10-87"><a href="#cb10-87"></a>    <span class="st">&#39;num_of_delays_total&#39;</span>: <span class="st">&#39;total_delays&#39;</span>,</span>
+<span id="cb10-88"><a href="#cb10-88"></a>    <span class="st">&#39;minutes_delayed_carrier&#39;</span>: <span class="st">&#39;carrier_time&#39;</span>, </span>
+<span id="cb10-89"><a href="#cb10-89"></a>    <span class="st">&#39;minutes_delayed_late_aircraft&#39;</span>: <span class="st">&#39;late_aircraft_time&#39;</span>, </span>
+<span id="cb10-90"><a href="#cb10-90"></a>    <span class="st">&#39;minutes_delayed_nas&#39;</span>: <span class="st">&#39;nas_time&#39;</span>, </span>
+<span id="cb10-91"><a href="#cb10-91"></a>    <span class="st">&#39;minutes_delayed_security&#39;</span>: <span class="st">&#39;security_time&#39;</span>, </span>
+<span id="cb10-92"><a href="#cb10-92"></a>    <span class="st">&#39;minutes_delayed_weather&#39;</span>: <span class="st">&#39;weather_time&#39;</span>, </span>
+<span id="cb10-93"><a href="#cb10-93"></a>    <span class="st">&#39;minutes_delayed_total&#39;</span>: <span class="st">&#39;total_time&#39;</span></span>
+<span id="cb10-94"><a href="#cb10-94"></a>}</span>
+<span id="cb10-95"><a href="#cb10-95"></a>df.rename(columns<span class="op">=</span>new_headers, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb10-96"><a href="#cb10-96"></a></span>
-<span id="cb10-97"><a href="#cb10-97"></a>df.info()</span>
-<span id="cb10-98"><a href="#cb10-98"></a></span>
-<span id="cb10-99"><a href="#cb10-99"></a><span class="co"># Here we check out our text data and see if there are corrections to be made</span></span>
-<span id="cb10-100"><a href="#cb10-100"></a>df.code.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-101"><a href="#cb10-101"></a>df.month.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-102"><a href="#cb10-102"></a>df.carrier_delays.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-103"><a href="#cb10-103"></a></span>
-<span id="cb10-104"><a href="#cb10-104"></a><span class="co"># Lets replace all n/a with pd.NA, and while we&#39;re at it, fix february&#39;s spelling</span></span>
-<span id="cb10-105"><a href="#cb10-105"></a>df.month.replace([<span class="st">&#39;n/a&#39;</span>, <span class="st">&#39;Febuary&#39;</span>], [np.nan, <span class="st">&#39;February&#39;</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-106"><a href="#cb10-106"></a></span>
-<span id="cb10-107"><a href="#cb10-107"></a><span class="co"># Checking the values again</span></span>
-<span id="cb10-108"><a href="#cb10-108"></a>df.month.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-109"><a href="#cb10-109"></a></span>
-<span id="cb10-110"><a href="#cb10-110"></a><span class="co"># Checking out the numerical data</span></span>
-<span id="cb10-111"><a href="#cb10-111"></a>df.select_dtypes(exclude<span class="op">=</span><span class="st">&#39;object&#39;</span>).describe()</span>
-<span id="cb10-112"><a href="#cb10-112"></a></span>
-<span id="cb10-113"><a href="#cb10-113"></a><span class="co"># # -999 appears to be a placeholder to missing data</span></span>
-<span id="cb10-114"><a href="#cb10-114"></a>df.replace(<span class="op">-</span><span class="dv">999</span>, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-115"><a href="#cb10-115"></a></span>
-<span id="cb10-116"><a href="#cb10-116"></a><span class="co"># After looking a bit closer at the data, I believe it&#39;s reasonable to fill in </span></span>
-<span id="cb10-117"><a href="#cb10-117"></a><span class="co"># some of these months. The raw data looks to be in chronological order, so I </span></span>
-<span id="cb10-118"><a href="#cb10-118"></a><span class="co"># am going to make that assumption that I can fill these in.</span></span>
-<span id="cb10-119"><a href="#cb10-119"></a>df[<span class="st">&#39;month&#39;</span>] <span class="op">=</span> np.where(</span>
-<span id="cb10-120"><a href="#cb10-120"></a>    df[<span class="st">&#39;code&#39;</span>] <span class="op">==</span> <span class="st">&quot;ATL&quot;</span>, df[<span class="st">&#39;month&#39;</span>].bfill(), df[<span class="st">&#39;month&#39;</span>].ffill()</span>
-<span id="cb10-121"><a href="#cb10-121"></a>)</span>
-<span id="cb10-122"><a href="#cb10-122"></a></span>
-<span id="cb10-123"><a href="#cb10-123"></a><span class="co"># I believe we can do the same for the year column</span></span>
-<span id="cb10-124"><a href="#cb10-124"></a>df[<span class="st">&#39;year&#39;</span>] <span class="op">=</span> np.where(</span>
-<span id="cb10-125"><a href="#cb10-125"></a>    df[<span class="st">&#39;code&#39;</span>] <span class="op">==</span> <span class="st">&quot;ATL&quot;</span>, df[<span class="st">&#39;year&#39;</span>].bfill(), df[<span class="st">&#39;year&#39;</span>].ffill()</span>
-<span id="cb10-126"><a href="#cb10-126"></a>)</span>
-<span id="cb10-127"><a href="#cb10-127"></a></span>
-<span id="cb10-128"><a href="#cb10-128"></a><span class="co"># Make all the years integers</span></span>
-<span id="cb10-129"><a href="#cb10-129"></a>df[<span class="st">&#39;year&#39;</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">&#39;year&#39;</span>], downcast<span class="op">=</span><span class="st">&#39;integer&#39;</span>)</span>
-<span id="cb10-130"><a href="#cb10-130"></a></span>
-<span id="cb10-131"><a href="#cb10-131"></a><span class="co"># Set the codes as categories</span></span>
-<span id="cb10-132"><a href="#cb10-132"></a>df.code <span class="op">=</span> pd.Categorical(</span>
-<span id="cb10-133"><a href="#cb10-133"></a>    df.code,</span>
-<span id="cb10-134"><a href="#cb10-134"></a>    ordered<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb10-135"><a href="#cb10-135"></a>    categories<span class="op">=</span>[<span class="st">&#39;ATL&#39;</span>, <span class="st">&#39;DEN&#39;</span>, <span class="st">&#39;IAD&#39;</span>, <span class="st">&#39;ORD&#39;</span>, <span class="st">&#39;SAN&#39;</span>, <span class="st">&#39;SFO&#39;</span>, <span class="st">&#39;SLC&#39;</span>]</span>
-<span id="cb10-136"><a href="#cb10-136"></a>)</span>
-<span id="cb10-137"><a href="#cb10-137"></a></span>
-<span id="cb10-138"><a href="#cb10-138"></a><span class="co"># Set the months as categories and order them</span></span>
-<span id="cb10-139"><a href="#cb10-139"></a>df.month <span class="op">=</span> pd.Categorical(</span>
-<span id="cb10-140"><a href="#cb10-140"></a>    df.month,</span>
-<span id="cb10-141"><a href="#cb10-141"></a>    ordered<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb10-142"><a href="#cb10-142"></a>    categories<span class="op">=</span>[</span>
-<span id="cb10-143"><a href="#cb10-143"></a>        <span class="st">&#39;January&#39;</span>, </span>
-<span id="cb10-144"><a href="#cb10-144"></a>        <span class="st">&#39;February&#39;</span>, </span>
-<span id="cb10-145"><a href="#cb10-145"></a>        <span class="st">&#39;March&#39;</span>, </span>
-<span id="cb10-146"><a href="#cb10-146"></a>        <span class="st">&#39;April&#39;</span>, </span>
-<span id="cb10-147"><a href="#cb10-147"></a>        <span class="st">&#39;May&#39;</span>, </span>
-<span id="cb10-148"><a href="#cb10-148"></a>        <span class="st">&#39;June&#39;</span>,</span>
-<span id="cb10-149"><a href="#cb10-149"></a>        <span class="st">&#39;July&#39;</span>, </span>
-<span id="cb10-150"><a href="#cb10-150"></a>        <span class="st">&#39;August&#39;</span>, </span>
-<span id="cb10-151"><a href="#cb10-151"></a>        <span class="st">&#39;September&#39;</span>, </span>
-<span id="cb10-152"><a href="#cb10-152"></a>        <span class="st">&#39;October&#39;</span>, </span>
-<span id="cb10-153"><a href="#cb10-153"></a>        <span class="st">&#39;November&#39;</span>,</span>
-<span id="cb10-154"><a href="#cb10-154"></a>        <span class="st">&#39;December&#39;</span></span>
-<span id="cb10-155"><a href="#cb10-155"></a>    ]</span>
-<span id="cb10-156"><a href="#cb10-156"></a>)</span>
-<span id="cb10-157"><a href="#cb10-157"></a></span>
-<span id="cb10-158"><a href="#cb10-158"></a><span class="co"># Here we double check the year and month counts</span></span>
-<span id="cb10-159"><a href="#cb10-159"></a>df.pivot_table(values<span class="op">=</span><span class="st">&#39;code&#39;</span>, index<span class="op">=</span><span class="st">&#39;year&#39;</span>, columns<span class="op">=</span><span class="st">&#39;month&#39;</span>, aggfunc<span class="op">=</span><span class="st">&#39;count&#39;</span>)</span>
-<span id="cb10-160"><a href="#cb10-160"></a><span class="in">```</span></span>
+<span id="cb10-97"><a href="#cb10-97"></a><span class="co"># Save the columns in a variable</span></span>
+<span id="cb10-98"><a href="#cb10-98"></a>col_list <span class="op">=</span> df.columns.values</span>
+<span id="cb10-99"><a href="#cb10-99"></a></span>
+<span id="cb10-100"><a href="#cb10-100"></a><span class="co"># This lets us see a general overview of what we&#39;re working with</span></span>
+<span id="cb10-101"><a href="#cb10-101"></a>df.info()</span>
+<span id="cb10-102"><a href="#cb10-102"></a></span>
+<span id="cb10-103"><a href="#cb10-103"></a><span class="co"># Here we check out our text data and see if there are corrections to be made</span></span>
+<span id="cb10-104"><a href="#cb10-104"></a>df.code.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-105"><a href="#cb10-105"></a>df.month.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-106"><a href="#cb10-106"></a>df.carrier_delays.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-107"><a href="#cb10-107"></a></span>
+<span id="cb10-108"><a href="#cb10-108"></a><span class="co"># Lets replace all n/a with pd.NA, and while we&#39;re at it, fix february&#39;s spelling</span></span>
+<span id="cb10-109"><a href="#cb10-109"></a>df.month.replace([<span class="st">&#39;n/a&#39;</span>, <span class="st">&#39;Febuary&#39;</span>], [np.nan, <span class="st">&#39;February&#39;</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-110"><a href="#cb10-110"></a></span>
+<span id="cb10-111"><a href="#cb10-111"></a><span class="co"># Checking the values again</span></span>
+<span id="cb10-112"><a href="#cb10-112"></a>df.month.value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-113"><a href="#cb10-113"></a></span>
+<span id="cb10-114"><a href="#cb10-114"></a><span class="co"># Checking out the numerical data</span></span>
+<span id="cb10-115"><a href="#cb10-115"></a>df.select_dtypes(exclude<span class="op">=</span><span class="st">&#39;object&#39;</span>).describe()</span>
+<span id="cb10-116"><a href="#cb10-116"></a></span>
+<span id="cb10-117"><a href="#cb10-117"></a><span class="co"># # -999 appears to be a placeholder to missing data</span></span>
+<span id="cb10-118"><a href="#cb10-118"></a>df.replace(<span class="op">-</span><span class="dv">999</span>, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-119"><a href="#cb10-119"></a></span>
+<span id="cb10-120"><a href="#cb10-120"></a><span class="co"># After looking a bit closer at the data, I believe it&#39;s reasonable to fill in </span></span>
+<span id="cb10-121"><a href="#cb10-121"></a><span class="co"># some of these months. The raw data looks to be in chronological order, so I </span></span>
+<span id="cb10-122"><a href="#cb10-122"></a><span class="co"># am going to make that assumption that I can fill these in.</span></span>
+<span id="cb10-123"><a href="#cb10-123"></a>df[<span class="st">&#39;month&#39;</span>] <span class="op">=</span> np.where(</span>
+<span id="cb10-124"><a href="#cb10-124"></a>    df[<span class="st">&#39;code&#39;</span>] <span class="op">==</span> <span class="st">&quot;ATL&quot;</span>, df[<span class="st">&#39;month&#39;</span>].bfill(), df[<span class="st">&#39;month&#39;</span>].ffill()</span>
+<span id="cb10-125"><a href="#cb10-125"></a>)</span>
+<span id="cb10-126"><a href="#cb10-126"></a></span>
+<span id="cb10-127"><a href="#cb10-127"></a><span class="co"># I believe we can do the same for the year column</span></span>
+<span id="cb10-128"><a href="#cb10-128"></a>df[<span class="st">&#39;year&#39;</span>] <span class="op">=</span> np.where(</span>
+<span id="cb10-129"><a href="#cb10-129"></a>    df[<span class="st">&#39;code&#39;</span>] <span class="op">==</span> <span class="st">&quot;ATL&quot;</span>, df[<span class="st">&#39;year&#39;</span>].bfill(), df[<span class="st">&#39;year&#39;</span>].ffill()</span>
+<span id="cb10-130"><a href="#cb10-130"></a>)</span>
+<span id="cb10-131"><a href="#cb10-131"></a></span>
+<span id="cb10-132"><a href="#cb10-132"></a><span class="co"># Make all the years integers</span></span>
+<span id="cb10-133"><a href="#cb10-133"></a>df[<span class="st">&#39;year&#39;</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">&#39;year&#39;</span>], downcast<span class="op">=</span><span class="st">&#39;integer&#39;</span>)</span>
+<span id="cb10-134"><a href="#cb10-134"></a></span>
+<span id="cb10-135"><a href="#cb10-135"></a><span class="co"># Set the codes as categories</span></span>
+<span id="cb10-136"><a href="#cb10-136"></a>df.code <span class="op">=</span> pd.Categorical(</span>
+<span id="cb10-137"><a href="#cb10-137"></a>    df.code,</span>
+<span id="cb10-138"><a href="#cb10-138"></a>    ordered<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb10-139"><a href="#cb10-139"></a>    categories<span class="op">=</span>[<span class="st">&#39;ATL&#39;</span>, <span class="st">&#39;DEN&#39;</span>, <span class="st">&#39;IAD&#39;</span>, <span class="st">&#39;ORD&#39;</span>, <span class="st">&#39;SAN&#39;</span>, <span class="st">&#39;SFO&#39;</span>, <span class="st">&#39;SLC&#39;</span>]</span>
+<span id="cb10-140"><a href="#cb10-140"></a>)</span>
+<span id="cb10-141"><a href="#cb10-141"></a></span>
+<span id="cb10-142"><a href="#cb10-142"></a><span class="co"># Set the months as categories and order them</span></span>
+<span id="cb10-143"><a href="#cb10-143"></a>df.month <span class="op">=</span> pd.Categorical(</span>
+<span id="cb10-144"><a href="#cb10-144"></a>    df.month,</span>
+<span id="cb10-145"><a href="#cb10-145"></a>    ordered<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-146"><a href="#cb10-146"></a>    categories<span class="op">=</span>[</span>
+<span id="cb10-147"><a href="#cb10-147"></a>        <span class="st">&#39;January&#39;</span>, </span>
+<span id="cb10-148"><a href="#cb10-148"></a>        <span class="st">&#39;February&#39;</span>, </span>
+<span id="cb10-149"><a href="#cb10-149"></a>        <span class="st">&#39;March&#39;</span>, </span>
+<span id="cb10-150"><a href="#cb10-150"></a>        <span class="st">&#39;April&#39;</span>, </span>
+<span id="cb10-151"><a href="#cb10-151"></a>        <span class="st">&#39;May&#39;</span>, </span>
+<span id="cb10-152"><a href="#cb10-152"></a>        <span class="st">&#39;June&#39;</span>,</span>
+<span id="cb10-153"><a href="#cb10-153"></a>        <span class="st">&#39;July&#39;</span>, </span>
+<span id="cb10-154"><a href="#cb10-154"></a>        <span class="st">&#39;August&#39;</span>, </span>
+<span id="cb10-155"><a href="#cb10-155"></a>        <span class="st">&#39;September&#39;</span>, </span>
+<span id="cb10-156"><a href="#cb10-156"></a>        <span class="st">&#39;October&#39;</span>, </span>
+<span id="cb10-157"><a href="#cb10-157"></a>        <span class="st">&#39;November&#39;</span>,</span>
+<span id="cb10-158"><a href="#cb10-158"></a>        <span class="st">&#39;December&#39;</span></span>
+<span id="cb10-159"><a href="#cb10-159"></a>    ]</span>
+<span id="cb10-160"><a href="#cb10-160"></a>)</span>
 <span id="cb10-161"><a href="#cb10-161"></a></span>
-<span id="cb10-162"><a href="#cb10-162"></a></span>
-<span id="cb10-165"><a href="#cb10-165"></a><span class="in">```{python}</span></span>
-<span id="cb10-166"><a href="#cb10-166"></a><span class="co"># Here we fill our na values with np.nan</span></span>
-<span id="cb10-167"><a href="#cb10-167"></a><span class="cf">for</span> c <span class="kw">in</span> [<span class="st">&#39;late_aircraft_delays&#39;</span>, <span class="st">&#39;carrier_time&#39;</span>, <span class="st">&#39;nas_time&#39;</span>]:</span>
-<span id="cb10-168"><a href="#cb10-168"></a>    df[c].fillna(np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-169"><a href="#cb10-169"></a></span>
-<span id="cb10-170"><a href="#cb10-170"></a><span class="co"># Here we get an accurate count</span></span>
-<span id="cb10-171"><a href="#cb10-171"></a>df.isna().<span class="bu">sum</span>()</span>
-<span id="cb10-172"><a href="#cb10-172"></a></span>
-<span id="cb10-173"><a href="#cb10-173"></a><span class="co"># And here is a sample row with our na value in it</span></span>
-<span id="cb10-174"><a href="#cb10-174"></a>df.query(<span class="st">&#39;@pd.isna(late_aircraft_delays)&#39;</span>).head(<span class="dv">1</span>)</span>
-<span id="cb10-175"><a href="#cb10-175"></a><span class="in">```</span></span>
+<span id="cb10-162"><a href="#cb10-162"></a><span class="co"># Here we double check the year and month counts</span></span>
+<span id="cb10-163"><a href="#cb10-163"></a>df.pivot_table(values<span class="op">=</span><span class="st">&#39;code&#39;</span>, index<span class="op">=</span><span class="st">&#39;year&#39;</span>, columns<span class="op">=</span><span class="st">&#39;month&#39;</span>, aggfunc<span class="op">=</span><span class="st">&#39;count&#39;</span>)</span>
+<span id="cb10-164"><a href="#cb10-164"></a><span class="in">```</span></span>
+<span id="cb10-165"><a href="#cb10-165"></a></span>
+<span id="cb10-166"><a href="#cb10-166"></a></span>
+<span id="cb10-169"><a href="#cb10-169"></a><span class="in">```{python}</span></span>
+<span id="cb10-170"><a href="#cb10-170"></a><span class="co"># Here we fill our na values with np.nan</span></span>
+<span id="cb10-171"><a href="#cb10-171"></a><span class="cf">for</span> c <span class="kw">in</span> [<span class="st">&#39;late_aircraft_delays&#39;</span>, <span class="st">&#39;carrier_time&#39;</span>, <span class="st">&#39;nas_time&#39;</span>]:</span>
+<span id="cb10-172"><a href="#cb10-172"></a>    df[c].fillna(np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-173"><a href="#cb10-173"></a></span>
+<span id="cb10-174"><a href="#cb10-174"></a><span class="co"># Here we get an accurate count</span></span>
+<span id="cb10-175"><a href="#cb10-175"></a>df.isna().<span class="bu">sum</span>()</span>
 <span id="cb10-176"><a href="#cb10-176"></a></span>
-<span id="cb10-177"><a href="#cb10-177"></a><span class="fu">## By Airport</span></span>
-<span id="cb10-178"><a href="#cb10-178"></a></span>
-<span id="cb10-179"><a href="#cb10-179"></a>*Which airport has the worst delays?*</span>
+<span id="cb10-177"><a href="#cb10-177"></a><span class="co"># And here is a sample row with our na value in it</span></span>
+<span id="cb10-178"><a href="#cb10-178"></a>df.query(<span class="st">&#39;@pd.isna(late_aircraft_delays)&#39;</span>).head(<span class="dv">1</span>)</span>
+<span id="cb10-179"><a href="#cb10-179"></a><span class="in">```</span></span>
 <span id="cb10-180"><a href="#cb10-180"></a></span>
-<span id="cb10-181"><a href="#cb10-181"></a>Here we seperate the relevant columns from our DataFrame. We then will compute the ratio of delayed flights to total flights and also find the minutes per delay. Afterwards we will group them and average them by airport. Graphing the data provides us with some significant insight about which airport is best and which is worst. When it comes to your likelihood of having your flight delayed, San Francisco has over a $\frac{1}{4}$ chance of delaying your flight. However, you have a slightly lower chance of having a longer wait time at Chicago O&#39;Hare. I personally would take a lower chance at a longer delay, so I say San Francisco is has the worst delays.</span>
+<span id="cb10-181"><a href="#cb10-181"></a><span class="fu">## By Airport</span></span>
 <span id="cb10-182"><a href="#cb10-182"></a></span>
-<span id="cb10-185"><a href="#cb10-185"></a><span class="in">```{python}</span></span>
-<span id="cb10-186"><a href="#cb10-186"></a>worst <span class="op">=</span> (</span>
-<span id="cb10-187"><a href="#cb10-187"></a>    df[[<span class="st">&#39;code&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;total_flights&#39;</span>, <span class="st">&#39;total_delays&#39;</span>, <span class="st">&#39;total_time&#39;</span>]]</span>
-<span id="cb10-188"><a href="#cb10-188"></a>    .assign(</span>
-<span id="cb10-189"><a href="#cb10-189"></a>        ratio_delayed<span class="op">=</span><span class="kw">lambda</span> x: x.total_delays <span class="op">/</span> x.total_flights,</span>
-<span id="cb10-190"><a href="#cb10-190"></a>        mins_per_delay<span class="op">=</span><span class="kw">lambda</span> x: x.total_time <span class="op">/</span> x.total_delays)</span>
-<span id="cb10-191"><a href="#cb10-191"></a>)</span>
-<span id="cb10-192"><a href="#cb10-192"></a></span>
-<span id="cb10-193"><a href="#cb10-193"></a>by_code <span class="op">=</span> (</span>
-<span id="cb10-194"><a href="#cb10-194"></a>    worst</span>
-<span id="cb10-195"><a href="#cb10-195"></a>    .groupby(<span class="st">&#39;code&#39;</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-196"><a href="#cb10-196"></a>    .agg(</span>
-<span id="cb10-197"><a href="#cb10-197"></a>        avg_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
-<span id="cb10-198"><a href="#cb10-198"></a>        median_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;median&#39;</span>),</span>
-<span id="cb10-199"><a href="#cb10-199"></a>        avg_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
-<span id="cb10-200"><a href="#cb10-200"></a>        median_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;median&#39;</span>))</span>
-<span id="cb10-201"><a href="#cb10-201"></a>    .reset_index()</span>
-<span id="cb10-202"><a href="#cb10-202"></a>)</span>
-<span id="cb10-203"><a href="#cb10-203"></a></span>
-<span id="cb10-204"><a href="#cb10-204"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb10-205"><a href="#cb10-205"></a>    by_code,</span>
-<span id="cb10-206"><a href="#cb10-206"></a>    x<span class="op">=</span><span class="st">&#39;code&#39;</span>,</span>
-<span id="cb10-207"><a href="#cb10-207"></a>    y<span class="op">=</span><span class="st">&#39;avg_time_delay&#39;</span>,</span>
-<span id="cb10-208"><a href="#cb10-208"></a>    color<span class="op">=</span><span class="st">&#39;avg_percent_delayed&#39;</span>,</span>
-<span id="cb10-209"><a href="#cb10-209"></a>    range_y<span class="op">=</span>[<span class="dv">40</span>, <span class="dv">70</span>],</span>
-<span id="cb10-210"><a href="#cb10-210"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
-<span id="cb10-211"><a href="#cb10-211"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;avg_time_delay&#39;</span>, <span class="st">&#39;avg_percent_delayed&#39;</span>],</span>
-<span id="cb10-212"><a href="#cb10-212"></a>    labels<span class="op">=</span>{</span>
-<span id="cb10-213"><a href="#cb10-213"></a>        <span class="st">&#39;avg_time_delay&#39;</span>: <span class="st">&#39;Average Time (Minutes)&#39;</span>,</span>
-<span id="cb10-214"><a href="#cb10-214"></a>        <span class="st">&#39;avg_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
-<span id="cb10-215"><a href="#cb10-215"></a>        <span class="st">&#39;code&#39;</span>: <span class="st">&#39;Airport&#39;</span></span>
-<span id="cb10-216"><a href="#cb10-216"></a>    }</span>
-<span id="cb10-217"><a href="#cb10-217"></a>)</span>
-<span id="cb10-218"><a href="#cb10-218"></a></span>
-<span id="cb10-219"><a href="#cb10-219"></a>fig.update_layout(</span>
-<span id="cb10-220"><a href="#cb10-220"></a>    title_text<span class="op">=</span><span class="st">&#39;Airport Delay Averages by Location&#39;</span>,</span>
+<span id="cb10-183"><a href="#cb10-183"></a>*Which airport has the worst delays?*</span>
+<span id="cb10-184"><a href="#cb10-184"></a></span>
+<span id="cb10-185"><a href="#cb10-185"></a>Here we seperate the relevant columns from our DataFrame. We then will compute the ratio of delayed flights to total flights and also find the minutes per delay. Afterwards we will group them and average them by airport. Graphing the data provides us with some significant insight about which airport is best and which is worst. When it comes to your likelihood of having your flight delayed, San Francisco has over a $\frac{1}{4}$ chance of delaying your flight. However, you have a slightly lower chance of having a longer wait time at Chicago O&#39;Hare. I personally would take a lower chance at a longer delay, so I say San Francisco is has the worst delays.</span>
+<span id="cb10-186"><a href="#cb10-186"></a></span>
+<span id="cb10-189"><a href="#cb10-189"></a><span class="in">```{python}</span></span>
+<span id="cb10-190"><a href="#cb10-190"></a>worst <span class="op">=</span> (</span>
+<span id="cb10-191"><a href="#cb10-191"></a>    df[[<span class="st">&#39;code&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;total_flights&#39;</span>, <span class="st">&#39;total_delays&#39;</span>, <span class="st">&#39;total_time&#39;</span>]]</span>
+<span id="cb10-192"><a href="#cb10-192"></a>    .assign(</span>
+<span id="cb10-193"><a href="#cb10-193"></a>        ratio_delayed<span class="op">=</span><span class="kw">lambda</span> x: x.total_delays <span class="op">/</span> x.total_flights,</span>
+<span id="cb10-194"><a href="#cb10-194"></a>        mins_per_delay<span class="op">=</span><span class="kw">lambda</span> x: x.total_time <span class="op">/</span> x.total_delays)</span>
+<span id="cb10-195"><a href="#cb10-195"></a>)</span>
+<span id="cb10-196"><a href="#cb10-196"></a></span>
+<span id="cb10-197"><a href="#cb10-197"></a>by_code <span class="op">=</span> (</span>
+<span id="cb10-198"><a href="#cb10-198"></a>    worst</span>
+<span id="cb10-199"><a href="#cb10-199"></a>    .groupby(<span class="st">&#39;code&#39;</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-200"><a href="#cb10-200"></a>    .agg(</span>
+<span id="cb10-201"><a href="#cb10-201"></a>        avg_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
+<span id="cb10-202"><a href="#cb10-202"></a>        median_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;median&#39;</span>),</span>
+<span id="cb10-203"><a href="#cb10-203"></a>        avg_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
+<span id="cb10-204"><a href="#cb10-204"></a>        median_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;median&#39;</span>))</span>
+<span id="cb10-205"><a href="#cb10-205"></a>    .reset_index()</span>
+<span id="cb10-206"><a href="#cb10-206"></a>)</span>
+<span id="cb10-207"><a href="#cb10-207"></a></span>
+<span id="cb10-208"><a href="#cb10-208"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb10-209"><a href="#cb10-209"></a>    by_code,</span>
+<span id="cb10-210"><a href="#cb10-210"></a>    x<span class="op">=</span><span class="st">&#39;code&#39;</span>,</span>
+<span id="cb10-211"><a href="#cb10-211"></a>    y<span class="op">=</span><span class="st">&#39;avg_time_delay&#39;</span>,</span>
+<span id="cb10-212"><a href="#cb10-212"></a>    color<span class="op">=</span><span class="st">&#39;avg_percent_delayed&#39;</span>,</span>
+<span id="cb10-213"><a href="#cb10-213"></a>    range_y<span class="op">=</span>[<span class="dv">40</span>, <span class="dv">70</span>],</span>
+<span id="cb10-214"><a href="#cb10-214"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
+<span id="cb10-215"><a href="#cb10-215"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;avg_time_delay&#39;</span>, <span class="st">&#39;avg_percent_delayed&#39;</span>],</span>
+<span id="cb10-216"><a href="#cb10-216"></a>    labels<span class="op">=</span>{</span>
+<span id="cb10-217"><a href="#cb10-217"></a>        <span class="st">&#39;avg_time_delay&#39;</span>: <span class="st">&#39;Average Time (Minutes)&#39;</span>,</span>
+<span id="cb10-218"><a href="#cb10-218"></a>        <span class="st">&#39;avg_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
+<span id="cb10-219"><a href="#cb10-219"></a>        <span class="st">&#39;code&#39;</span>: <span class="st">&#39;Airport&#39;</span></span>
+<span id="cb10-220"><a href="#cb10-220"></a>    }</span>
 <span id="cb10-221"><a href="#cb10-221"></a>)</span>
 <span id="cb10-222"><a href="#cb10-222"></a></span>
-<span id="cb10-223"><a href="#cb10-223"></a>fig.update_yaxes(</span>
-<span id="cb10-224"><a href="#cb10-224"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
+<span id="cb10-223"><a href="#cb10-223"></a>fig.update_layout(</span>
+<span id="cb10-224"><a href="#cb10-224"></a>    title_text<span class="op">=</span><span class="st">&#39;Airport Delay Averages by Location&#39;</span>,</span>
 <span id="cb10-225"><a href="#cb10-225"></a>)</span>
 <span id="cb10-226"><a href="#cb10-226"></a></span>
-<span id="cb10-227"><a href="#cb10-227"></a>fig.update_coloraxes(</span>
-<span id="cb10-228"><a href="#cb10-228"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-227"><a href="#cb10-227"></a>fig.update_yaxes(</span>
+<span id="cb10-228"><a href="#cb10-228"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
 <span id="cb10-229"><a href="#cb10-229"></a>)</span>
 <span id="cb10-230"><a href="#cb10-230"></a></span>
-<span id="cb10-231"><a href="#cb10-231"></a>fig.show()</span>
-<span id="cb10-232"><a href="#cb10-232"></a><span class="in">```</span></span>
-<span id="cb10-233"><a href="#cb10-233"></a></span>
-<span id="cb10-234"><a href="#cb10-234"></a>As the average of a dataset can be swayed by the extremities that are included, I have also decided to include the median of the dataset. Fortunately for us, this shows that there weren&#39;t too many extreme outliers involved and rather shows some consistency. Once again, San Francisco is shown to have the highest chance of a delay, while O&#39;Hare is not far behind, but with slightly longer delay times.</span>
-<span id="cb10-235"><a href="#cb10-235"></a></span>
-<span id="cb10-238"><a href="#cb10-238"></a><span class="in">```{python}</span></span>
-<span id="cb10-239"><a href="#cb10-239"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb10-240"><a href="#cb10-240"></a>    by_code,</span>
-<span id="cb10-241"><a href="#cb10-241"></a>    x<span class="op">=</span><span class="st">&#39;code&#39;</span>,</span>
-<span id="cb10-242"><a href="#cb10-242"></a>    y<span class="op">=</span><span class="st">&#39;median_time_delay&#39;</span>,</span>
-<span id="cb10-243"><a href="#cb10-243"></a>    color<span class="op">=</span><span class="st">&#39;median_percent_delayed&#39;</span>,</span>
-<span id="cb10-244"><a href="#cb10-244"></a>    range_y<span class="op">=</span>[<span class="dv">40</span>, <span class="dv">70</span>],</span>
-<span id="cb10-245"><a href="#cb10-245"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
-<span id="cb10-246"><a href="#cb10-246"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;median_time_delay&#39;</span>, <span class="st">&#39;median_percent_delayed&#39;</span>],</span>
-<span id="cb10-247"><a href="#cb10-247"></a>    labels<span class="op">=</span>{</span>
-<span id="cb10-248"><a href="#cb10-248"></a>        <span class="st">&#39;median_time_delay&#39;</span>: <span class="st">&#39;Median Time (Minutes)&#39;</span>,</span>
-<span id="cb10-249"><a href="#cb10-249"></a>        <span class="st">&#39;median_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
-<span id="cb10-250"><a href="#cb10-250"></a>        <span class="st">&#39;code&#39;</span>: <span class="st">&#39;Airport&#39;</span></span>
-<span id="cb10-251"><a href="#cb10-251"></a>    }</span>
-<span id="cb10-252"><a href="#cb10-252"></a>)</span>
-<span id="cb10-253"><a href="#cb10-253"></a></span>
-<span id="cb10-254"><a href="#cb10-254"></a>fig.update_layout(</span>
-<span id="cb10-255"><a href="#cb10-255"></a>    title_text<span class="op">=</span><span class="st">&#39;Median Airport Delays by Location&#39;</span>,</span>
+<span id="cb10-231"><a href="#cb10-231"></a>fig.update_coloraxes(</span>
+<span id="cb10-232"><a href="#cb10-232"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-233"><a href="#cb10-233"></a>)</span>
+<span id="cb10-234"><a href="#cb10-234"></a></span>
+<span id="cb10-235"><a href="#cb10-235"></a>fig.show()</span>
+<span id="cb10-236"><a href="#cb10-236"></a><span class="in">```</span></span>
+<span id="cb10-237"><a href="#cb10-237"></a></span>
+<span id="cb10-238"><a href="#cb10-238"></a>As the average of a dataset can be swayed by the extremities that are included, I have also decided to include the median of the dataset. Fortunately for us, this shows that there weren&#39;t too many extreme outliers involved and rather shows some consistency. Once again, San Francisco is shown to have the highest chance of a delay, while O&#39;Hare is not far behind, but with slightly longer delay times.</span>
+<span id="cb10-239"><a href="#cb10-239"></a></span>
+<span id="cb10-242"><a href="#cb10-242"></a><span class="in">```{python}</span></span>
+<span id="cb10-243"><a href="#cb10-243"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb10-244"><a href="#cb10-244"></a>    by_code,</span>
+<span id="cb10-245"><a href="#cb10-245"></a>    x<span class="op">=</span><span class="st">&#39;code&#39;</span>,</span>
+<span id="cb10-246"><a href="#cb10-246"></a>    y<span class="op">=</span><span class="st">&#39;median_time_delay&#39;</span>,</span>
+<span id="cb10-247"><a href="#cb10-247"></a>    color<span class="op">=</span><span class="st">&#39;median_percent_delayed&#39;</span>,</span>
+<span id="cb10-248"><a href="#cb10-248"></a>    range_y<span class="op">=</span>[<span class="dv">40</span>, <span class="dv">70</span>],</span>
+<span id="cb10-249"><a href="#cb10-249"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
+<span id="cb10-250"><a href="#cb10-250"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;median_time_delay&#39;</span>, <span class="st">&#39;median_percent_delayed&#39;</span>],</span>
+<span id="cb10-251"><a href="#cb10-251"></a>    labels<span class="op">=</span>{</span>
+<span id="cb10-252"><a href="#cb10-252"></a>        <span class="st">&#39;median_time_delay&#39;</span>: <span class="st">&#39;Median Time (Minutes)&#39;</span>,</span>
+<span id="cb10-253"><a href="#cb10-253"></a>        <span class="st">&#39;median_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
+<span id="cb10-254"><a href="#cb10-254"></a>        <span class="st">&#39;code&#39;</span>: <span class="st">&#39;Airport&#39;</span></span>
+<span id="cb10-255"><a href="#cb10-255"></a>    }</span>
 <span id="cb10-256"><a href="#cb10-256"></a>)</span>
 <span id="cb10-257"><a href="#cb10-257"></a></span>
-<span id="cb10-258"><a href="#cb10-258"></a>fig.update_yaxes(</span>
-<span id="cb10-259"><a href="#cb10-259"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
+<span id="cb10-258"><a href="#cb10-258"></a>fig.update_layout(</span>
+<span id="cb10-259"><a href="#cb10-259"></a>    title_text<span class="op">=</span><span class="st">&#39;Median Airport Delays by Location&#39;</span>,</span>
 <span id="cb10-260"><a href="#cb10-260"></a>)</span>
 <span id="cb10-261"><a href="#cb10-261"></a></span>
-<span id="cb10-262"><a href="#cb10-262"></a>fig.update_coloraxes(</span>
-<span id="cb10-263"><a href="#cb10-263"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-262"><a href="#cb10-262"></a>fig.update_yaxes(</span>
+<span id="cb10-263"><a href="#cb10-263"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
 <span id="cb10-264"><a href="#cb10-264"></a>)</span>
 <span id="cb10-265"><a href="#cb10-265"></a></span>
-<span id="cb10-266"><a href="#cb10-266"></a>fig.show()</span>
-<span id="cb10-267"><a href="#cb10-267"></a><span class="in">```</span></span>
-<span id="cb10-268"><a href="#cb10-268"></a></span>
-<span id="cb10-269"><a href="#cb10-269"></a><span class="fu">## By Month</span></span>
-<span id="cb10-270"><a href="#cb10-270"></a></span>
-<span id="cb10-271"><a href="#cb10-271"></a>*What is the best month to fly if you want to avoid delays of any length?*</span>
+<span id="cb10-266"><a href="#cb10-266"></a>fig.update_coloraxes(</span>
+<span id="cb10-267"><a href="#cb10-267"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-268"><a href="#cb10-268"></a>)</span>
+<span id="cb10-269"><a href="#cb10-269"></a></span>
+<span id="cb10-270"><a href="#cb10-270"></a>fig.show()</span>
+<span id="cb10-271"><a href="#cb10-271"></a><span class="in">```</span></span>
 <span id="cb10-272"><a href="#cb10-272"></a></span>
-<span id="cb10-273"><a href="#cb10-273"></a>Surprising almost no one, December has the highest chances of getting your flight delayed. Old man Winter sure can be harsh on planes and the data backs that up nicely. I think the most shocking thing for me was that summer has the longest delays on average. I would think that these are not related to maintainence, or weather, like in the winter, but could dealing with other passengers cause this much delay in our travels? If you want to have minimal delays of any kind, April or October are your best bet! These make sense, as school is in session for most families and the weather isn&#39;t too extreme.</span>
+<span id="cb10-273"><a href="#cb10-273"></a><span class="fu">## By Month</span></span>
 <span id="cb10-274"><a href="#cb10-274"></a></span>
-<span id="cb10-275"><a href="#cb10-275"></a></span>
-<span id="cb10-278"><a href="#cb10-278"></a><span class="in">```{python}</span></span>
-<span id="cb10-279"><a href="#cb10-279"></a>by_month <span class="op">=</span> (</span>
-<span id="cb10-280"><a href="#cb10-280"></a>    worst</span>
-<span id="cb10-281"><a href="#cb10-281"></a>    .groupby(<span class="st">&#39;month&#39;</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-282"><a href="#cb10-282"></a>    .agg(</span>
-<span id="cb10-283"><a href="#cb10-283"></a>        avg_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
-<span id="cb10-284"><a href="#cb10-284"></a>        median_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;median&#39;</span>),</span>
-<span id="cb10-285"><a href="#cb10-285"></a>        avg_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
-<span id="cb10-286"><a href="#cb10-286"></a>        median_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;median&#39;</span>))</span>
-<span id="cb10-287"><a href="#cb10-287"></a>    .reset_index()</span>
-<span id="cb10-288"><a href="#cb10-288"></a>)</span>
-<span id="cb10-289"><a href="#cb10-289"></a></span>
-<span id="cb10-290"><a href="#cb10-290"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb10-291"><a href="#cb10-291"></a>    by_month,</span>
-<span id="cb10-292"><a href="#cb10-292"></a>    x<span class="op">=</span><span class="st">&#39;month&#39;</span>,</span>
-<span id="cb10-293"><a href="#cb10-293"></a>    y<span class="op">=</span><span class="st">&#39;avg_time_delay&#39;</span>,</span>
-<span id="cb10-294"><a href="#cb10-294"></a>    color<span class="op">=</span><span class="st">&#39;avg_percent_delayed&#39;</span>,</span>
-<span id="cb10-295"><a href="#cb10-295"></a>    range_y<span class="op">=</span>[<span class="dv">50</span>, <span class="dv">62</span>],</span>
-<span id="cb10-296"><a href="#cb10-296"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
-<span id="cb10-297"><a href="#cb10-297"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;avg_time_delay&#39;</span>, <span class="st">&#39;avg_percent_delayed&#39;</span>],</span>
-<span id="cb10-298"><a href="#cb10-298"></a>    labels<span class="op">=</span>{</span>
-<span id="cb10-299"><a href="#cb10-299"></a>        <span class="st">&#39;avg_time_delay&#39;</span>: <span class="st">&#39;Average Time (Minutes)&#39;</span>,</span>
-<span id="cb10-300"><a href="#cb10-300"></a>        <span class="st">&#39;avg_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
-<span id="cb10-301"><a href="#cb10-301"></a>        <span class="st">&#39;month&#39;</span>: <span class="st">&#39;&#39;</span></span>
-<span id="cb10-302"><a href="#cb10-302"></a>    }</span>
-<span id="cb10-303"><a href="#cb10-303"></a>)</span>
-<span id="cb10-304"><a href="#cb10-304"></a></span>
-<span id="cb10-305"><a href="#cb10-305"></a>fig.update_layout(</span>
-<span id="cb10-306"><a href="#cb10-306"></a>    title_text<span class="op">=</span><span class="st">&#39;Airport Delay Averages by Month&#39;</span>,</span>
+<span id="cb10-275"><a href="#cb10-275"></a>*What is the best month to fly if you want to avoid delays of any length?*</span>
+<span id="cb10-276"><a href="#cb10-276"></a></span>
+<span id="cb10-277"><a href="#cb10-277"></a>Surprising almost no one, December has the highest chances of getting your flight delayed. Old man Winter sure can be harsh on planes and the data backs that up nicely. I think the most shocking thing for me was that summer has the longest delays on average. I would think that these are not related to maintainence, or weather, like in the winter, but could dealing with other passengers cause this much delay in our travels? If you want to have minimal delays of any kind, April or October are your best bet! These make sense, as school is in session for most families and the weather isn&#39;t too extreme.</span>
+<span id="cb10-278"><a href="#cb10-278"></a></span>
+<span id="cb10-279"><a href="#cb10-279"></a></span>
+<span id="cb10-282"><a href="#cb10-282"></a><span class="in">```{python}</span></span>
+<span id="cb10-283"><a href="#cb10-283"></a>by_month <span class="op">=</span> (</span>
+<span id="cb10-284"><a href="#cb10-284"></a>    worst</span>
+<span id="cb10-285"><a href="#cb10-285"></a>    .groupby(<span class="st">&#39;month&#39;</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-286"><a href="#cb10-286"></a>    .agg(</span>
+<span id="cb10-287"><a href="#cb10-287"></a>        avg_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
+<span id="cb10-288"><a href="#cb10-288"></a>        median_percent_delayed<span class="op">=</span>(<span class="st">&#39;ratio_delayed&#39;</span>, <span class="st">&#39;median&#39;</span>),</span>
+<span id="cb10-289"><a href="#cb10-289"></a>        avg_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;mean&#39;</span>),</span>
+<span id="cb10-290"><a href="#cb10-290"></a>        median_time_delay<span class="op">=</span>(<span class="st">&#39;mins_per_delay&#39;</span>, <span class="st">&#39;median&#39;</span>))</span>
+<span id="cb10-291"><a href="#cb10-291"></a>    .reset_index()</span>
+<span id="cb10-292"><a href="#cb10-292"></a>)</span>
+<span id="cb10-293"><a href="#cb10-293"></a></span>
+<span id="cb10-294"><a href="#cb10-294"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb10-295"><a href="#cb10-295"></a>    by_month,</span>
+<span id="cb10-296"><a href="#cb10-296"></a>    x<span class="op">=</span><span class="st">&#39;month&#39;</span>,</span>
+<span id="cb10-297"><a href="#cb10-297"></a>    y<span class="op">=</span><span class="st">&#39;avg_time_delay&#39;</span>,</span>
+<span id="cb10-298"><a href="#cb10-298"></a>    color<span class="op">=</span><span class="st">&#39;avg_percent_delayed&#39;</span>,</span>
+<span id="cb10-299"><a href="#cb10-299"></a>    range_y<span class="op">=</span>[<span class="dv">50</span>, <span class="dv">62</span>],</span>
+<span id="cb10-300"><a href="#cb10-300"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
+<span id="cb10-301"><a href="#cb10-301"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;avg_time_delay&#39;</span>, <span class="st">&#39;avg_percent_delayed&#39;</span>],</span>
+<span id="cb10-302"><a href="#cb10-302"></a>    labels<span class="op">=</span>{</span>
+<span id="cb10-303"><a href="#cb10-303"></a>        <span class="st">&#39;avg_time_delay&#39;</span>: <span class="st">&#39;Average Time (Minutes)&#39;</span>,</span>
+<span id="cb10-304"><a href="#cb10-304"></a>        <span class="st">&#39;avg_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
+<span id="cb10-305"><a href="#cb10-305"></a>        <span class="st">&#39;month&#39;</span>: <span class="st">&#39;&#39;</span></span>
+<span id="cb10-306"><a href="#cb10-306"></a>    }</span>
 <span id="cb10-307"><a href="#cb10-307"></a>)</span>
 <span id="cb10-308"><a href="#cb10-308"></a></span>
-<span id="cb10-309"><a href="#cb10-309"></a>fig.update_yaxes(</span>
-<span id="cb10-310"><a href="#cb10-310"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
+<span id="cb10-309"><a href="#cb10-309"></a>fig.update_layout(</span>
+<span id="cb10-310"><a href="#cb10-310"></a>    title_text<span class="op">=</span><span class="st">&#39;Airport Delay Averages by Month&#39;</span>,</span>
 <span id="cb10-311"><a href="#cb10-311"></a>)</span>
 <span id="cb10-312"><a href="#cb10-312"></a></span>
-<span id="cb10-313"><a href="#cb10-313"></a>fig.update_coloraxes(</span>
-<span id="cb10-314"><a href="#cb10-314"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-313"><a href="#cb10-313"></a>fig.update_yaxes(</span>
+<span id="cb10-314"><a href="#cb10-314"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
 <span id="cb10-315"><a href="#cb10-315"></a>)</span>
 <span id="cb10-316"><a href="#cb10-316"></a></span>
-<span id="cb10-317"><a href="#cb10-317"></a>fig.show()</span>
-<span id="cb10-318"><a href="#cb10-318"></a><span class="in">```</span></span>
-<span id="cb10-319"><a href="#cb10-319"></a></span>
-<span id="cb10-320"><a href="#cb10-320"></a>Once again I&#39;ve included the median times and, like before, it seems to corraborate the averages pretty closely. April and October are your best choices!</span>
-<span id="cb10-321"><a href="#cb10-321"></a></span>
-<span id="cb10-324"><a href="#cb10-324"></a><span class="in">```{python}</span></span>
-<span id="cb10-325"><a href="#cb10-325"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb10-326"><a href="#cb10-326"></a>    by_month,</span>
-<span id="cb10-327"><a href="#cb10-327"></a>    x<span class="op">=</span><span class="st">&#39;month&#39;</span>,</span>
-<span id="cb10-328"><a href="#cb10-328"></a>    y<span class="op">=</span><span class="st">&#39;median_time_delay&#39;</span>,</span>
-<span id="cb10-329"><a href="#cb10-329"></a>    color<span class="op">=</span><span class="st">&#39;median_percent_delayed&#39;</span>,</span>
-<span id="cb10-330"><a href="#cb10-330"></a>    range_y<span class="op">=</span>[<span class="dv">50</span>, <span class="dv">62</span>],</span>
-<span id="cb10-331"><a href="#cb10-331"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
-<span id="cb10-332"><a href="#cb10-332"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;median_time_delay&#39;</span>, <span class="st">&#39;median_percent_delayed&#39;</span>],</span>
-<span id="cb10-333"><a href="#cb10-333"></a>    labels<span class="op">=</span>{</span>
-<span id="cb10-334"><a href="#cb10-334"></a>        <span class="st">&#39;median_time_delay&#39;</span>: <span class="st">&#39;Median Time (Minutes)&#39;</span>,</span>
-<span id="cb10-335"><a href="#cb10-335"></a>        <span class="st">&#39;median_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
-<span id="cb10-336"><a href="#cb10-336"></a>        <span class="st">&#39;month&#39;</span>: <span class="st">&#39;&#39;</span></span>
-<span id="cb10-337"><a href="#cb10-337"></a>    }</span>
-<span id="cb10-338"><a href="#cb10-338"></a>)</span>
-<span id="cb10-339"><a href="#cb10-339"></a></span>
-<span id="cb10-340"><a href="#cb10-340"></a>fig.update_layout(</span>
-<span id="cb10-341"><a href="#cb10-341"></a>    title_text<span class="op">=</span><span class="st">&#39;Median Airport Delays by Month&#39;</span>,</span>
+<span id="cb10-317"><a href="#cb10-317"></a>fig.update_coloraxes(</span>
+<span id="cb10-318"><a href="#cb10-318"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-319"><a href="#cb10-319"></a>)</span>
+<span id="cb10-320"><a href="#cb10-320"></a></span>
+<span id="cb10-321"><a href="#cb10-321"></a>fig.show()</span>
+<span id="cb10-322"><a href="#cb10-322"></a><span class="in">```</span></span>
+<span id="cb10-323"><a href="#cb10-323"></a></span>
+<span id="cb10-324"><a href="#cb10-324"></a>Once again I&#39;ve included the median times and, like before, it seems to corraborate the averages pretty closely. April and October are your best choices!</span>
+<span id="cb10-325"><a href="#cb10-325"></a></span>
+<span id="cb10-328"><a href="#cb10-328"></a><span class="in">```{python}</span></span>
+<span id="cb10-329"><a href="#cb10-329"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb10-330"><a href="#cb10-330"></a>    by_month,</span>
+<span id="cb10-331"><a href="#cb10-331"></a>    x<span class="op">=</span><span class="st">&#39;month&#39;</span>,</span>
+<span id="cb10-332"><a href="#cb10-332"></a>    y<span class="op">=</span><span class="st">&#39;median_time_delay&#39;</span>,</span>
+<span id="cb10-333"><a href="#cb10-333"></a>    color<span class="op">=</span><span class="st">&#39;median_percent_delayed&#39;</span>,</span>
+<span id="cb10-334"><a href="#cb10-334"></a>    range_y<span class="op">=</span>[<span class="dv">50</span>, <span class="dv">62</span>],</span>
+<span id="cb10-335"><a href="#cb10-335"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1f&#39;</span>,</span>
+<span id="cb10-336"><a href="#cb10-336"></a>    hover_data<span class="op">=</span>[<span class="st">&#39;median_time_delay&#39;</span>, <span class="st">&#39;median_percent_delayed&#39;</span>],</span>
+<span id="cb10-337"><a href="#cb10-337"></a>    labels<span class="op">=</span>{</span>
+<span id="cb10-338"><a href="#cb10-338"></a>        <span class="st">&#39;median_time_delay&#39;</span>: <span class="st">&#39;Median Time (Minutes)&#39;</span>,</span>
+<span id="cb10-339"><a href="#cb10-339"></a>        <span class="st">&#39;median_percent_delayed&#39;</span>: <span class="st">&#39;Percent Delayed&#39;</span>,</span>
+<span id="cb10-340"><a href="#cb10-340"></a>        <span class="st">&#39;month&#39;</span>: <span class="st">&#39;&#39;</span></span>
+<span id="cb10-341"><a href="#cb10-341"></a>    }</span>
 <span id="cb10-342"><a href="#cb10-342"></a>)</span>
 <span id="cb10-343"><a href="#cb10-343"></a></span>
-<span id="cb10-344"><a href="#cb10-344"></a>fig.update_yaxes(</span>
-<span id="cb10-345"><a href="#cb10-345"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
+<span id="cb10-344"><a href="#cb10-344"></a>fig.update_layout(</span>
+<span id="cb10-345"><a href="#cb10-345"></a>    title_text<span class="op">=</span><span class="st">&#39;Median Airport Delays by Month&#39;</span>,</span>
 <span id="cb10-346"><a href="#cb10-346"></a>)</span>
 <span id="cb10-347"><a href="#cb10-347"></a></span>
-<span id="cb10-348"><a href="#cb10-348"></a>fig.update_coloraxes(</span>
-<span id="cb10-349"><a href="#cb10-349"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-348"><a href="#cb10-348"></a>fig.update_yaxes(</span>
+<span id="cb10-349"><a href="#cb10-349"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0f&#39;</span></span>
 <span id="cb10-350"><a href="#cb10-350"></a>)</span>
 <span id="cb10-351"><a href="#cb10-351"></a></span>
-<span id="cb10-352"><a href="#cb10-352"></a>fig.show()</span>
-<span id="cb10-353"><a href="#cb10-353"></a><span class="in">```</span></span>
-<span id="cb10-354"><a href="#cb10-354"></a></span>
+<span id="cb10-352"><a href="#cb10-352"></a>fig.update_coloraxes(</span>
+<span id="cb10-353"><a href="#cb10-353"></a>    colorbar_tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-354"><a href="#cb10-354"></a>)</span>
 <span id="cb10-355"><a href="#cb10-355"></a></span>
-<span id="cb10-356"><a href="#cb10-356"></a><span class="fu">## Bureau of Transportation Statistics</span></span>
-<span id="cb10-357"><a href="#cb10-357"></a></span>
-<span id="cb10-358"><a href="#cb10-358"></a><span class="ss">- </span><span class="va">[ ]</span> *Create a new column that calculates the total number of flights delayed by weather (both severe and mild)*</span>
-<span id="cb10-359"><a href="#cb10-359"></a><span class="ss">- </span><span class="va">[ ]</span> *Create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.*</span>
-<span id="cb10-360"><a href="#cb10-360"></a></span>
-<span id="cb10-363"><a href="#cb10-363"></a><span class="in">```{python}</span></span>
-<span id="cb10-364"><a href="#cb10-364"></a>months <span class="op">=</span> [<span class="st">&#39;April&#39;</span>, <span class="st">&#39;May&#39;</span>, <span class="st">&#39;June&#39;</span>, <span class="st">&#39;July&#39;</span>, <span class="st">&#39;August&#39;</span>]</span>
-<span id="cb10-365"><a href="#cb10-365"></a></span>
-<span id="cb10-366"><a href="#cb10-366"></a>bts <span class="op">=</span> df[[<span class="st">&#39;code&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;total_flights&#39;</span>, <span class="st">&#39;total_delays&#39;</span>, <span class="st">&#39;late_aircraft_delays&#39;</span>, <span class="st">&#39;nas_delays&#39;</span>, <span class="st">&#39;weather_delays&#39;</span>]]</span>
-<span id="cb10-367"><a href="#cb10-367"></a>bts.late_aircraft_delays.fillna(bts.late_aircraft_delays.mean(), inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-368"><a href="#cb10-368"></a>bts <span class="op">=</span> bts.assign(</span>
-<span id="cb10-369"><a href="#cb10-369"></a>    total_weather_delays<span class="op">=</span><span class="kw">lambda</span> x: np.<span class="bu">round</span>(</span>
-<span id="cb10-370"><a href="#cb10-370"></a>        x.weather_delays <span class="op">+</span> (x.late_aircraft_delays <span class="op">*</span> <span class="fl">0.3</span>) <span class="op">+</span> (x.nas_delays <span class="op">*</span> np.where((x.month.isin(months)), <span class="fl">0.4</span>, <span class="fl">0.65</span>))</span>
-<span id="cb10-371"><a href="#cb10-371"></a>    ),</span>
-<span id="cb10-372"><a href="#cb10-372"></a>    percent_weather_delays<span class="op">=</span><span class="kw">lambda</span> x: np.<span class="bu">round</span>(x.total_weather_delays <span class="op">/</span> x.total_delays, <span class="dv">4</span>)</span>
-<span id="cb10-373"><a href="#cb10-373"></a>)</span>
-<span id="cb10-374"><a href="#cb10-374"></a></span>
-<span id="cb10-375"><a href="#cb10-375"></a>dat <span class="op">=</span> (</span>
-<span id="cb10-376"><a href="#cb10-376"></a>    bts</span>
-<span id="cb10-377"><a href="#cb10-377"></a>    .groupby(<span class="st">&#39;code&#39;</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-378"><a href="#cb10-378"></a>    .agg(avg_ratio_weather_delays<span class="op">=</span>(<span class="st">&#39;percent_weather_delays&#39;</span>, <span class="st">&#39;mean&#39;</span>))</span>
-<span id="cb10-379"><a href="#cb10-379"></a>    .reset_index()</span>
-<span id="cb10-380"><a href="#cb10-380"></a>)</span>
-<span id="cb10-381"><a href="#cb10-381"></a></span>
-<span id="cb10-382"><a href="#cb10-382"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb10-383"><a href="#cb10-383"></a>    dat,</span>
-<span id="cb10-384"><a href="#cb10-384"></a>    x<span class="op">=</span><span class="st">&#39;code&#39;</span>,</span>
-<span id="cb10-385"><a href="#cb10-385"></a>    y<span class="op">=</span><span class="st">&#39;avg_ratio_weather_delays&#39;</span>,</span>
-<span id="cb10-386"><a href="#cb10-386"></a>    color<span class="op">=</span><span class="st">&#39;avg_ratio_weather_delays&#39;</span>,</span>
-<span id="cb10-387"><a href="#cb10-387"></a>    range_y<span class="op">=</span>[<span class="fl">0.25</span>, <span class="fl">0.4</span>],</span>
-<span id="cb10-388"><a href="#cb10-388"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1%&#39;</span>,</span>
-<span id="cb10-389"><a href="#cb10-389"></a>    labels<span class="op">=</span>{</span>
-<span id="cb10-390"><a href="#cb10-390"></a>        <span class="st">&#39;avg_ratio_weather_delays&#39;</span>: <span class="st">&#39;Percent&#39;</span>,</span>
-<span id="cb10-391"><a href="#cb10-391"></a>        <span class="st">&#39;code&#39;</span>: <span class="st">&#39;Airport&#39;</span></span>
-<span id="cb10-392"><a href="#cb10-392"></a>    }</span>
-<span id="cb10-393"><a href="#cb10-393"></a>)</span>
-<span id="cb10-394"><a href="#cb10-394"></a></span>
-<span id="cb10-395"><a href="#cb10-395"></a>fig.update_layout(</span>
-<span id="cb10-396"><a href="#cb10-396"></a>    title_text<span class="op">=</span><span class="st">&#39;Percent of Total Delays caused by Weather&#39;</span></span>
+<span id="cb10-356"><a href="#cb10-356"></a>fig.show()</span>
+<span id="cb10-357"><a href="#cb10-357"></a><span class="in">```</span></span>
+<span id="cb10-358"><a href="#cb10-358"></a></span>
+<span id="cb10-359"><a href="#cb10-359"></a></span>
+<span id="cb10-360"><a href="#cb10-360"></a><span class="fu">## Bureau of Transportation Statistics</span></span>
+<span id="cb10-361"><a href="#cb10-361"></a></span>
+<span id="cb10-362"><a href="#cb10-362"></a><span class="ss">- </span><span class="va">[ ]</span> *Create a new column that calculates the total number of flights delayed by weather (both severe and mild)*</span>
+<span id="cb10-363"><a href="#cb10-363"></a><span class="ss">- </span><span class="va">[ ]</span> *Create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.*</span>
+<span id="cb10-364"><a href="#cb10-364"></a></span>
+<span id="cb10-367"><a href="#cb10-367"></a><span class="in">```{python}</span></span>
+<span id="cb10-368"><a href="#cb10-368"></a>months <span class="op">=</span> [<span class="st">&#39;April&#39;</span>, <span class="st">&#39;May&#39;</span>, <span class="st">&#39;June&#39;</span>, <span class="st">&#39;July&#39;</span>, <span class="st">&#39;August&#39;</span>]</span>
+<span id="cb10-369"><a href="#cb10-369"></a></span>
+<span id="cb10-370"><a href="#cb10-370"></a>bts <span class="op">=</span> df[[<span class="st">&#39;code&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;total_flights&#39;</span>, <span class="st">&#39;total_delays&#39;</span>, <span class="st">&#39;late_aircraft_delays&#39;</span>, <span class="st">&#39;nas_delays&#39;</span>, <span class="st">&#39;weather_delays&#39;</span>]]</span>
+<span id="cb10-371"><a href="#cb10-371"></a>bts.late_aircraft_delays.fillna(bts.late_aircraft_delays.mean(), inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-372"><a href="#cb10-372"></a>bts <span class="op">=</span> bts.assign(</span>
+<span id="cb10-373"><a href="#cb10-373"></a>    total_weather_delays<span class="op">=</span><span class="kw">lambda</span> x: np.<span class="bu">round</span>(</span>
+<span id="cb10-374"><a href="#cb10-374"></a>        x.weather_delays <span class="op">+</span> (x.late_aircraft_delays <span class="op">*</span> <span class="fl">0.3</span>) <span class="op">+</span> (x.nas_delays <span class="op">*</span> np.where((x.month.isin(months)), <span class="fl">0.4</span>, <span class="fl">0.65</span>))</span>
+<span id="cb10-375"><a href="#cb10-375"></a>    ),</span>
+<span id="cb10-376"><a href="#cb10-376"></a>    percent_weather_delays<span class="op">=</span><span class="kw">lambda</span> x: np.<span class="bu">round</span>(x.total_weather_delays <span class="op">/</span> x.total_delays, <span class="dv">4</span>)</span>
+<span id="cb10-377"><a href="#cb10-377"></a>)</span>
+<span id="cb10-378"><a href="#cb10-378"></a></span>
+<span id="cb10-379"><a href="#cb10-379"></a>dat <span class="op">=</span> (</span>
+<span id="cb10-380"><a href="#cb10-380"></a>    bts</span>
+<span id="cb10-381"><a href="#cb10-381"></a>    .groupby(<span class="st">&#39;code&#39;</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-382"><a href="#cb10-382"></a>    .agg(avg_ratio_weather_delays<span class="op">=</span>(<span class="st">&#39;percent_weather_delays&#39;</span>, <span class="st">&#39;mean&#39;</span>))</span>
+<span id="cb10-383"><a href="#cb10-383"></a>    .reset_index()</span>
+<span id="cb10-384"><a href="#cb10-384"></a>)</span>
+<span id="cb10-385"><a href="#cb10-385"></a></span>
+<span id="cb10-386"><a href="#cb10-386"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb10-387"><a href="#cb10-387"></a>    dat,</span>
+<span id="cb10-388"><a href="#cb10-388"></a>    x<span class="op">=</span><span class="st">&#39;code&#39;</span>,</span>
+<span id="cb10-389"><a href="#cb10-389"></a>    y<span class="op">=</span><span class="st">&#39;avg_ratio_weather_delays&#39;</span>,</span>
+<span id="cb10-390"><a href="#cb10-390"></a>    color<span class="op">=</span><span class="st">&#39;avg_ratio_weather_delays&#39;</span>,</span>
+<span id="cb10-391"><a href="#cb10-391"></a>    range_y<span class="op">=</span>[<span class="fl">0.25</span>, <span class="fl">0.4</span>],</span>
+<span id="cb10-392"><a href="#cb10-392"></a>    text_auto<span class="op">=</span><span class="st">&#39;.1%&#39;</span>,</span>
+<span id="cb10-393"><a href="#cb10-393"></a>    labels<span class="op">=</span>{</span>
+<span id="cb10-394"><a href="#cb10-394"></a>        <span class="st">&#39;avg_ratio_weather_delays&#39;</span>: <span class="st">&#39;Percent&#39;</span>,</span>
+<span id="cb10-395"><a href="#cb10-395"></a>        <span class="st">&#39;code&#39;</span>: <span class="st">&#39;Airport&#39;</span></span>
+<span id="cb10-396"><a href="#cb10-396"></a>    }</span>
 <span id="cb10-397"><a href="#cb10-397"></a>)</span>
 <span id="cb10-398"><a href="#cb10-398"></a></span>
-<span id="cb10-399"><a href="#cb10-399"></a>fig.update_coloraxes(</span>
-<span id="cb10-400"><a href="#cb10-400"></a>    showscale<span class="op">=</span><span class="va">False</span></span>
+<span id="cb10-399"><a href="#cb10-399"></a>fig.update_layout(</span>
+<span id="cb10-400"><a href="#cb10-400"></a>    title_text<span class="op">=</span><span class="st">&#39;Percent of Total Delays caused by Weather&#39;</span></span>
 <span id="cb10-401"><a href="#cb10-401"></a>)</span>
 <span id="cb10-402"><a href="#cb10-402"></a></span>
-<span id="cb10-403"><a href="#cb10-403"></a>fig.update_yaxes(</span>
-<span id="cb10-404"><a href="#cb10-404"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-403"><a href="#cb10-403"></a>fig.update_coloraxes(</span>
+<span id="cb10-404"><a href="#cb10-404"></a>    showscale<span class="op">=</span><span class="va">False</span></span>
 <span id="cb10-405"><a href="#cb10-405"></a>)</span>
 <span id="cb10-406"><a href="#cb10-406"></a></span>
-<span id="cb10-407"><a href="#cb10-407"></a>fig.show()</span>
-<span id="cb10-408"><a href="#cb10-408"></a><span class="in">```</span></span>
-<span id="cb10-409"><a href="#cb10-409"></a></span>
-<span id="cb10-410"><a href="#cb10-410"></a>To me, this graph really illustrates how much humidity causes the weather. Both SLC and SAN are very dry places that are mostly sunny -- regardless of temperature. The other places in this grouping are in much more humid climates. Chicago is right next to the great lakes, Atlanta is notoriously humid, plus Denver and Houston have a decent amount of humidity surrounding them.</span>
-<span id="cb10-411"><a href="#cb10-411"></a></span>
-<span id="cb10-412"><a href="#cb10-412"></a><span class="fu">## Questions and Tasks</span></span>
+<span id="cb10-407"><a href="#cb10-407"></a>fig.update_yaxes(</span>
+<span id="cb10-408"><a href="#cb10-408"></a>    tickformat<span class="op">=</span><span class="st">&#39;.0%&#39;</span></span>
+<span id="cb10-409"><a href="#cb10-409"></a>)</span>
+<span id="cb10-410"><a href="#cb10-410"></a></span>
+<span id="cb10-411"><a href="#cb10-411"></a>fig.show()</span>
+<span id="cb10-412"><a href="#cb10-412"></a><span class="in">```</span></span>
 <span id="cb10-413"><a href="#cb10-413"></a></span>
-<span id="cb10-414"><a href="#cb10-414"></a><span class="ss">1. </span>Fix all of the varied missing data types in the data to be consistent (all missing values should be displayed as “NaN”). In your report include one record example (one row) from your new data, in the raw JSON format. Your example should display the “NaN” for at least one missing value.</span>
-<span id="cb10-415"><a href="#cb10-415"></a><span class="ss">2. </span>Which airport has the worst delays? Discuss the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours.</span>
-<span id="cb10-416"><a href="#cb10-416"></a><span class="ss">3. </span>What is the best month to fly if you want to avoid delays of any length? Discuss the metric you chose and why you chose it to calculate your answer. Include one chart to help support your answer, with the x-axis ordered by month. (To answer this question, you will need to remove any rows that are missing the Month variable.)</span>
-<span id="cb10-417"><a href="#cb10-417"></a><span class="ss">4. </span>According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. Your job is to create a new column that calculates the total number of flights delayed by weather (both severe and mild). You will need to replace all the missing values in the Late Aircraft variable with the mean. Show your work by printing the first 5 rows of data in a table. Use these three rules for your calculations:</span>
-<span id="cb10-418"><a href="#cb10-418"></a>    a. 100% of delayed flights in the Weather category are due to weather</span>
-<span id="cb10-419"><a href="#cb10-419"></a>    b. 30% of all delayed flights in the Late-Arriving category are due to weather.</span>
-<span id="cb10-420"><a href="#cb10-420"></a>    c. From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%.</span>
-<span id="cb10-421"><a href="#cb10-421"></a><span class="ss">5. </span>Using the new weather variable calculated above, create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.</span>
-<span id="cb10-422"><a href="#cb10-422"></a></span>
-<span id="cb10-423"><a href="#cb10-423"></a></span>
+<span id="cb10-414"><a href="#cb10-414"></a>To me, this graph really illustrates how much humidity causes the weather. Both SLC and SAN are very dry places that are mostly sunny -- regardless of temperature. The other places in this grouping are in much more humid climates. Chicago is right next to the great lakes, Atlanta is notoriously humid, plus Denver and Houston have a decent amount of humidity surrounding them.</span>
+<span id="cb10-415"><a href="#cb10-415"></a></span>
+<span id="cb10-416"><a href="#cb10-416"></a><span class="fu">## Questions and Tasks</span></span>
+<span id="cb10-417"><a href="#cb10-417"></a></span>
+<span id="cb10-418"><a href="#cb10-418"></a><span class="ss">1. </span>Fix all of the varied missing data types in the data to be consistent (all missing values should be displayed as “NaN”). In your report include one record example (one row) from your new data, in the raw JSON format. Your example should display the “NaN” for at least one missing value.</span>
+<span id="cb10-419"><a href="#cb10-419"></a><span class="ss">2. </span>Which airport has the worst delays? Discuss the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours.</span>
+<span id="cb10-420"><a href="#cb10-420"></a><span class="ss">3. </span>What is the best month to fly if you want to avoid delays of any length? Discuss the metric you chose and why you chose it to calculate your answer. Include one chart to help support your answer, with the x-axis ordered by month. (To answer this question, you will need to remove any rows that are missing the Month variable.)</span>
+<span id="cb10-421"><a href="#cb10-421"></a><span class="ss">4. </span>According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. Your job is to create a new column that calculates the total number of flights delayed by weather (both severe and mild). You will need to replace all the missing values in the Late Aircraft variable with the mean. Show your work by printing the first 5 rows of data in a table. Use these three rules for your calculations:</span>
+<span id="cb10-422"><a href="#cb10-422"></a>    a. 100% of delayed flights in the Weather category are due to weather</span>
+<span id="cb10-423"><a href="#cb10-423"></a>    b. 30% of all delayed flights in the Late-Arriving category are due to weather.</span>
+<span id="cb10-424"><a href="#cb10-424"></a>    c. From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%.</span>
+<span id="cb10-425"><a href="#cb10-425"></a><span class="ss">5. </span>Using the new weather variable calculated above, create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
