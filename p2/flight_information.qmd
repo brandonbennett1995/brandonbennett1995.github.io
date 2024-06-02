@@ -7,7 +7,7 @@ editor:
   render-on-save: true
 format:
   html:
-    theme: superhero
+    theme: darkly
     self-contained: true
     page-layout: full
     toc-depth: 3
@@ -337,8 +337,7 @@ fig.show()
 ```
 
 
-
-## <abbr title="Bureau of Transportation Statistics">BTS</abbr>
+## Bureau of Transportation Statistics
 
 - [ ] *Create a new column that calculates the total number of flights delayed by weather (both severe and mild)*
 - [ ] *Create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.*
