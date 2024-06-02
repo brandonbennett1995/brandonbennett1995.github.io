@@ -55,8 +55,8 @@ import plotly.express as px
 Here is the raw data
 
 ```{python}
-# url = 'https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json'
-df = pd.read_json('flights_missing.json')
+url = 'https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json'
+df = pd.read_json(url)
 df.head()
 ```
 
