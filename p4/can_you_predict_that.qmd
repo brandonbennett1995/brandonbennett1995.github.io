@@ -1,0 +1,43 @@
+---
+title: "Client Report - Can You Predict That?"
+subtitle: "Course DS 250"
+author: "Brandon Bennett"
+jupyter: python3
+editor:
+  render-on-save: true
+format:
+  html:
+    theme: darkly
+    self-contained: true
+    page-layout: full
+    toc-depth: 3
+    toc-expand: true
+    toc-location: left
+    toc-title: "Grand Questions"
+    toc: true
+    number-sections: true
+    code-copy: hover
+    code-fold: true
+    code-line-numbers: true
+    code-overflow: scroll
+    code-summary: "Show Code"
+    code-tools:
+      source: true
+      toggle: true
+      caption: See Code
+    grid:
+      sidebar-width: 200px
+      body-width: 900px
+      margin-width: 300px
+      gutter-width: 1rem
+execute: 
+  warning: false    
+---
+
+```{python}
+#| label: Import ibraries
+#| include: false
+import pandas as pd
+import numpy as np
+import plotly.express as px
+```
