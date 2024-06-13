@@ -41,9 +41,7 @@ import sqlite3
 import numpy as np
 import pandas as pd
 import plotly.express as px
-```
 
-```{python}
 # careful to list your path to the file or save it in the same place as your .qmd or .py file
 sqlite_file = "lahmansbaseballdb.sqlite"
 con = sqlite3.connect(sqlite_file)
@@ -54,15 +52,9 @@ results = pd.read_sql_query(q, con)
 results
 ```
 
-```{python}
-q = """--sql
-    SELECT * 
-    FROM sqlite_master 
-    WHERE type='table'
-    """
-table = pd.read_sql_query(q, con)
-table.filter(["name"])
-```
+## Baseball Players Who Attended BYU-Idaho
+
+Here we want to take a look at what players attended BYU-Idaho before going pro. First thing we want to do is get the `schoolID` for BYU-Idaho.
 
 ```{python}
 q = """--sql
@@ -75,12 +67,21 @@ byui = schools.get("schoolID")[0]
 schools
 ```
 
+Now that we have successfully grabbed the `schoolID` from the database, lets see what players went to BYU-Idaho. We're also going to get the following data related to each player:
+
+1. Given Name
+2. Player ID
+3. School
+4. Team
+5. Year
+6. Salary
+
 ```{python}
 q = """--sql
     SELECT people.nameGiven AS `Given Name`,
            people.playerID AS `Player ID`,
-           collegeplaying.schoolID AS `School ID`,
-           salaries.teamID AS `Team ID`,
+           collegeplaying.schoolID AS `School`,
+           salaries.teamID AS `Team`,
            salaries.yearID AS `Year`,
            salaries.salary AS `Salary`
     FROM people
@@ -91,62 +92,79 @@ q = """--sql
     """
 
 player_info = pd.read_sql_query(q, con)
+
+# Looks like we have some duplicates
+player_info = player_info.drop_duplicates()
+
+# Do some formatting
 player_info = player_info.replace("idbyuid", "Brigham Young University-Idaho")
 player_info["Salary"] = player_info["Salary"].map(lambda x: f"$ {x:,.0f}")
-player_info = player_info.drop_duplicates()
-player_info.reset_index(drop=True)
 
+player_info.reset_index(drop=True)
 ```
 
-```{python}
+## Batting Averages
 
+### At Bat 1+ Times
+
+```{python}
 q = """--sql
     SELECT playerID, yearID, H, AB
     FROM batting
-    WHERE AB > 0
+    WHERE AB >= 1
     """
-
 batting_avgs = pd.read_sql_query(q, con)
 batters = (
-    batting_avgs.groupby("playerID")
-    .agg(ab=("AB", "sum"), h=("H", "sum"))
-    .assign(ba=lambda x: x.h / x.ab)
+    batting_avgs.groupby(["playerID", "yearID"])
+    .agg(hits=("H", "sum"), at_bat=("AB", "sum"))
+    .assign(batting_average=lambda x: (x.hits / x.at_bat))
 )
-batters.sort_values("ba", ascending=False).head().reset_index()
-
+batters.sort_values("batting_average", ascending=False).head().reset_index()
 ```
 
-```{python}
+### At Bat 10+ Times
 
+```{python}
 q = """--sql
     SELECT playerID, yearID, H, AB
     FROM batting
-    WHERE AB >= 100
+    WHERE AB >= 10
     """
-
-high_batting_avgs = pd.read_sql_query(q, con)
-high_batters = (
-    high_batting_avgs.groupby("playerID")
-    .agg(ab=("AB", "sum"), h=("H", "sum"))
-    .assign(ba=lambda x: x.h / x.ab)
+batting_avgs = pd.read_sql_query(q, con)
+batters = (
+    batting_avgs.groupby(["playerID", "yearID"])
+    .agg(
+        hits=("H", "sum"),
+        at_bat=("AB", "sum")
+    )
+    .assign(batting_average=lambda x: (x.hits / x.at_bat))
 )
-high_batters.sort_values("ba", ascending=False).head().reset_index()
-
+batters.sort_values("batting_average", ascending=False).head().reset_index()
 ```
 
-```{python}
+### At Bat 100+ Times
 
+```{python}
 q = """--sql
-    SELECT * FROM teams
+    SELECT b.playerID, SUM(b.H) AS 'Total H', SUM(b.AB) AS 'Total AB'
+    FROM people as p
+    LEFT JOIN batting AS b
+        ON b.playerID = p.playerID
+    GROUP BY b.playerID
+        HAVING Sum(b.AB)>=100
+    ORDER BY Sum(b.ab)
     """
+high_batters = pd.read_sql_query(q, con)
+high_batters = (
+    high_batters.assign(batting_average=lambda x: (x['Total H'] / x['Total AB']))
+)
 
-mlb_players = pd.read_sql_query(q, con)
-mlb_players
-
+high_batters.sort_values(
+    "batting_average", ascending=False).head().reset_index(drop=True)
 ```
 
+<!-- 
 ```{python}
-
 q = """--sql
     SELECT salaries.yearID AS `Year`, 
            salaries.teamID AS `Team ID`,
@@ -164,11 +182,14 @@ q = """--sql
 
 teams_players_pos = pd.read_sql_query(q, con)
 teams_players_pos
+``` 
+-->
 
-```
+## Comparing Salaries
+*Of the Boston Red Sox and New York Yankees*
 
+First, let's grab all the data related to the Red Sox[^1] and the Yankees[^2].
 ```{python}
-
 q = """--sql
     SELECT salaries.yearID AS `Year`,
            salaries.teamID AS `Team`,
@@ -188,19 +209,19 @@ mlb_players["Team"] = mlb_players["Team"].replace(
     ["BOS", "NYA"], ["Boston Red Sox", "New York Yankees"]
 )
 mlb_players
-
 ```
 
-```{python}
+### By Year
 
+Now that we have the relevant data, let's see how much the average salary is for each team. It looks like if you get drafted by the Yankees, you will have a significantly higher paying contract!
+
+```{python}
 avg_player_salary = (
     mlb_players.groupby(["Year", "Team"]).agg(avg_salary=("Salary", np.mean))
 ).reset_index()
 avg_player_salary["avg_salary"] = avg_player_salary["avg_salary"].map(
     lambda x: float(f"{x:.2f}")
 )
-avg_player_salary
-
 ```
 
 ```{python}
@@ -211,6 +232,7 @@ fig = px.bar(
     color="Team",
     title="Player Salary | 1985-2016",
     barmode="group",
+    text_auto="$.2s",
     color_discrete_map={"Boston Red Sox": "#BD3039",
                         "New York Yankees": "#003087"},
 )
@@ -224,7 +246,7 @@ fig.update_layout(
         title="",
         orientation="h",
         yanchor="top",
-        y=0.99,
+        y=0.95,
         xanchor="left",
         x=0.005,
     )
@@ -232,6 +254,8 @@ fig.update_layout(
 
 fig.show()
 ```
+
+### By Position
 
 ```{python}
 avg_player_salary_by_pos = (
@@ -242,11 +266,15 @@ avg_player_salary_by_pos = (
 avg_player_salary_by_pos["avg_salary"] = avg_player_salary_by_pos["avg_salary"].map(
     lambda x: float(f"{x:.2f}")
 )
-avg_player_salary_by_pos
+
+avg_player_salary_by_pos.sort_values(by=['avg_salary', 'Position'], ascending=False).reset_index(
+    drop=True).style.format(precision=2, thousands=",")
 ```
 
+And what position would earn you the most?
+
 ```{python}
-fig = px.bar(
+fig=px.bar(
     avg_player_salary_by_pos,
     x="Position",
     y="avg_salary",
@@ -255,7 +283,7 @@ fig = px.bar(
     text_auto="$.2s",
     barmode="group",
     color_discrete_map={"Boston Red Sox": "#BD3039",
-                        "New York Yankees": "#003087"},
+        "New York Yankees": "#003087"},
 )
 
 fig.update_yaxes(title="Average Salary", tickprefix="$")
@@ -265,11 +293,16 @@ fig.update_layout(
         title="",
         orientation="h",
         yanchor="top",
-        y=0.99,
+        y=0.95,
         xanchor="left",
-        x=0.75,
+        x=0.7,
     )
 )
 
 fig.show()
 ```
+
+It looks like the First Baseman get's the most on average. I always thought the pitcher would earn the highest, but from these two teams, that is not the case.
+
+[^1]: Designated by the `teamID` `BOS`
+[^2]: Designated by the `teamID` `NYA`

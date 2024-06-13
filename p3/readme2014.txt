@@ -16,16 +16,16 @@ README CONTENTS
 1.4 Using this Database
 1.5 Revision History
 
-2.0 Data Tables
-2.1 MASTER Table
-2.2 Batting Table
-2.3 Pitching Table
-2.4 Fielding Table
-2.5 All-Star Table
-2.6 Hall of Fame Table
-2.7 Managers Table
-2.8 Teams Table
-2.9 BattingPost Table
+2.00 Data Tables
+2.01 MASTER Table
+2.02 Batting Table
+2.03 Pitching Table
+2.04 Fielding Table
+2.05 All-Star Table
+2.06 HallOfFame Table
+2.07 Managers Table
+2.08 Teams Table
+2.09 BattingPost Table
 2.10 PitchingPost Table
 2.11 TeamFranchises Table
 2.12 FieldingOF Table
@@ -331,38 +331,37 @@ birthdates in the MASTER Table.
 
 The database is comprised of the following main Tables:
 
-  MASTER - Player names, DOB, and biographical info
-  Batting - batting statistics
-  Pitching - pitching statistics
-  Fielding - fielding statistics
+    MASTER - Player names, DOB, and biographical info
+    Batting - batting statistics
+    Pitching - pitching statistics
+    Fielding - fielding statistics
 
 It is supplemented by these Tables:
 
-  AllStarFull - All-Star appearances
-  HallofFame - Hall of Fame voting data
-  Managers - managerial statistics
-  Teams - yearly stats and standings 
-  BattingPost - post-season batting statistics
-  PitchingPost - post-season pitching statistics
-  TeamFranchises - franchise information
-  FieldingOF - outfield position data  
-  FieldingPost- post-season fieldinf data
-  ManagersHalf - split season data for managers
-  TeamsHalf - split season data for teams
-  Salaries - player salary data
-  SeriesPost - post-season series information
-  AwardsManagers - awards won by managers 
-  AwardsPlayers - awards won by players
-  AwardsShareManagers - award voting for manager awards
-  AwardsSharePlayers - award voting for player awards
-  Appearances - details on the positions a player appeared at
-  Schools - list of colleges that players attended
-  CollegePlaying - list of players and the colleges they attended
+    AllStarFull - All-Star appearances
+    Appearances - details on the positions a player appeared at
+    AwardsManagers - awards won by managers 
+    AwardsPlayers - awards won by players
+    AwardsShareManagers - award voting for manager awards
+    AwardsSharePlayers - award voting for player awards
+    BattingPost - post-season batting statistics
+    CollegePlaying - list of players and the colleges they attended
+    FieldingOF - outfield position data  
+    FieldingPost- post-season fieldinf data
+    HallofFame - Hall of Fame voting data
+    Managers - managerial statistics
+    ManagersHalf - split season data for managers
+    PitchingPost - post-season pitching statistics
+    Salaries - player salary data
+    Schools - list of colleges that players attended
+    SeriesPost - post-season series information
+    TeamFranchises - franchise information
+    Teams - yearly stats and standings 
+    TeamsHalf - split season data for teams
 
 
 Sections 2.1 through 2.24 of this document describe each of the Tables in
 detail and the fields that each contains.
-
 
 --------------------------------------------------------------------------
 2.1 MASTER Table
@@ -604,7 +603,7 @@ L              Losses
 G              Games
 GS             Games Started
 CG             Complete Games
-SHO             Shutouts 
+SHO            Shutouts 
 SV             Saves
 IPOuts         Outs Pitched (innings pitched x 3)
 H              Hits
@@ -692,6 +691,7 @@ lgIDloser      League ID of the team that lost the series
 wins           Wins by team that won the series
 losses         Losses by team that won the series
 ties           Tie games
+
 ------------------------------------------------------------------------------
 2.17 AwardsManagers Table
 
