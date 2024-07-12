@@ -14,7 +14,7 @@ The data is called `flights_missing`. Monthly Airline Delays by Airport for US F
 A data frame with columns:
 
 | Variable                        | Class     | Description                    |
-|:--------------------------------|:----------|:-------------------------------|
+| :------------------------------ | :-------- | :----------------------------- |
 | `airport_code`                  | character | Airport Code                   |
 | `airport_name`                  | character | Airport Name                   |
 | `month`                         | character | Month                          |
@@ -32,3 +32,24 @@ A data frame with columns:
 | `minutes_delayed_security`      | integer   | Minutes Delayed Security       |
 | `minutes_delayed_weather`       | integer   | Minutes Delayed Weather        |
 | `minutes_delayed_total`         | integer   | Minutes Delayed Total          |
+
+## Notes
+
+```python
+df.shape  # This returns (rows, columns)
+
+# What does a row represent in this dataset?
+# - A row is a reported ufo sighting
+
+# What are the different ways missing values are encoded?
+
+# Object columns
+df['column_name'].value_counts(dropna=False)
+
+# Numeric columns
+df.['column_name'].describe()  # -999 looks like a missing value encoding
+
+
+# How many np.nan in each column?
+df.isna().sum()
+```

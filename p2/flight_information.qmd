@@ -16,7 +16,7 @@ format:
     toc-title: "Grand Questions"
     toc: true
     number-sections: true
-    code-copy: hover
+    code-copy: true
     code-fold: true
     code-line-numbers: true
     code-overflow: scroll
@@ -67,6 +67,7 @@ df.head()
 Let's start by getting some more info on the data.
 
 ```{python}
+#| include: false
 # This lets us see a general overview of what we're working with
 df.info()
 ```
@@ -74,6 +75,7 @@ df.info()
 Maybe just a bit more.
 
 ```{python}
+# | include: false
 # This lets us see a general overview of what we're working with
 df.describe()
 ```
@@ -185,7 +187,7 @@ for c in ['late_aircraft_delays', 'carrier_time', 'nas_time']:
 df.isna().sum()
 
 # And here is a sample row with our na value in it
-df.query('@pd.isna(late_aircraft_delays)').head(1)
+df.query('@pd.isna(late_aircraft_delays)').head(5)
 ```
 
 
@@ -194,6 +196,7 @@ df.query('@pd.isna(late_aircraft_delays)').head(1)
 *Which airport has the worst delays?*
 
 Here we seperate the relevant columns from our DataFrame. We then will compute the ratio of delayed flights to total flights and also find the minutes per delay. Afterwards we will group them and average them by airport. Graphing the data provides us with some significant insight about which airport is best and which is worst. When it comes to your likelihood of having your flight delayed, San Francisco has over a $\frac{1}{4}$ chance of delaying your flight. However, you have a slightly lower chance of having a longer wait time at Chicago O'Hare. I personally would take a lower chance at a longer delay, so I say San Francisco is has the worst delays.
+
 
 ```{python}
 worst = (
@@ -219,6 +222,7 @@ fig = px.bar(
     x='code',
     y='avg_time_delay',
     color='avg_percent_delayed',
+    color_continuous_scale="bluered",
     range_y=[40, 70],
     text_auto='.1f',
     hover_data=['avg_time_delay', 'avg_percent_delayed'],
@@ -252,6 +256,7 @@ fig = px.bar(
     x='code',
     y='median_time_delay',
     color='median_percent_delayed',
+    color_continuous_scale="bluered",
     range_y=[40, 70],
     text_auto='.1f',
     hover_data=['median_time_delay', 'median_percent_delayed'],
@@ -301,6 +306,7 @@ fig = px.bar(
     x='month',
     y='avg_time_delay',
     color='avg_percent_delayed',
+    color_continuous_scale="bluered",
     range_y=[50, 62],
     text_auto='.1f',
     hover_data=['avg_time_delay', 'avg_percent_delayed'],
@@ -334,6 +340,7 @@ fig = px.bar(
     x='month',
     y='median_time_delay',
     color='median_percent_delayed',
+    color_continuous_scale="bluered",
     range_y=[50, 62],
     text_auto='.1f',
     hover_data=['median_time_delay', 'median_percent_delayed'],
@@ -384,11 +391,18 @@ dat = (
     .reset_index()
 )
 
+dat.head()
+```
+
+
+```{python}
+
 fig = px.bar(
     dat,
     x='code',
     y='avg_ratio_weather_delays',
     color='avg_ratio_weather_delays',
+    color_continuous_scale="bluered",
     range_y=[0.25, 0.4],
     text_auto='.1%',
     labels={

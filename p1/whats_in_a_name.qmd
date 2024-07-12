@@ -28,14 +28,23 @@ execute:
 
 # Elevator Pitch {.unnumbered}
 
-- *My name, Brandon, was given to me right after its peak of popularity*
-- *Most Brittany's are around 35 years old*
-- *The names, Mary, Martha, Peter, and, Paul rose in popularity during the 1950, but have since fallen*
-- *The name Rick gained a lot of traction after the release of [Casa Blanca in 1942](https://en.wikipedia.org/wiki/Casablanca_(film))*
+-   My name, *Brandon*, was given to me right after its peak of popularity in *1995*
+-   Most *Brittany's* were born in the *late 80's and early 90's*, making them around *35 years old*
+-   *Marth, Mary, Paul, and Peter* could have been influenced by the *[Healing Revival Movement]* after WW2
+    -   *Martha* was most popular in *1947*
+    -   *Mary* was most popular in *1950*
+    -   *Paul* was most popular in *1954*
+    -   *Peter* was most popular in *1956*
+-   The name *Rick* gained a lot of traction after the release of *[Casa Blanca]* in *1942*
+    -   *Rick* reached peak popularity in *1958*
+  
+  [Healing Revival Movement]: https://en.wikipedia.org/wiki/Healing_revival
+  [Casa Blanca in 1942]: https://en.wikipedia.org/wiki/Casablanca_(film)
 
 ```{python}
 # | label: libraries
 # | include: false
+import numpy as np
 import pandas as pd
 import plotly.express as px
 ```
@@ -44,8 +53,8 @@ import plotly.express as px
 # | label: fetch-data
 # | fig-cap: Sample of the data
 
-file = 'https://raw.githubusercontent.com/byuidatascience/data4names/master/data-raw/names_year/names_year.csv'
-
+# file = 'https://raw.githubusercontent.com/byuidatascience/data4names/master/data-raw/names_year/names_year.csv'
+file = r'./names_year.csv'
 # Reading in the data
 df = pd.read_csv(file)
 
@@ -58,10 +67,7 @@ df = df.rename(columns={'name': 'Name', 'year': 'Year'})
 # Changing the 'Total' column to an int because we can't have
 # .5 kids named something
 df = df.astype({'Total': 'int32'})
-
-# Displaying the head
-df.head()
-```  
+```
 
 # Hi, My Name is...
 
@@ -73,12 +79,11 @@ and even when I go to the Doctors office I sometimes have to give my middle name
 super common too!
 
 ```{python}
-#| code-summary: Filtering records for 'Brandon'
-#| warning: false
+# | code-summary: Filtering records for 'Brandon'
+# | warning: false
 
 my_name = df.query("Name == 'Brandon'")
 rows, cols = my_name.shape
-my_name.head()
 ```
 
 The name *Brandon* has `{python} rows` records in our database.
@@ -100,15 +105,12 @@ fig = px.line(
 
 # Adding a line to indicate my birth year
 fig.add_vline(
-    x=1995
-)
-
-# Annotating said line
-fig.add_annotation(
     x=1995,
-    y=25_000,
-    text='The Year I was Born',
-    align='right',
+    label=dict(
+        text="My Birthyear",
+        textposition="middle left",
+        font=dict(size=16)
+    )
 )
 
 fig.show()
@@ -118,10 +120,9 @@ fig.show()
 
 *If you talked to someone named Brittany on the phone, what is your guess of his or her age?*
 
-I would guess that she is around ±35 years old. The majority of babies named *Brittany* falls right on 1990. Even
-when we look at popular media, there are a fair amount of actresses and singers with the first name *Brittany*, i.e.
+I would guess that she is around ±35 years old. The majority of babies named *Brittany* falls right on 1990. Even when
+we look at popular media, there are a fair amount of actresses and singers with the first name *Brittany*, i.e.
 *Brittany Spears* (Pop Singer) and *Brittany Snow* (Actress)
-
 
 *What ages would you not guess?*
 
@@ -138,7 +139,6 @@ rows, cols = brittany.shape
 
 The name *Brittany* has `{python} rows` in our database.
 
-
 ```{python}
 # | fig-cap: "Brittany is a relatively new name."
 # | fig-align: center
@@ -146,12 +146,19 @@ The name *Brittany* has `{python} rows` in our database.
 
 fig = px.line(
     brittany,
-    x='Year',
-    y='Total',
+    x="Year",
+    y="Total",
     title="Popularity of 'Brittany' over time",
-    labels={
-        'Year': 'Year'
-    }
+    labels={"Year": "Year"},
+)
+
+fig.add_vline(
+    x=1990,
+    label=dict(
+        text="Peak Brittany's",
+        textposition="middle left",
+        font=dict(size=16)
+    )
 )
 
 fig.show()
@@ -159,9 +166,15 @@ fig.show()
 
 # Christian Names
 
-*Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four names. What trends do you notice?*
+*Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four
+names. What trends do you notice?*
 
-I notice there is a decent increase in all the names after *1945* and a steep decline in all of the names after the year *1960* or so. This falls right in line with the baby boomer demographic. This also makes a lot of sense, considering that a Gallup Poll Survey found that in 1950 *[over 90% of the adult population identified as Christian](https://www.govinfo.gov/content/pkg/USCOURTS-ca4-15-02597/pdf/USCOURTS-ca4-15-02597-3.pdf)*. This fact seems to be supported by the trend of each name through the 1950's.
+I notice there is a decent increase in all the names after *1945* and a steep decline in all of the names after the year
+*1960* or so. This falls right in line with the baby boomer demographic. This also makes a lot of sense, considering
+that a Gallup Poll Survey found that in 1950 [*over 90% of the adult population identified as Christian*]. This fact
+seems to be supported by the trend of each name through the 1950's.
+
+  [*over 90% of the adult population identified as Christian*]: https://www.govinfo.gov/content/pkg/USCOURTS-ca4-15-02597/pdf/USCOURTS-ca4-15-02597-3.pdf
 
 ```{python}
 # | code-summary: Filtering out Mary, Martha, Peter, and Paul
@@ -189,14 +202,23 @@ fig = px.line(
     }
 )
 
+fig.add_vline(x=1950)
+fig.add_vline(x=1950)
+fig.add_vline(x=1950)
+fig.add_vline(x=1950)
+
 fig.show()
 ```
 
 # Rick
 
-*Think of a unique name from a famous movie. Plot the usage of that name and see how changes line up with the movie release. Does it look like the movie had an effect on usage?*
+*Think of a unique name from a famous movie. Plot the usage of that name and see how changes line up with the movie
+release. Does it look like the movie had an effect on usage?*
 
-I chose the name *Rick* from *Casa Blanca*. *Casa Blanca* was released on *January 23, 1943*. The data seems to indicate that the movie had a significant impact on usage of the name *Rick*. The year this movie was released, there were only 193 babies given the name and there are no records before *1939*. The data seems to indicate that there was a significant impact from the movie.
+I chose the name *Rick* from *Casa Blanca*. *Casa Blanca* was released on *January 23, 1943*. The data seems to indicate
+that the movie had a significant impact on usage of the name *Rick*. The year this movie was released, there were only
+193 babies given the name and there are no records before *1939*. The data seems to indicate that there was a
+significant impact from the movie.
 
 ```{python}
 # | code-summary: Selecting 'Rick' from the database
