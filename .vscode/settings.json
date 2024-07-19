@@ -1,5 +1,6 @@
 {
   "cSpell.ignorePaths": [
+    "**/*.ipynb",
     "**/readme*.txt",
     ".git/objects",
     ".vscode",
@@ -16,5 +17,4 @@
     "**/CVS": true,
     "**/Thumbs.db": true
   },
-  "python.defaultInterpreterPath": "python"
 }

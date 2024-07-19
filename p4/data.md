@@ -1,405 +1,401 @@
-# Denver residential dwelling sales for 2013
-
-```python
-# Things to do to explore the data
-
-```
+## Denver residential dwelling sales for 2013
 
 The data is called `dwellings_denver`.
 
-***Description***
+### Description
 
-Attributes of each dwelling with their selling price for homes that sold in Denver in 2013
+Attributes of each dwelling with their selling price for homes that sold in Denver in 2013: [Source](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-real-property-sales-book-2013)
 
-[Data Source](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-real-property-sales-book-2013)
-
-***Data Format***
+### Data format
 
 A data frame with columns:
 
-| Variable  | Class     | Description                               |
-|:----------|:----------|:------------------------------------------|
-| parcel    | character | The parcel id                             |
-| nbhd      | numeric   | Neigborhood of the home                   |
-| abstrprd  | numeric   | No clue                                   |
-| livearea  | numeric   | Square footage that is liveable           |
-| finbsmnt  | numeric   | Square footage finished in the basement   |
-| basement  | numeric   | Total square footage of the basement      |
-| yrbuilt   | numeric   | Year the home was built                   |
-| condition | character | Condition of the home (6 levels provided) |
-| quality   | character | A letter rating                           |
-| totunits  | numeric   | How many dwelling units in the building   |
-| stories   | numeric   | The number of stories                     |
-| gartype   | character | Details on the garage type                |
-| nocars    | numeric   | Size of the garage in cars                |
-| xtraffic  | logical   | Emtpy                                     |
-| floorlvl  | numeric   | What level the living unit is on          |
-| numbdrm   | numeric   | Number of bedrooms                        |
-| numbaths  | numeric   | Number of bathrooms                       |
-| arcstyle  | character | Type of home                              |
-| sprice    | numeric   | Selling price                             |
-| deduct    | numeric   | Deduction from the selling price          |
-| netprice  | numeric   | Net price of home                         |
-| tasp      | numeric   | Tax assesed selling price                 |
-| smonth    | numeric   | Month sold                                |
-| syear     | numeric   | Year sold                                 |
-| qualified | character | Q or U with 66 percent Q                  |
-| status    | character | I or V with over 90 percent I             |
+| Variable    | Class | Description                                              |
+|:------------|:------|:---------------------------------------------------------|
+| `parcel`    | `A-Z` | The parcel id                                            |
+| `nbhd`      | `#`   | Neighborhood of the home                                 |
+| `abstrprd`  | `#`   | No clue                                                  |
+| `livearea`  | `#`   | Square footage that is liveable                          |
+| `finbsmnt`  | `#`   | Square footage finished in the basement                  |
+| `basement`  | `#`   | Total square footage of the basement                     |
+| `yrbuilt`   | `#`   | Year the home was built                                  |
+| `condition` | `A-Z` | Condition of the home (6 levels provided)                |
+| `quality`   | `A-Z` | A letter ratting                                         |
+| `totunits`  | `#`   | How many dwelling units in the building                  |
+| `stories`   | `#`   | The number of stories                                    |
+| `gartype`   | `A-Z` | Details on the garage type                               |
+| `nocars`    | `#`   | Size of the garage in cars                               |
+| `xtraffic`  | `T/F` | Empty                                                    |
+| `floorlvl`  | `#`   | What level the living unit is on^[Mostly for apartments] |
+| `numbdrm`   | `#`   | Number of bedrooms                                       |
+| `numbaths`  | `#`   | Number of bathrooms                                      |
+| `arcstyle`  | `A-Z` | Type of home                                             |
+| `sprice`    | `#`   | Selling price                                            |
+| `deduct`    | `#`   | Deduction from the selling price                         |
+| `netprice`  | `#`   | Net price of home                                        |
+| `tasp`      | `#`   | Tax assessed selling price                               |
+| `smonth`    | `#`   | Month sold                                               |
+| `syear`     | `#`   | Year sold                                                |
+| `qualified` | `A-Z` | Q or U with 66 percent Q                                 |
+| `status`    | `A-Z` | I or V with over 90 percent I                            |
 
-## Residential Dwelling Sales 2013 (ML Ready)
+
+## Denver residential dwelling sales for 2013
 
 The data is called `dwellings_ml`.
 
-***Description***
+### Description
 
 Attributes of each dwelling with their selling price in machine learning format
 
-[Data Source](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-real-property-sales-book-2013)
+<!-- [Source](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-real-property-sales-book-2013) -->
 
-***Data Format***
+### Data format
 
 A data frame with columns:
 
-| Variable                         | Class     | Description                             |
-|:---------------------------------|:----------|:----------------------------------------|
-| parcel                           | character | The parcel id                           |
-| abstrprd                         | numeric   | No clue^[Um, What?]                     |
-| livearea                         | numeric   | Square footage that is liveable         |
-| finbsmnt                         | numeric   | Square footage finished in the basement |
-| basement                         | numeric   | Total square footage of the basement    |
-| yrbuilt                          | numeric   | Year the home was built                 |
-| totunits                         | numeric   | How many dwelling units in the building |
-| stories                          | numeric   | The number of stories                   |
-| nocars                           | numeric   | Size of the garage in cars              |
-| numbdrm                          | numeric   | Number of bedrooms                      |
-| numbaths                         | numeric   | Number of bathrooms                     |
-| sprice                           | numeric   | Selling price                           |
-| deduct                           | numeric   | Deduction from the selling price        |
-| netprice                         | numeric   | Net price of home                       |
-| tasp                             | numeric   | Tax assesed selling price               |
-| smonth                           | numeric   | Month sold                              |
-| syear                            | numeric   | Year sold                               |
-| condition_AVG                    | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| condition_Excel                  | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| condition_Fair                   | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| condition_Good                   | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| condition_VGood                  | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| quality_A                        | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| quality_B                        | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| quality_C                        | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| quality_D                        | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| quality_X                        | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_Att                      | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_Att/Det                  | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_CP                       | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_Det                      | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_None                     | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_att/CP                   | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| gartype_det/CP                   | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_BI-LEVEL                | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_CONVERSIONS             | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_END UNIT                | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_MIDDLE UNIT             | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_ONE AND HALF-STORY      | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_ONE-STORY               | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_SPLIT LEVEL             | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_THREE-STORY             | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_TRI-LEVEL               | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_TRI-LEVEL WITH BASEMENT | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_TWO AND HALF-STORY      | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| arcstyle_TWO-STORY               | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| qualified_Q                      | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| qualified_U                      | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| status_I                         | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| status_V                         | numeric   | 0 (Doesn't Have) or 1 (Has)             |
-| before1980                       | numeric   | 0 (Doesn't Have) or 1 (Has)             |
+| Variable                           | Class | Description                             |
+|:-----------------------------------|:------|:----------------------------------------|
+| `abstrprd`                         | `#`   | No clue                                 |
+| `arcstyle_BI-LEVEL`                | `#`   | `0 or 1`                                |
+| `arcstyle_CONVERSIONS`             | `#`   | `0 or 1`                                |
+| `arcstyle_END UNIT`                | `#`   | `0 or 1`                                |
+| `arcstyle_MIDDLE UNIT`             | `#`   | `0 or 1`                                |
+| `arcstyle_ONE AND HALF-STORY`      | `#`   | `0 or 1`                                |
+| `arcstyle_ONE-STORY`               | `#`   | `0 or 1`                                |
+| `arcstyle_SPLIT LEVEL`             | `#`   | `0 or 1`                                |
+| `arcstyle_THREE-STORY`             | `#`   | `0 or 1`                                |
+| `arcstyle_TRI-LEVEL WITH BASEMENT` | `#`   | `0 or 1`                                |
+| `arcstyle_TRI-LEVEL`               | `#`   | `0 or 1`                                |
+| `arcstyle_TWO AND HALF-STORY`      | `#`   | `0 or 1`                                |
+| `arcstyle_TWO-STORY`               | `#`   | `0 or 1`                                |
+| `basement`                         | `#`   | Total square footage of the basement    |
+| `before1980`                       | `#`   | `0 or 1`                                |
+| `condition_AVG`                    | `#`   | `0 or 1`                                |
+| `condition_Excel`                  | `#`   | `0 or 1`                                |
+| `condition_Fair`                   | `#`   | `0 or 1`                                |
+| `condition_Good`                   | `#`   | `0 or 1`                                |
+| `condition_VGood`                  | `#`   | `0 or 1`                                |
+| `deduct`                           | `#`   | Deduction from the selling price        |
+| `finbsmnt`                         | `#`   | Square footage finished in the basement |
+| `gartype_att/CP`                   | `#`   | `0 or 1`                                |
+| `gartype_Att/Det`                  | `#`   | `0 or 1`                                |
+| `gartype_Att`                      | `#`   | `0 or 1`                                |
+| `gartype_CP`                       | `#`   | `0 or 1`                                |
+| `gartype_det/CP`                   | `#`   | `0 or 1`                                |
+| `gartype_Det`                      | `#`   | `0 or 1`                                |
+| `gartype_None`                     | `#`   | `0 or 1`                                |
+| `livearea`                         | `#`   | Square footage that is liveable         |
+| `netprice`                         | `#`   | Net price of home                       |
+| `nocars`                           | `#`   | Size of the garage in cars              |
+| `numbaths`                         | `#`   | Number of bathrooms                     |
+| `numbdrm`                          | `#`   | Number of bedrooms                      |
+| `parcel`                           | `A-Z` | The parcel id                           |
+| `qualified_Q`                      | `#`   | `0 or 1`                                |
+| `qualified_U`                      | `#`   | `0 or 1`                                |
+| `quality_A`                        | `#`   | `0 or 1`                                |
+| `quality_B`                        | `#`   | `0 or 1`                                |
+| `quality_C`                        | `#`   | `0 or 1`                                |
+| `quality_D`                        | `#`   | `0 or 1`                                |
+| `quality_X`                        | `#`   | `0 or 1`                                |
+| `smonth`                           | `#`   | Month sold                              |
+| `sprice`                           | `#`   | Selling price                           |
+| `status_I`                         | `#`   | `0 or 1`                                |
+| `status_V`                         | `#`   | `0 or 1`                                |
+| `stories`                          | `#`   | The number of stories                   |
+| `syear`                            | `#`   | Year sold                               |
+| `tasp`                             | `#`   | Tax assessed selling price              |
+| `totunits`                         | `#`   | How many dwelling units in the building |
+| `yrbuilt`                          | `#`   | Year the home was built                 |
 
-## One hot encoded neighbordood Variable
+
+
+## One Hot Encoded Neighborhood Variable
 
 The data is called `dwellings_neighborhoods_ml`.
 
-***Description***
+### Description
 
-Neighborhood attributes for homes that sold in Denver in 2013
+Neighborhood attributes for homes that sold in Denver in 2013: [Source](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-real-property-sales-book-2013)
 
-[Data Source](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-real-property-sales-book-2013)
-
-***Data Format***
+### Data Format
 
 A data frame with columns:
 
-| Variable | Class   | Description       |
-|:---------|:--------|:------------------|
-| nbhd_1   | numeric | Neighborhood #1   |
-| nbhd_2   | numeric | Neighborhood #2   |
-| nbhd_3   | numeric | Neighborhood #3   |
-| nbhd_4   | numeric | Neighborhood #4   |
-| nbhd_5   | numeric | Neighborhood #5   |
-| nbhd_101 | numeric | Neighborhood #101 |
-| nbhd_104 | numeric | Neighborhood #104 |
-| nbhd_105 | numeric | Neighborhood #105 |
-| nbhd_106 | numeric | Neighborhood #106 |
-| nbhd_107 | numeric | Neighborhood #107 |
-| nbhd_108 | numeric | Neighborhood #108 |
-| nbhd_109 | numeric | Neighborhood #109 |
-| nbhd_110 | numeric | Neighborhood #110 |
-| nbhd_111 | numeric | Neighborhood #111 |
-| nbhd_112 | numeric | Neighborhood #112 |
-| nbhd_113 | numeric | Neighborhood #113 |
-| nbhd_114 | numeric | Neighborhood #114 |
-| nbhd_115 | numeric | Neighborhood #115 |
-| nbhd_116 | numeric | Neighborhood #116 |
-| nbhd_117 | numeric | Neighborhood #117 |
-| nbhd_118 | numeric | Neighborhood #118 |
-| nbhd_120 | numeric | Neighborhood #120 |
-| nbhd_121 | numeric | Neighborhood #121 |
-| nbhd_122 | numeric | Neighborhood #122 |
-| nbhd_123 | numeric | Neighborhood #123 |
-| nbhd_124 | numeric | Neighborhood #124 |
-| nbhd_127 | numeric | Neighborhood #127 |
-| nbhd_128 | numeric | Neighborhood #128 |
-| nbhd_129 | numeric | Neighborhood #129 |
-| nbhd_130 | numeric | Neighborhood #130 |
-| nbhd_131 | numeric | Neighborhood #131 |
-| nbhd_132 | numeric | Neighborhood #132 |
-| nbhd_133 | numeric | Neighborhood #133 |
-| nbhd_201 | numeric | Neighborhood #201 |
-| nbhd_202 | numeric | Neighborhood #202 |
-| nbhd_203 | numeric | Neighborhood #203 |
-| nbhd_205 | numeric | Neighborhood #205 |
-| nbhd_206 | numeric | Neighborhood #206 |
-| nbhd_207 | numeric | Neighborhood #207 |
-| nbhd_208 | numeric | Neighborhood #208 |
-| nbhd_210 | numeric | Neighborhood #210 |
-| nbhd_211 | numeric | Neighborhood #211 |
-| nbhd_212 | numeric | Neighborhood #212 |
-| nbhd_213 | numeric | Neighborhood #213 |
-| nbhd_214 | numeric | Neighborhood #214 |
-| nbhd_215 | numeric | Neighborhood #215 |
-| nbhd_216 | numeric | Neighborhood #216 |
-| nbhd_217 | numeric | Neighborhood #217 |
-| nbhd_218 | numeric | Neighborhood #218 |
-| nbhd_219 | numeric | Neighborhood #219 |
-| nbhd_220 | numeric | Neighborhood #220 |
-| nbhd_221 | numeric | Neighborhood #221 |
-| nbhd_222 | numeric | Neighborhood #222 |
-| nbhd_224 | numeric | Neighborhood #224 |
-| nbhd_225 | numeric | Neighborhood #225 |
-| nbhd_226 | numeric | Neighborhood #226 |
-| nbhd_227 | numeric | Neighborhood #227 |
-| nbhd_228 | numeric | Neighborhood #228 |
-| nbhd_229 | numeric | Neighborhood #229 |
-| nbhd_230 | numeric | Neighborhood #230 |
-| nbhd_231 | numeric | Neighborhood #231 |
-| nbhd_232 | numeric | Neighborhood #232 |
-| nbhd_233 | numeric | Neighborhood #233 |
-| nbhd_234 | numeric | Neighborhood #234 |
-| nbhd_235 | numeric | Neighborhood #235 |
-| nbhd_237 | numeric | Neighborhood #237 |
-| nbhd_238 | numeric | Neighborhood #238 |
-| nbhd_239 | numeric | Neighborhood #239 |
-| nbhd_240 | numeric | Neighborhood #240 |
-| nbhd_241 | numeric | Neighborhood #241 |
-| nbhd_242 | numeric | Neighborhood #242 |
-| nbhd_243 | numeric | Neighborhood #243 |
-| nbhd_244 | numeric | Neighborhood #244 |
-| nbhd_245 | numeric | Neighborhood #245 |
-| nbhd_247 | numeric | Neighborhood #247 |
-| nbhd_248 | numeric | Neighborhood #248 |
-| nbhd_249 | numeric | Neighborhood #249 |
-| nbhd_250 | numeric | Neighborhood #250 |
-| nbhd_252 | numeric | Neighborhood #252 |
-| nbhd_253 | numeric | Neighborhood #253 |
-| nbhd_254 | numeric | Neighborhood #254 |
-| nbhd_255 | numeric | Neighborhood #255 |
-| nbhd_256 | numeric | Neighborhood #256 |
-| nbhd_257 | numeric | Neighborhood #257 |
-| nbhd_258 | numeric | Neighborhood #258 |
-| nbhd_259 | numeric | Neighborhood #259 |
-| nbhd_260 | numeric | Neighborhood #260 |
-| nbhd_301 | numeric | Neighborhood #301 |
-| nbhd_302 | numeric | Neighborhood #302 |
-| nbhd_401 | numeric | Neighborhood #401 |
-| nbhd_402 | numeric | Neighborhood #402 |
-| nbhd_403 | numeric | Neighborhood #403 |
-| nbhd_404 | numeric | Neighborhood #404 |
-| nbhd_503 | numeric | Neighborhood #503 |
-| nbhd_504 | numeric | Neighborhood #504 |
-| nbhd_505 | numeric | Neighborhood #505 |
-| nbhd_506 | numeric | Neighborhood #506 |
-| nbhd_507 | numeric | Neighborhood #507 |
-| nbhd_508 | numeric | Neighborhood #508 |
-| nbhd_509 | numeric | Neighborhood #509 |
-| nbhd_510 | numeric | Neighborhood #510 |
-| nbhd_511 | numeric | Neighborhood #511 |
-| nbhd_512 | numeric | Neighborhood #512 |
-| nbhd_513 | numeric | Neighborhood #513 |
-| nbhd_514 | numeric | Neighborhood #514 |
-| nbhd_515 | numeric | Neighborhood #515 |
-| nbhd_517 | numeric | Neighborhood #517 |
-| nbhd_518 | numeric | Neighborhood #518 |
-| nbhd_519 | numeric | Neighborhood #519 |
-| nbhd_520 | numeric | Neighborhood #520 |
-| nbhd_521 | numeric | Neighborhood #521 |
-| nbhd_522 | numeric | Neighborhood #522 |
-| nbhd_523 | numeric | Neighborhood #523 |
-| nbhd_524 | numeric | Neighborhood #524 |
-| nbhd_525 | numeric | Neighborhood #525 |
-| nbhd_526 | numeric | Neighborhood #526 |
-| nbhd_527 | numeric | Neighborhood #527 |
-| nbhd_528 | numeric | Neighborhood #528 |
-| nbhd_529 | numeric | Neighborhood #529 |
-| nbhd_530 | numeric | Neighborhood #530 |
-| nbhd_531 | numeric | Neighborhood #531 |
-| nbhd_532 | numeric | Neighborhood #532 |
-| nbhd_533 | numeric | Neighborhood #533 |
-| nbhd_534 | numeric | Neighborhood #534 |
-| nbhd_535 | numeric | Neighborhood #535 |
-| nbhd_536 | numeric | Neighborhood #536 |
-| nbhd_537 | numeric | Neighborhood #537 |
-| nbhd_538 | numeric | Neighborhood #538 |
-| nbhd_539 | numeric | Neighborhood #539 |
-| nbhd_540 | numeric | Neighborhood #540 |
-| nbhd_541 | numeric | Neighborhood #541 |
-| nbhd_543 | numeric | Neighborhood #543 |
-| nbhd_544 | numeric | Neighborhood #544 |
-| nbhd_545 | numeric | Neighborhood #545 |
-| nbhd_546 | numeric | Neighborhood #546 |
-| nbhd_547 | numeric | Neighborhood #547 |
-| nbhd_548 | numeric | Neighborhood #548 |
-| nbhd_549 | numeric | Neighborhood #549 |
-| nbhd_550 | numeric | Neighborhood #550 |
-| nbhd_551 | numeric | Neighborhood #551 |
-| nbhd_552 | numeric | Neighborhood #552 |
-| nbhd_553 | numeric | Neighborhood #553 |
-| nbhd_555 | numeric | Neighborhood #555 |
-| nbhd_556 | numeric | Neighborhood #556 |
-| nbhd_580 | numeric | Neighborhood #580 |
-| nbhd_581 | numeric | Neighborhood #581 |
-| nbhd_582 | numeric | Neighborhood #582 |
-| nbhd_583 | numeric | Neighborhood #583 |
-| nbhd_584 | numeric | Neighborhood #584 |
-| nbhd_585 | numeric | Neighborhood #585 |
-| nbhd_586 | numeric | Neighborhood #586 |
-| nbhd_587 | numeric | Neighborhood #587 |
-| nbhd_588 | numeric | Neighborhood #588 |
-| nbhd_589 | numeric | Neighborhood #589 |
-| nbhd_590 | numeric | Neighborhood #590 |
-| nbhd_591 | numeric | Neighborhood #591 |
-| nbhd_592 | numeric | Neighborhood #592 |
-| nbhd_593 | numeric | Neighborhood #593 |
-| nbhd_594 | numeric | Neighborhood #594 |
-| nbhd_596 | numeric | Neighborhood #596 |
-| nbhd_597 | numeric | Neighborhood #597 |
-| nbhd_598 | numeric | Neighborhood #598 |
-| nbhd_599 | numeric | Neighborhood #599 |
-| nbhd_601 | numeric | Neighborhood #601 |
-| nbhd_602 | numeric | Neighborhood #602 |
-| nbhd_604 | numeric | Neighborhood #604 |
-| nbhd_605 | numeric | Neighborhood #605 |
-| nbhd_606 | numeric | Neighborhood #606 |
-| nbhd_607 | numeric | Neighborhood #607 |
-| nbhd_611 | numeric | Neighborhood #611 |
-| nbhd_612 | numeric | Neighborhood #612 |
-| nbhd_613 | numeric | Neighborhood #613 |
-| nbhd_614 | numeric | Neighborhood #614 |
-| nbhd_615 | numeric | Neighborhood #615 |
-| nbhd_616 | numeric | Neighborhood #616 |
-| nbhd_617 | numeric | Neighborhood #617 |
-| nbhd_618 | numeric | Neighborhood #618 |
-| nbhd_620 | numeric | Neighborhood #620 |
-| nbhd_621 | numeric | Neighborhood #621 |
-| nbhd_622 | numeric | Neighborhood #622 |
-| nbhd_623 | numeric | Neighborhood #623 |
-| nbhd_624 | numeric | Neighborhood #624 |
-| nbhd_625 | numeric | Neighborhood #625 |
-| nbhd_627 | numeric | Neighborhood #627 |
-| nbhd_628 | numeric | Neighborhood #628 |
-| nbhd_629 | numeric | Neighborhood #629 |
-| nbhd_630 | numeric | Neighborhood #630 |
-| nbhd_631 | numeric | Neighborhood #631 |
-| nbhd_634 | numeric | Neighborhood #634 |
-| nbhd_635 | numeric | Neighborhood #635 |
-| nbhd_636 | numeric | Neighborhood #636 |
-| nbhd_637 | numeric | Neighborhood #637 |
-| nbhd_638 | numeric | Neighborhood #638 |
-| nbhd_639 | numeric | Neighborhood #639 |
-| nbhd_640 | numeric | Neighborhood #640 |
-| nbhd_641 | numeric | Neighborhood #641 |
-| nbhd_642 | numeric | Neighborhood #642 |
-| nbhd_643 | numeric | Neighborhood #643 |
-| nbhd_644 | numeric | Neighborhood #644 |
-| nbhd_645 | numeric | Neighborhood #645 |
-| nbhd_646 | numeric | Neighborhood #646 |
-| nbhd_647 | numeric | Neighborhood #647 |
-| nbhd_648 | numeric | Neighborhood #648 |
-| nbhd_649 | numeric | Neighborhood #649 |
-| nbhd_650 | numeric | Neighborhood #650 |
-| nbhd_651 | numeric | Neighborhood #651 |
-| nbhd_652 | numeric | Neighborhood #652 |
-| nbhd_653 | numeric | Neighborhood #653 |
-| nbhd_654 | numeric | Neighborhood #654 |
-| nbhd_655 | numeric | Neighborhood #655 |
-| nbhd_656 | numeric | Neighborhood #656 |
-| nbhd_657 | numeric | Neighborhood #657 |
-| nbhd_658 | numeric | Neighborhood #658 |
-| nbhd_659 | numeric | Neighborhood #659 |
-| nbhd_660 | numeric | Neighborhood #660 |
-| nbhd_661 | numeric | Neighborhood #661 |
-| nbhd_663 | numeric | Neighborhood #663 |
-| nbhd_664 | numeric | Neighborhood #664 |
-| nbhd_665 | numeric | Neighborhood #665 |
-| nbhd_666 | numeric | Neighborhood #666 |
-| nbhd_667 | numeric | Neighborhood #667 |
-| nbhd_668 | numeric | Neighborhood #668 |
-| nbhd_669 | numeric | Neighborhood #669 |
-| nbhd_670 | numeric | Neighborhood #670 |
-| nbhd_671 | numeric | Neighborhood #671 |
-| nbhd_672 | numeric | Neighborhood #672 |
-| nbhd_673 | numeric | Neighborhood #673 |
-| nbhd_674 | numeric | Neighborhood #674 |
-| nbhd_675 | numeric | Neighborhood #675 |
-| nbhd_676 | numeric | Neighborhood #676 |
-| nbhd_678 | numeric | Neighborhood #678 |
-| nbhd_679 | numeric | Neighborhood #679 |
-| nbhd_680 | numeric | Neighborhood #680 |
-| nbhd_681 | numeric | Neighborhood #681 |
-| nbhd_682 | numeric | Neighborhood #682 |
-| nbhd_683 | numeric | Neighborhood #683 |
-| nbhd_690 | numeric | Neighborhood #690 |
-| nbhd_691 | numeric | Neighborhood #691 |
-| nbhd_692 | numeric | Neighborhood #692 |
-| nbhd_693 | numeric | Neighborhood #693 |
-| nbhd_694 | numeric | Neighborhood #694 |
-| nbhd_695 | numeric | Neighborhood #695 |
-| nbhd_698 | numeric | Neighborhood #698 |
-| nbhd_702 | numeric | Neighborhood #702 |
-| nbhd_703 | numeric | Neighborhood #703 |
-| nbhd_704 | numeric | Neighborhood #704 |
-| nbhd_705 | numeric | Neighborhood #705 |
-| nbhd_706 | numeric | Neighborhood #706 |
-| nbhd_707 | numeric | Neighborhood #707 |
-| nbhd_708 | numeric | Neighborhood #708 |
-| nbhd_709 | numeric | Neighborhood #709 |
-| nbhd_710 | numeric | Neighborhood #710 |
-| nbhd_711 | numeric | Neighborhood #711 |
-| nbhd_712 | numeric | Neighborhood #712 |
-| nbhd_713 | numeric | Neighborhood #713 |
-| nbhd_714 | numeric | Neighborhood #714 |
-| nbhd_715 | numeric | Neighborhood #715 |
-| nbhd_716 | numeric | Neighborhood #716 |
-| nbhd_717 | numeric | Neighborhood #717 |
-| nbhd_718 | numeric | Neighborhood #718 |
-| nbhd_719 | numeric | Neighborhood #719 |
-| nbhd_720 | numeric | Neighborhood #720 |
-| nbhd_801 | numeric | Neighborhood #801 |
-| nbhd_802 | numeric | Neighborhood #802 |
-| nbhd_803 | numeric | Neighborhood #803 |
-| nbhd_804 | numeric | Neighborhood #804 |
-| nbhd_805 | numeric | Neighborhood #805 |
-| nbhd_901 | numeric | Neighborhood #901 |
-| nbhd_902 | numeric | Neighborhood #902 |
-| nbhd_903 | numeric | Neighborhood #903 |
-| nbhd_904 | numeric | Neighborhood #904 |
-| nbhd_905 | numeric | Neighborhood #905 |
-| nbhd_906 | numeric | Neighborhood #906 |
+| Variable   | Class | Description   |
+|:-----------|:------|:--------------|
+| `parcel`   | `A-Z` | The parcel id |
+| `nbhd_1`   | `#`   | `0 or 1`      |
+| `nbhd_2`   | `#`   | `0 or 1`      |
+| `nbhd_3`   | `#`   | `0 or 1`      |
+| `nbhd_4`   | `#`   | `0 or 1`      |
+| `nbhd_5`   | `#`   | `0 or 1`      |
+| `nbhd_101` | `#`   | `0 or 1`      |
+| `nbhd_104` | `#`   | `0 or 1`      |
+| `nbhd_105` | `#`   | `0 or 1`      |
+| `nbhd_106` | `#`   | `0 or 1`      |
+| `nbhd_107` | `#`   | `0 or 1`      |
+| `nbhd_108` | `#`   | `0 or 1`      |
+| `nbhd_109` | `#`   | `0 or 1`      |
+| `nbhd_110` | `#`   | `0 or 1`      |
+| `nbhd_111` | `#`   | `0 or 1`      |
+| `nbhd_112` | `#`   | `0 or 1`      |
+| `nbhd_113` | `#`   | `0 or 1`      |
+| `nbhd_114` | `#`   | `0 or 1`      |
+| `nbhd_115` | `#`   | `0 or 1`      |
+| `nbhd_116` | `#`   | `0 or 1`      |
+| `nbhd_117` | `#`   | `0 or 1`      |
+| `nbhd_118` | `#`   | `0 or 1`      |
+| `nbhd_120` | `#`   | `0 or 1`      |
+| `nbhd_121` | `#`   | `0 or 1`      |
+| `nbhd_122` | `#`   | `0 or 1`      |
+| `nbhd_123` | `#`   | `0 or 1`      |
+| `nbhd_124` | `#`   | `0 or 1`      |
+| `nbhd_127` | `#`   | `0 or 1`      |
+| `nbhd_128` | `#`   | `0 or 1`      |
+| `nbhd_129` | `#`   | `0 or 1`      |
+| `nbhd_130` | `#`   | `0 or 1`      |
+| `nbhd_131` | `#`   | `0 or 1`      |
+| `nbhd_132` | `#`   | `0 or 1`      |
+| `nbhd_133` | `#`   | `0 or 1`      |
+| `nbhd_201` | `#`   | `0 or 1`      |
+| `nbhd_202` | `#`   | `0 or 1`      |
+| `nbhd_203` | `#`   | `0 or 1`      |
+| `nbhd_205` | `#`   | `0 or 1`      |
+| `nbhd_206` | `#`   | `0 or 1`      |
+| `nbhd_207` | `#`   | `0 or 1`      |
+| `nbhd_208` | `#`   | `0 or 1`      |
+| `nbhd_210` | `#`   | `0 or 1`      |
+| `nbhd_211` | `#`   | `0 or 1`      |
+| `nbhd_212` | `#`   | `0 or 1`      |
+| `nbhd_213` | `#`   | `0 or 1`      |
+| `nbhd_214` | `#`   | `0 or 1`      |
+| `nbhd_215` | `#`   | `0 or 1`      |
+| `nbhd_216` | `#`   | `0 or 1`      |
+| `nbhd_217` | `#`   | `0 or 1`      |
+| `nbhd_218` | `#`   | `0 or 1`      |
+| `nbhd_219` | `#`   | `0 or 1`      |
+| `nbhd_220` | `#`   | `0 or 1`      |
+| `nbhd_221` | `#`   | `0 or 1`      |
+| `nbhd_222` | `#`   | `0 or 1`      |
+| `nbhd_224` | `#`   | `0 or 1`      |
+| `nbhd_225` | `#`   | `0 or 1`      |
+| `nbhd_226` | `#`   | `0 or 1`      |
+| `nbhd_227` | `#`   | `0 or 1`      |
+| `nbhd_228` | `#`   | `0 or 1`      |
+| `nbhd_229` | `#`   | `0 or 1`      |
+| `nbhd_230` | `#`   | `0 or 1`      |
+| `nbhd_231` | `#`   | `0 or 1`      |
+| `nbhd_232` | `#`   | `0 or 1`      |
+| `nbhd_233` | `#`   | `0 or 1`      |
+| `nbhd_234` | `#`   | `0 or 1`      |
+| `nbhd_235` | `#`   | `0 or 1`      |
+| `nbhd_237` | `#`   | `0 or 1`      |
+| `nbhd_238` | `#`   | `0 or 1`      |
+| `nbhd_239` | `#`   | `0 or 1`      |
+| `nbhd_240` | `#`   | `0 or 1`      |
+| `nbhd_241` | `#`   | `0 or 1`      |
+| `nbhd_242` | `#`   | `0 or 1`      |
+| `nbhd_243` | `#`   | `0 or 1`      |
+| `nbhd_244` | `#`   | `0 or 1`      |
+| `nbhd_245` | `#`   | `0 or 1`      |
+| `nbhd_247` | `#`   | `0 or 1`      |
+| `nbhd_248` | `#`   | `0 or 1`      |
+| `nbhd_249` | `#`   | `0 or 1`      |
+| `nbhd_250` | `#`   | `0 or 1`      |
+| `nbhd_252` | `#`   | `0 or 1`      |
+| `nbhd_253` | `#`   | `0 or 1`      |
+| `nbhd_254` | `#`   | `0 or 1`      |
+| `nbhd_255` | `#`   | `0 or 1`      |
+| `nbhd_256` | `#`   | `0 or 1`      |
+| `nbhd_257` | `#`   | `0 or 1`      |
+| `nbhd_258` | `#`   | `0 or 1`      |
+| `nbhd_259` | `#`   | `0 or 1`      |
+| `nbhd_260` | `#`   | `0 or 1`      |
+| `nbhd_301` | `#`   | `0 or 1`      |
+| `nbhd_302` | `#`   | `0 or 1`      |
+| `nbhd_401` | `#`   | `0 or 1`      |
+| `nbhd_402` | `#`   | `0 or 1`      |
+| `nbhd_403` | `#`   | `0 or 1`      |
+| `nbhd_404` | `#`   | `0 or 1`      |
+| `nbhd_503` | `#`   | `0 or 1`      |
+| `nbhd_504` | `#`   | `0 or 1`      |
+| `nbhd_505` | `#`   | `0 or 1`      |
+| `nbhd_506` | `#`   | `0 or 1`      |
+| `nbhd_507` | `#`   | `0 or 1`      |
+| `nbhd_508` | `#`   | `0 or 1`      |
+| `nbhd_509` | `#`   | `0 or 1`      |
+| `nbhd_510` | `#`   | `0 or 1`      |
+| `nbhd_511` | `#`   | `0 or 1`      |
+| `nbhd_512` | `#`   | `0 or 1`      |
+| `nbhd_513` | `#`   | `0 or 1`      |
+| `nbhd_514` | `#`   | `0 or 1`      |
+| `nbhd_515` | `#`   | `0 or 1`      |
+| `nbhd_517` | `#`   | `0 or 1`      |
+| `nbhd_518` | `#`   | `0 or 1`      |
+| `nbhd_519` | `#`   | `0 or 1`      |
+| `nbhd_520` | `#`   | `0 or 1`      |
+| `nbhd_521` | `#`   | `0 or 1`      |
+| `nbhd_522` | `#`   | `0 or 1`      |
+| `nbhd_523` | `#`   | `0 or 1`      |
+| `nbhd_524` | `#`   | `0 or 1`      |
+| `nbhd_525` | `#`   | `0 or 1`      |
+| `nbhd_526` | `#`   | `0 or 1`      |
+| `nbhd_527` | `#`   | `0 or 1`      |
+| `nbhd_528` | `#`   | `0 or 1`      |
+| `nbhd_529` | `#`   | `0 or 1`      |
+| `nbhd_530` | `#`   | `0 or 1`      |
+| `nbhd_531` | `#`   | `0 or 1`      |
+| `nbhd_532` | `#`   | `0 or 1`      |
+| `nbhd_533` | `#`   | `0 or 1`      |
+| `nbhd_534` | `#`   | `0 or 1`      |
+| `nbhd_535` | `#`   | `0 or 1`      |
+| `nbhd_536` | `#`   | `0 or 1`      |
+| `nbhd_537` | `#`   | `0 or 1`      |
+| `nbhd_538` | `#`   | `0 or 1`      |
+| `nbhd_539` | `#`   | `0 or 1`      |
+| `nbhd_540` | `#`   | `0 or 1`      |
+| `nbhd_541` | `#`   | `0 or 1`      |
+| `nbhd_543` | `#`   | `0 or 1`      |
+| `nbhd_544` | `#`   | `0 or 1`      |
+| `nbhd_545` | `#`   | `0 or 1`      |
+| `nbhd_546` | `#`   | `0 or 1`      |
+| `nbhd_547` | `#`   | `0 or 1`      |
+| `nbhd_548` | `#`   | `0 or 1`      |
+| `nbhd_549` | `#`   | `0 or 1`      |
+| `nbhd_550` | `#`   | `0 or 1`      |
+| `nbhd_551` | `#`   | `0 or 1`      |
+| `nbhd_552` | `#`   | `0 or 1`      |
+| `nbhd_553` | `#`   | `0 or 1`      |
+| `nbhd_555` | `#`   | `0 or 1`      |
+| `nbhd_556` | `#`   | `0 or 1`      |
+| `nbhd_580` | `#`   | `0 or 1`      |
+| `nbhd_581` | `#`   | `0 or 1`      |
+| `nbhd_582` | `#`   | `0 or 1`      |
+| `nbhd_583` | `#`   | `0 or 1`      |
+| `nbhd_584` | `#`   | `0 or 1`      |
+| `nbhd_585` | `#`   | `0 or 1`      |
+| `nbhd_586` | `#`   | `0 or 1`      |
+| `nbhd_587` | `#`   | `0 or 1`      |
+| `nbhd_588` | `#`   | `0 or 1`      |
+| `nbhd_589` | `#`   | `0 or 1`      |
+| `nbhd_590` | `#`   | `0 or 1`      |
+| `nbhd_591` | `#`   | `0 or 1`      |
+| `nbhd_592` | `#`   | `0 or 1`      |
+| `nbhd_593` | `#`   | `0 or 1`      |
+| `nbhd_594` | `#`   | `0 or 1`      |
+| `nbhd_596` | `#`   | `0 or 1`      |
+| `nbhd_597` | `#`   | `0 or 1`      |
+| `nbhd_598` | `#`   | `0 or 1`      |
+| `nbhd_599` | `#`   | `0 or 1`      |
+| `nbhd_601` | `#`   | `0 or 1`      |
+| `nbhd_602` | `#`   | `0 or 1`      |
+| `nbhd_604` | `#`   | `0 or 1`      |
+| `nbhd_605` | `#`   | `0 or 1`      |
+| `nbhd_606` | `#`   | `0 or 1`      |
+| `nbhd_607` | `#`   | `0 or 1`      |
+| `nbhd_611` | `#`   | `0 or 1`      |
+| `nbhd_612` | `#`   | `0 or 1`      |
+| `nbhd_613` | `#`   | `0 or 1`      |
+| `nbhd_614` | `#`   | `0 or 1`      |
+| `nbhd_615` | `#`   | `0 or 1`      |
+| `nbhd_616` | `#`   | `0 or 1`      |
+| `nbhd_617` | `#`   | `0 or 1`      |
+| `nbhd_618` | `#`   | `0 or 1`      |
+| `nbhd_620` | `#`   | `0 or 1`      |
+| `nbhd_621` | `#`   | `0 or 1`      |
+| `nbhd_622` | `#`   | `0 or 1`      |
+| `nbhd_623` | `#`   | `0 or 1`      |
+| `nbhd_624` | `#`   | `0 or 1`      |
+| `nbhd_625` | `#`   | `0 or 1`      |
+| `nbhd_627` | `#`   | `0 or 1`      |
+| `nbhd_628` | `#`   | `0 or 1`      |
+| `nbhd_629` | `#`   | `0 or 1`      |
+| `nbhd_630` | `#`   | `0 or 1`      |
+| `nbhd_631` | `#`   | `0 or 1`      |
+| `nbhd_634` | `#`   | `0 or 1`      |
+| `nbhd_635` | `#`   | `0 or 1`      |
+| `nbhd_636` | `#`   | `0 or 1`      |
+| `nbhd_637` | `#`   | `0 or 1`      |
+| `nbhd_638` | `#`   | `0 or 1`      |
+| `nbhd_639` | `#`   | `0 or 1`      |
+| `nbhd_640` | `#`   | `0 or 1`      |
+| `nbhd_641` | `#`   | `0 or 1`      |
+| `nbhd_642` | `#`   | `0 or 1`      |
+| `nbhd_643` | `#`   | `0 or 1`      |
+| `nbhd_644` | `#`   | `0 or 1`      |
+| `nbhd_645` | `#`   | `0 or 1`      |
+| `nbhd_646` | `#`   | `0 or 1`      |
+| `nbhd_647` | `#`   | `0 or 1`      |
+| `nbhd_648` | `#`   | `0 or 1`      |
+| `nbhd_649` | `#`   | `0 or 1`      |
+| `nbhd_650` | `#`   | `0 or 1`      |
+| `nbhd_651` | `#`   | `0 or 1`      |
+| `nbhd_652` | `#`   | `0 or 1`      |
+| `nbhd_653` | `#`   | `0 or 1`      |
+| `nbhd_654` | `#`   | `0 or 1`      |
+| `nbhd_655` | `#`   | `0 or 1`      |
+| `nbhd_656` | `#`   | `0 or 1`      |
+| `nbhd_657` | `#`   | `0 or 1`      |
+| `nbhd_658` | `#`   | `0 or 1`      |
+| `nbhd_659` | `#`   | `0 or 1`      |
+| `nbhd_660` | `#`   | `0 or 1`      |
+| `nbhd_661` | `#`   | `0 or 1`      |
+| `nbhd_663` | `#`   | `0 or 1`      |
+| `nbhd_664` | `#`   | `0 or 1`      |
+| `nbhd_665` | `#`   | `0 or 1`      |
+| `nbhd_666` | `#`   | `0 or 1`      |
+| `nbhd_667` | `#`   | `0 or 1`      |
+| `nbhd_668` | `#`   | `0 or 1`      |
+| `nbhd_669` | `#`   | `0 or 1`      |
+| `nbhd_670` | `#`   | `0 or 1`      |
+| `nbhd_671` | `#`   | `0 or 1`      |
+| `nbhd_672` | `#`   | `0 or 1`      |
+| `nbhd_673` | `#`   | `0 or 1`      |
+| `nbhd_674` | `#`   | `0 or 1`      |
+| `nbhd_675` | `#`   | `0 or 1`      |
+| `nbhd_676` | `#`   | `0 or 1`      |
+| `nbhd_678` | `#`   | `0 or 1`      |
+| `nbhd_679` | `#`   | `0 or 1`      |
+| `nbhd_680` | `#`   | `0 or 1`      |
+| `nbhd_681` | `#`   | `0 or 1`      |
+| `nbhd_682` | `#`   | `0 or 1`      |
+| `nbhd_683` | `#`   | `0 or 1`      |
+| `nbhd_690` | `#`   | `0 or 1`      |
+| `nbhd_691` | `#`   | `0 or 1`      |
+| `nbhd_692` | `#`   | `0 or 1`      |
+| `nbhd_693` | `#`   | `0 or 1`      |
+| `nbhd_694` | `#`   | `0 or 1`      |
+| `nbhd_695` | `#`   | `0 or 1`      |
+| `nbhd_698` | `#`   | `0 or 1`      |
+| `nbhd_702` | `#`   | `0 or 1`      |
+| `nbhd_703` | `#`   | `0 or 1`      |
+| `nbhd_704` | `#`   | `0 or 1`      |
+| `nbhd_705` | `#`   | `0 or 1`      |
+| `nbhd_706` | `#`   | `0 or 1`      |
+| `nbhd_707` | `#`   | `0 or 1`      |
+| `nbhd_708` | `#`   | `0 or 1`      |
+| `nbhd_709` | `#`   | `0 or 1`      |
+| `nbhd_710` | `#`   | `0 or 1`      |
+| `nbhd_711` | `#`   | `0 or 1`      |
+| `nbhd_712` | `#`   | `0 or 1`      |
+| `nbhd_713` | `#`   | `0 or 1`      |
+| `nbhd_714` | `#`   | `0 or 1`      |
+| `nbhd_715` | `#`   | `0 or 1`      |
+| `nbhd_716` | `#`   | `0 or 1`      |
+| `nbhd_717` | `#`   | `0 or 1`      |
+| `nbhd_718` | `#`   | `0 or 1`      |
+| `nbhd_719` | `#`   | `0 or 1`      |
+| `nbhd_720` | `#`   | `0 or 1`      |
+| `nbhd_801` | `#`   | `0 or 1`      |
+| `nbhd_802` | `#`   | `0 or 1`      |
+| `nbhd_803` | `#`   | `0 or 1`      |
+| `nbhd_804` | `#`   | `0 or 1`      |
+| `nbhd_805` | `#`   | `0 or 1`      |
+| `nbhd_901` | `#`   | `0 or 1`      |
+| `nbhd_902` | `#`   | `0 or 1`      |
+| `nbhd_903` | `#`   | `0 or 1`      |
+| `nbhd_904` | `#`   | `0 or 1`      |
+| `nbhd_905` | `#`   | `0 or 1`      |
+| `nbhd_906` | `#`   | `0 or 1`      |
+

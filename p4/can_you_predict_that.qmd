@@ -7,37 +7,236 @@ editor:
   render-on-save: true
 format:
   html:
-    theme: darkly
-    self-contained: true
-    page-layout: full
-    toc-depth: 3
-    toc-expand: true
-    toc-location: left
-    toc-title: "Grand Questions"
-    toc: true
-    number-sections: true
-    code-copy: hover
+    code-copy: true
     code-fold: true
     code-line-numbers: true
     code-overflow: scroll
-    code-summary: "Show Code"
+    code-summary: Show Code
     code-tools:
+      caption: See Code
       source: true
       toggle: true
-      caption: See Code
+    number-sections: true
+    page-layout: full
+    self-contained: true
+    theme: darkly
+    toc: true
+    toc-depth: 3
+    toc-expand: true
+    toc-location: left
+    toc-title: Grand Questions
     grid:
       sidebar-width: 200px
-      body-width: 900px
-      margin-width: 300px
-      gutter-width: 1rem
-execute: 
-  warning: false    
+      body-width: 1250px
+execute:
+  warning: false
 ---
 
 ```{python}
-#| label: Import ibraries
+#| label: Import Libraries
 #| include: false
-import pandas as pd
+# Standard Imports
 import numpy as np
+import pandas as pd
 import plotly.express as px
+
+# Scikit-Learn Imports
+from sklearn import metrics
+from sklearn import tree
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import RocCurveDisplay
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+```
+
+```{python}
+#| label: Import Data
+df = pd.read_csv("https://github.com/byuidatascience/data4dwellings/raw/master/data-raw/dwellings_ml/dwellings_ml.csv")
+color_theme = px.colors.diverging.Portland
+```
+
+## Elevator Pitch {.unnumbered}
+
+- One story homes have a higher likelyhood of being built before 1980
+- Newer homes are more likely to be multi-level
+- Newer homes are more likely to be around 4,000 ft²
+
+## Correlations
+
+Below are some parameters I thought had some insightful parallels: *Please note that all red data points are pre1980 and all blue are post 1980*.
+
+If the building has any of the following qualities, odds are it was build after 1980:
+
+-   The building has 2+ stories
+-   The sale price was greater than \$2,000,000
+-   The living space is 3,600 Ft²
+
+Anything with the above features is *usually* a newer home. As architecture and construction method have improved, so have the quality of houses. As a result, we start to see houses with more "luxurious" or "fancy" features, like 3 stories or more intricate basement features. The price at which a property is sold is also a big indicator. If a property is sold of a price that seems to be an outlier, it was probably built after 1980.
+
+```{python}
+h_subset = df.filter([
+    "basement",
+    "before1980",
+    "finbsmnt",
+    "livearea",
+    "nocars",
+    "numbaths",
+    "numbdrm",
+    "sprice",
+    "stories",
+    "yrbuilt",
+]).sample(500)
+fig = px.scatter_matrix(
+    h_subset,
+    dimensions=["basement", "finbsmnt", "livearea", "sprice", "stories"],
+    color="before1980",
+    color_continuous_scale=color_theme,
+    title="House Specifications & Sale Price",
+    height=800,
+    width=1200,
+    labels={
+        "basement": "Basement<br>Total (Ft²)",
+        "finbsmnt": "Basement<br>Finished (Ft²)",
+        "livearea": "Living<br>Space (Ft²)",
+        "sprice": "Selling Price",
+        "stories": "Stories",
+    }
+)
+fig.update_coloraxes(colorbar_tickformat=".0%")
+fig.update_layout(coloraxis_colorbar=dict(orientation="h"))
+fig.update_traces(diagonal_visible=False)
+fig.show()
+```
+
+---
+
+We can see that as time progressed, the amount of stories a house has has risen. This may be due to the cost of land going up, or due to better building practices. The below chart indicates the the physical features of a house correlate more with each other than the sale price or stories.
+
+```{python}
+corr = h_subset.drop(columns="before1980").corr()
+labels = [
+        "Has Basement",
+        "Basement Area<br>Finished (Ft²)",
+        "Living Area",
+        "Garage Size",
+        "Number of<br>Bathrooms",
+        "Number of<br>Bedrooms",
+        "Selling Price",
+        "Stories",
+        "Year Built",
+    ]
+fig = px.imshow(
+    corr,
+    text_auto=".1%",
+    height=800,
+    width=1200,
+    color_continuous_scale=color_theme,
+    labels=dict(color="Correlation"),
+    x=labels,
+    y=labels,
+)
+fig.update_layout(
+    title=dict(text="Feature Correlation Percentages"),
+    coloraxis_colorbar=dict(orientation="h")
+)
+
+fig.update_coloraxes(colorbar_tickformat=".0%")
+fig.show()
+```
+
+## Building A Classification Model
+
+After looking at possible correlations between the data, we will build a classification model from the data. Earlier, we looked at parameters that were continuous values.
+
+### Model Features
+
+```{python}
+keep = [
+    "abstrprd", "arcstyle_END UNIT", "arcstyle_MIDDLE UNIT", "arcstyle_ONE-STORY", "arcstyle_TWO-STORY", "basement",
+    "condition_AVG", "deduct", "finbsmnt", "gartype_Att", "livearea", "netprice", "nocars", "numbaths", "numbdrm",
+    "qualified_Q", "quality_C", "status_I", "stories",
+]
+X_pred = df.filter(items=keep)
+y_pred = df.filter(regex="before1980")
+X_train, X_test, y_train, y_test = train_test_split(
+    X_pred, y_pred, test_size=.34, random_state= 6
+)
+
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+y_probs = clf.predict_proba(X_test)
+print(metrics.classification_report(y_pred, y_test))
+```
+
+To build our classification model, we are going to provide it with the most relevent pieces of data from our data set.
+
+::: {.callout-note collapse="true"}
+
+### Features Provided
+
+- `abstrprd`
+- `arcstyle_END UNIT`
+- `arcstyle_MIDDLE UNIT`
+- `arcstyle_ONE-STORY`
+- `arcstyle_TWO-STORY`
+- `basement`
+- `condition_AVG`
+- `deduct`
+- `finbsmnt`
+- `gartype_Att`
+- `livearea`
+- `netprice`
+- `nocars`
+- `numbaths`
+- `numbdrm`
+- `qualified_Q`
+- `quality_C`
+- `status_I`
+- `stories`
+
+:::
+
+## Model Quality
+
+After building a basic classification model, we see that we have achieved an accuracy of 91%, which means we have identified a strong correlation between certain aspects of the data and determining if a house was built before 1980. Our model has also determined that the most important feature was if the building was one story or not. This makes sense as one of the most common/popular house desgin is the [Ranch Style Home](https://www.homesandgardens.com/ideas/ranch-style-houses) or the [Craftsman Style Home](https://www.thespruce.com/craftsman-homes-5070211). These styles of homes were much more popular before 1980.
+
+```{python}
+df_features = pd.DataFrame({
+    "f_names": X_train.columns,
+    "f_values": clf.feature_importances_
+}).sort_values("f_values", ascending=False)
+fig = px.bar(
+    df_features.head(30),
+    x="f_values",
+    y="f_names",
+    text_auto=".1%",
+    width=1200,
+    height=800,
+    color="f_values",
+    color_continuous_scale=color_theme,
+    range_x=[0,0.3],
+    title="Feature Importance",
+    hover_data=["f_names", "f_values"],
+)
+fig.update_coloraxes(
+    colorbar_tickformat=".0%",
+    colorbar_title="Value"
+)
+fig.update_layout(
+    margin=dict(pad=0, l=20, r=20),
+    xaxis=dict(tickformat=".0%"),
+    yaxis={"categoryorder": "total ascending"},
+)
+fig.update_traces(
+    texttemplate=df_features["f_names"].values,
+    textposition="auto"
+)
+fig.update_xaxes(title="Feature Values")
+fig.update_yaxes(
+    title="Feature Name",
+    visible=True,
+    showticklabels=False
+)
+fig.show()
 ```

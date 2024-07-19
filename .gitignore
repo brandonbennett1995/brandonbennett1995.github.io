@@ -2,10 +2,4 @@
 **/*.json
 **/*.sql*
 **/*.py
-# p2/flights_missing.json
-# p3/lahmansbaseballdb.erd.json
-# p3/lahmansbaseballdb.png
-# p3/lahmansbaseballdb.sqlite
-# p3/relational_data.py
-# p3/sql_notes.md
-# p3/temp.sql
+**/Data*
