@@ -30,9 +30,16 @@ format:
       body-width: 900px
       margin-width: 300px
       gutter-width: 1rem
-execute: 
-  warning: false    
+execute:
+  warning: false
 ---
+
+## Elevator Pitch {.unnumbered}
+
+-   There's a lot of amazing baseball players out there, but SQL is the real MVP in baseball analytics.
+-   The highest paid BYU-I alumni baseball player is Matthew Raymond earning a salary of \$4,000,000.
+-   Players for the New York Yankees are paid more on average than the players for the Boston Red Sox
+-   On average, the First Baseman gets paid the most.
 
 ```{python}
 # | label: Import Libraries
@@ -43,7 +50,7 @@ import pandas as pd
 import plotly.express as px
 
 # careful to list your path to the file or save it in the same place as your .qmd or .py file
-sqlite_file = "lahmansbaseballdb.sqlite"
+sqlite_file = r"./Data/lahmansbaseballdb.sqlite"
 con = sqlite3.connect(sqlite_file)
 
 # Quick check to make sure we're all connected.
@@ -69,12 +76,12 @@ schools
 
 Now that we have successfully grabbed the `schoolID` from the database, lets see what players went to BYU-Idaho. We're also going to get the following data related to each player:
 
-1. Given Name
-2. Player ID
-3. School
-4. Team
-5. Year
-6. Salary
+1.  Given Name
+2.  Player ID
+3.  School
+4.  Team
+5.  Year
+6.  Salary
 
 ```{python}
 q = """--sql
@@ -163,13 +170,14 @@ high_batters.sort_values(
     "batting_average", ascending=False).head().reset_index(drop=True)
 ```
 
-<!-- 
+
+<!--
 ```{python}
 q = """--sql
-    SELECT salaries.yearID AS `Year`, 
+    SELECT salaries.yearID AS `Year`,
            salaries.teamID AS `Team ID`,
            teams.name AS `Team Name`,
-           salaries.playerID AS `Player ID`, 
+           salaries.playerID AS `Player ID`,
            people.nameGiven AS `Player Name`,
            fielding.POS as `Position`,
            salaries.salary AS `Salary`
@@ -182,13 +190,19 @@ q = """--sql
 
 teams_players_pos = pd.read_sql_query(q, con)
 teams_players_pos
-``` 
+```
 -->
 
 ## Comparing Salaries
+
 *Of the Boston Red Sox and New York Yankees*
 
 First, let's grab all the data related to the Red Sox[^1] and the Yankees[^2].
+
+[^1]: Designated by the `teamID`: `BOS`
+
+[^2]: Designated by the `teamID`: `NYA`
+
 ```{python}
 q = """--sql
     SELECT salaries.yearID AS `Year`,
@@ -303,6 +317,3 @@ fig.show()
 ```
 
 It looks like the First Baseman get's the most on average. I always thought the pitcher would earn the highest, but from these two teams, that is not the case.
-
-[^1]: Designated by the `teamID` `BOS`
-[^2]: Designated by the `teamID` `NYA`
