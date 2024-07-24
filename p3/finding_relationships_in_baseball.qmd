@@ -50,7 +50,7 @@ import pandas as pd
 import plotly.express as px
 
 # careful to list your path to the file or save it in the same place as your .qmd or .py file
-sqlite_file = r"./Data/lahmansbaseballdb.sqlite"
+sqlite_file = "./Data/lahmansbaseballdb.sqlite"
 con = sqlite3.connect(sqlite_file)
 
 # Quick check to make sure we're all connected.
@@ -92,8 +92,8 @@ q = """--sql
            salaries.yearID AS `Year`,
            salaries.salary AS `Salary`
     FROM people
-    JOIN collegeplaying ON people.playerID = collegeplaying.playerID
-    JOIN salaries ON people.playerID = salaries.playerID
+    FULL JOIN collegeplaying ON people.playerID = collegeplaying.playerID
+    FULL JOIN salaries ON people.playerID = salaries.playerID
     WHERE schoolID = 'idbyuid'
     ORDER BY salary DESC
     """
@@ -105,7 +105,7 @@ player_info = player_info.drop_duplicates()
 
 # Do some formatting
 player_info = player_info.replace("idbyuid", "Brigham Young University-Idaho")
-player_info["Salary"] = player_info["Salary"].map(lambda x: f"$ {x:,.0f}")
+player_info["Salary"] = player_info["Salary"].map(lambda x:  f"$ {x:,.0f}")
 
 player_info.reset_index(drop=True)
 ```
@@ -169,29 +169,6 @@ high_batters = (
 high_batters.sort_values(
     "batting_average", ascending=False).head().reset_index(drop=True)
 ```
-
-
-<!--
-```{python}
-q = """--sql
-    SELECT salaries.yearID AS `Year`,
-           salaries.teamID AS `Team ID`,
-           teams.name AS `Team Name`,
-           salaries.playerID AS `Player ID`,
-           people.nameGiven AS `Player Name`,
-           fielding.POS as `Position`,
-           salaries.salary AS `Salary`
-    FROM salaries
-    JOIN fielding
-        USING (yearID, teamID, playerID)
-    INNER JOIN people on salaries.playerID=people.playerID
-    INNER JOIN teams on salaries.teamID=teams.teamID
-    """
-
-teams_players_pos = pd.read_sql_query(q, con)
-teams_players_pos
-```
--->
 
 ## Comparing Salaries
 

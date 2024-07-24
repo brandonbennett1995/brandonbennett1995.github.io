@@ -3164,7 +3164,7 @@ require(['plotly'], function(Plotly) {
 <section id="baseball-players-who-attended-byu-idaho" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="baseball-players-who-attended-byu-idaho"><span class="header-section-number">1</span> Baseball Players Who Attended BYU-Idaho</h2>
 <p>Here we want to take a look at what players attended BYU-Idaho before going pro. First thing we want to do is get the <code>schoolID</code> for BYU-Idaho.</p>
-<div id="995237be" class="cell" data-execution_count="2">
+<div id="ca4d0687" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
@@ -3176,7 +3176,7 @@ require(['plotly'], function(Plotly) {
 <span id="cb1-7"><a href="#cb1-7"></a>byui <span class="op">=</span> schools.get(<span class="st">&quot;schoolID&quot;</span>)[<span class="dv">0</span>]</span>
 <span id="cb1-8"><a href="#cb1-8"></a>schools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -3215,7 +3215,7 @@ require(['plotly'], function(Plotly) {
 <li>Year</li>
 <li>Salary</li>
 </ol>
-<div id="42a879a5" class="cell" data-execution_count="3">
+<div id="363d69ed" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
@@ -3226,8 +3226,8 @@ require(['plotly'], function(Plotly) {
 <span id="cb2-6"><a href="#cb2-6"></a><span class="st">           salaries.yearID AS `Year`,</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="st">           salaries.salary AS `Salary`</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="st">    FROM people</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="st">    JOIN collegeplaying ON people.playerID = collegeplaying.playerID</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="st">    JOIN salaries ON people.playerID = salaries.playerID</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">    FULL JOIN collegeplaying ON people.playerID = collegeplaying.playerID</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="st">    FULL JOIN salaries ON people.playerID = salaries.playerID</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a><span class="st">    WHERE schoolID = &#39;idbyuid&#39;</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="st">    ORDER BY salary DESC</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="st">    &quot;&quot;&quot;</span></span>
@@ -3239,11 +3239,11 @@ require(['plotly'], function(Plotly) {
 <span id="cb2-19"><a href="#cb2-19"></a></span>
 <span id="cb2-20"><a href="#cb2-20"></a><span class="co"># Do some formatting</span></span>
 <span id="cb2-21"><a href="#cb2-21"></a>player_info <span class="op">=</span> player_info.replace(<span class="st">&quot;idbyuid&quot;</span>, <span class="st">&quot;Brigham Young University-Idaho&quot;</span>)</span>
-<span id="cb2-22"><a href="#cb2-22"></a>player_info[<span class="st">&quot;Salary&quot;</span>] <span class="op">=</span> player_info[<span class="st">&quot;Salary&quot;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="ss">f&quot;$ </span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a>player_info[<span class="st">&quot;Salary&quot;</span>] <span class="op">=</span> player_info[<span class="st">&quot;Salary&quot;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x:  <span class="ss">f&quot;$ </span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">&quot;</span>)</span>
 <span id="cb2-23"><a href="#cb2-23"></a></span>
 <span id="cb2-24"><a href="#cb2-24"></a>player_info.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -3266,7 +3266,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>CHA</td>
-<td>2014</td>
+<td>2014.0</td>
 <td>$ 4,000,000</td>
 </tr>
 <tr class="even">
@@ -3275,7 +3275,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>BAL</td>
-<td>2012</td>
+<td>2012.0</td>
 <td>$ 3,600,000</td>
 </tr>
 <tr class="odd">
@@ -3284,7 +3284,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>COL</td>
-<td>2011</td>
+<td>2011.0</td>
 <td>$ 2,800,000</td>
 </tr>
 <tr class="even">
@@ -3293,7 +3293,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>CHA</td>
-<td>2013</td>
+<td>2013.0</td>
 <td>$ 2,300,000</td>
 </tr>
 <tr class="odd">
@@ -3302,7 +3302,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>HOU</td>
-<td>2010</td>
+<td>2010.0</td>
 <td>$ 1,625,000</td>
 </tr>
 <tr class="even">
@@ -3311,7 +3311,7 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>SLN</td>
-<td>2001</td>
+<td>2001.0</td>
 <td>$ 1,025,000</td>
 </tr>
 <tr class="odd">
@@ -3320,7 +3320,7 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>SLN</td>
-<td>2002</td>
+<td>2002.0</td>
 <td>$ 900,000</td>
 </tr>
 <tr class="even">
@@ -3329,7 +3329,7 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>SLN</td>
-<td>2003</td>
+<td>2003.0</td>
 <td>$ 800,000</td>
 </tr>
 <tr class="odd">
@@ -3338,7 +3338,7 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>SLN</td>
-<td>2000</td>
+<td>2000.0</td>
 <td>$ 550,000</td>
 </tr>
 <tr class="even">
@@ -3347,7 +3347,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>FLO</td>
-<td>2009</td>
+<td>2009.0</td>
 <td>$ 410,000</td>
 </tr>
 <tr class="odd">
@@ -3356,7 +3356,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>FLO</td>
-<td>2008</td>
+<td>2008.0</td>
 <td>$ 395,000</td>
 </tr>
 <tr class="even">
@@ -3365,7 +3365,7 @@ require(['plotly'], function(Plotly) {
 <td>lindsma01</td>
 <td>Brigham Young University-Idaho</td>
 <td>FLO</td>
-<td>2007</td>
+<td>2007.0</td>
 <td>$ 380,000</td>
 </tr>
 <tr class="odd">
@@ -3374,7 +3374,7 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>SLN</td>
-<td>1999</td>
+<td>1999.0</td>
 <td>$ 215,000</td>
 </tr>
 <tr class="even">
@@ -3383,7 +3383,7 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>PHI</td>
-<td>1998</td>
+<td>1998.0</td>
 <td>$ 185,000</td>
 </tr>
 <tr class="odd">
@@ -3392,8 +3392,17 @@ require(['plotly'], function(Plotly) {
 <td>stephga01</td>
 <td>Brigham Young University-Idaho</td>
 <td>PHI</td>
-<td>1997</td>
+<td>1997.0</td>
 <td>$ 150,000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>Troy Patrick</td>
+<td>catetr01</td>
+<td>Brigham Young University-Idaho</td>
+<td>None</td>
+<td>NaN</td>
+<td>$ nan</td>
 </tr>
 </tbody>
 </table>
@@ -3406,7 +3415,7 @@ require(['plotly'], function(Plotly) {
 <h2 data-number="2" class="anchored" data-anchor-id="batting-averages"><span class="header-section-number">2</span> Batting Averages</h2>
 <section id="at-bat-1-times" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="at-bat-1-times"><span class="header-section-number">2.1</span> At Bat 1+ Times</h3>
-<div id="db2bd6d7" class="cell" data-execution_count="4">
+<div id="c4510e94" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
@@ -3422,7 +3431,7 @@ require(['plotly'], function(Plotly) {
 <span id="cb3-11"><a href="#cb3-11"></a>)</span>
 <span id="cb3-12"><a href="#cb3-12"></a>batters.sort_values(<span class="st">&quot;batting_average&quot;</span>, ascending<span class="op">=</span><span class="va">False</span>).head().reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -3487,7 +3496,7 @@ require(['plotly'], function(Plotly) {
 </section>
 <section id="at-bat-10-times" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="at-bat-10-times"><span class="header-section-number">2.2</span> At Bat 10+ Times</h3>
-<div id="61edfb90" class="cell" data-execution_count="5">
+<div id="588dd706" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
@@ -3506,7 +3515,7 @@ require(['plotly'], function(Plotly) {
 <span id="cb4-14"><a href="#cb4-14"></a>)</span>
 <span id="cb4-15"><a href="#cb4-15"></a>batters.sort_values(<span class="st">&quot;batting_average&quot;</span>, ascending<span class="op">=</span><span class="va">False</span>).head().reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -3571,7 +3580,7 @@ require(['plotly'], function(Plotly) {
 </section>
 <section id="at-bat-100-times" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="at-bat-100-times"><span class="header-section-number">2.3</span> At Bat 100+ Times</h3>
-<div id="a45c4dcf" class="cell" data-execution_count="6">
+<div id="d641a60d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
@@ -3591,7 +3600,7 @@ require(['plotly'], function(Plotly) {
 <span id="cb5-15"><a href="#cb5-15"></a>high_batters.sort_values(</span>
 <span id="cb5-16"><a href="#cb5-16"></a>    <span class="st">&quot;batting_average&quot;</span>, ascending<span class="op">=</span><span class="va">False</span>).head().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -3647,190 +3656,13 @@ require(['plotly'], function(Plotly) {
 </div>
 </div>
 </div>
-<!--
-
-::: {#12d61ea8 .cell execution_count=7}
-``` {.python .cell-code}
-q = """--sql
-    SELECT salaries.yearID AS `Year`,
-           salaries.teamID AS `Team ID`,
-           teams.name AS `Team Name`,
-           salaries.playerID AS `Player ID`,
-           people.nameGiven AS `Player Name`,
-           fielding.POS as `Position`,
-           salaries.salary AS `Salary`
-    FROM salaries
-    JOIN fielding
-        USING (yearID, teamID, playerID)
-    INNER JOIN people on salaries.playerID=people.playerID
-    INNER JOIN teams on salaries.teamID=teams.teamID
-    """
-
-teams_players_pos = pd.read_sql_query(q, con)
-teams_players_pos
-```
-
-::: {.cell-output .cell-output-display execution_count=43}
-
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Year</th>
-<th data-quarto-table-cell-role="th">Team ID</th>
-<th data-quarto-table-cell-role="th">Team Name</th>
-<th data-quarto-table-cell-role="th">Player ID</th>
-<th data-quarto-table-cell-role="th">Player Name</th>
-<th data-quarto-table-cell-role="th">Position</th>
-<th data-quarto-table-cell-role="th">Salary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1985</td>
-<td>ATL</td>
-<td>Atlanta Braves</td>
-<td>barkele01</td>
-<td>Leonard Harold</td>
-<td>P</td>
-<td>870000.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1985</td>
-<td>ATL</td>
-<td>Atlanta Braves</td>
-<td>barkele01</td>
-<td>Leonard Harold</td>
-<td>P</td>
-<td>870000.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1985</td>
-<td>ATL</td>
-<td>Atlanta Braves</td>
-<td>barkele01</td>
-<td>Leonard Harold</td>
-<td>P</td>
-<td>870000.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1985</td>
-<td>ATL</td>
-<td>Atlanta Braves</td>
-<td>barkele01</td>
-<td>Leonard Harold</td>
-<td>P</td>
-<td>870000.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1985</td>
-<td>ATL</td>
-<td>Atlanta Braves</td>
-<td>barkele01</td>
-<td>Leonard Harold</td>
-<td>P</td>
-<td>870000.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2493621</td>
-<td>2016</td>
-<td>WAS</td>
-<td>Washington Senators</td>
-<td>zimmery01</td>
-<td>Ryan Wallace</td>
-<td>1B</td>
-<td>14000000.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2493622</td>
-<td>2016</td>
-<td>WAS</td>
-<td>Washington Senators</td>
-<td>zimmery01</td>
-<td>Ryan Wallace</td>
-<td>1B</td>
-<td>14000000.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2493623</td>
-<td>2016</td>
-<td>WAS</td>
-<td>Washington Senators</td>
-<td>zimmery01</td>
-<td>Ryan Wallace</td>
-<td>1B</td>
-<td>14000000.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2493624</td>
-<td>2016</td>
-<td>WAS</td>
-<td>Washington Senators</td>
-<td>zimmery01</td>
-<td>Ryan Wallace</td>
-<td>1B</td>
-<td>14000000.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2493625</td>
-<td>2016</td>
-<td>WAS</td>
-<td>Washington Senators</td>
-<td>zimmery01</td>
-<td>Ryan Wallace</td>
-<td>1B</td>
-<td>14000000.0</td>
-</tr>
-</tbody>
-</table>
-
-<p>2493626 rows × 7 columns</p>
-</div>
-```
-
-:::
-:::
-
-
--->
 </section>
 </section>
 <section id="comparing-salaries" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="comparing-salaries"><span class="header-section-number">3</span> Comparing Salaries</h2>
 <p><em>Of the Boston Red Sox and New York Yankees</em></p>
 <p>First, let’s grab all the data related to the Red Sox<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and the Yankees<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<div id="2639513a" class="cell" data-execution_count="8">
+<div id="08e7941c" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
@@ -3853,7 +3685,7 @@ teams_players_pos
 <span id="cb6-18"><a href="#cb6-18"></a>)</span>
 <span id="cb6-19"><a href="#cb6-19"></a>mlb_players</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -3979,7 +3811,7 @@ teams_players_pos
 <section id="by-year" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="by-year"><span class="header-section-number">3.1</span> By Year</h3>
 <p>Now that we have the relevant data, let’s see how much the average salary is for each team. It looks like if you get drafted by the Yankees, you will have a significantly higher paying contract!</p>
-<div id="9bd1939a" class="cell" data-execution_count="9">
+<div id="658ec9a8" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>avg_player_salary <span class="op">=</span> (</span>
@@ -3990,7 +3822,7 @@ teams_players_pos
 <span id="cb7-6"><a href="#cb7-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="dec0c42f" class="cell" data-execution_count="10">
+<div id="af849cba" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -4023,9 +3855,9 @@ teams_players_pos
 <span id="cb8-28"><a href="#cb8-28"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="2d137bec-2af8-47c8-974e-691d58bea22c" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("2d137bec-2af8-47c8-974e-691d58bea22c")) {                    Plotly.newPlot(                        "2d137bec-2af8-47c8-974e-691d58bea22c",                        [{"alignmentgroup":"True","hovertemplate":"Team=Boston Red Sox\u003cbr\u003eYear=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Boston Red Sox","marker":{"color":"#BD3039","pattern":{"shape":""}},"name":"Boston Red Sox","offsetgroup":"Boston Red Sox","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":[1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016],"xaxis":"x","y":[397640.9,476053.75,677583.35,562503.07,474837.84,623114.03,972960.53,1255389.6,975990.93,997071.78,741532.3,971461.54,1339255.95,1529862.5,1782797.62,2490540.39,3483771.92,3498413.53,3130257.14,3660594.59,3745871.53,4068839.48,4631474.65,4194839.84,3357714.26,5944213.67,5518602.21,4762201.44,4188750.0,3647350.66,5270895.0,5628610.62],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Team=New York Yankees\u003cbr\u003eYear=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"New York Yankees","marker":{"color":"#003087","pattern":{"shape":""}},"name":"New York Yankees","offsetgroup":"New York Yankees","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":[1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016],"xaxis":"x","y":[665985.9,653034.33,440584.58,660030.32,526320.66,675967.17,860393.58,917504.07,1147995.24,1486162.41,1338034.14,1458304.57,2097935.57,1831059.85,2516206.65,2942801.67,3528563.03,4087624.5,5169993.8,6359827.14,7240642.94,6307931.94,6062255.42,6686787.25,6250413.97,7150952.78,6515511.57,6682773.8,7984068.62,7637700.23,6878417.6,7105873.17],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Year"},"insiderange":[1984.5,2016.5]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Salary"},"tickprefix":"$"},"legend":{"title":{"text":""},"tracegroupgap":0,"orientation":"h","yanchor":"top","y":0.95,"xanchor":"left","x":0.005},"title":{"text":"Player Salary | 1985-2016"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="3a0ba07d-8356-435b-95ba-bc5761960e82" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("3a0ba07d-8356-435b-95ba-bc5761960e82")) {                    Plotly.newPlot(                        "3a0ba07d-8356-435b-95ba-bc5761960e82",                        [{"alignmentgroup":"True","hovertemplate":"Team=Boston Red Sox\u003cbr\u003eYear=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Boston Red Sox","marker":{"color":"#BD3039","pattern":{"shape":""}},"name":"Boston Red Sox","offsetgroup":"Boston Red Sox","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":[1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016],"xaxis":"x","y":[397640.9,476053.75,677583.35,562503.07,474837.84,623114.03,972960.53,1255389.6,975990.93,997071.78,741532.3,971461.54,1339255.95,1529862.5,1782797.62,2490540.39,3483771.92,3498413.53,3130257.14,3660594.59,3745871.53,4068839.48,4631474.65,4194839.84,3357714.26,5944213.67,5518602.21,4762201.44,4188750.0,3647350.66,5270895.0,5628610.62],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Team=New York Yankees\u003cbr\u003eYear=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"New York Yankees","marker":{"color":"#003087","pattern":{"shape":""}},"name":"New York Yankees","offsetgroup":"New York Yankees","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":[1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016],"xaxis":"x","y":[665985.9,653034.33,440584.58,660030.32,526320.66,675967.17,860393.58,917504.07,1147995.24,1486162.41,1338034.14,1458304.57,2097935.57,1831059.85,2516206.65,2942801.67,3528563.03,4087624.5,5169993.8,6359827.14,7240642.94,6307931.94,6062255.42,6686787.25,6250413.97,7150952.78,6515511.57,6682773.8,7984068.62,7637700.23,6878417.6,7105873.17],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Year"},"insiderange":[1984.5,2016.5]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Salary"},"tickprefix":"$"},"legend":{"title":{"text":""},"tracegroupgap":0,"orientation":"h","yanchor":"top","y":0.95,"xanchor":"left","x":0.005},"title":{"text":"Player Salary | 1985-2016"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('2d137bec-2af8-47c8-974e-691d58bea22c');
+var gd = document.getElementById('3a0ba07d-8356-435b-95ba-bc5761960e82');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -4053,7 +3885,7 @@ if (outputEl) {{
 </section>
 <section id="by-position" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="by-position"><span class="header-section-number">3.2</span> By Position</h3>
-<div id="3fa4f895" class="cell" data-execution_count="11">
+<div id="7cd243ff" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>avg_player_salary_by_pos <span class="op">=</span> (</span>
@@ -4068,110 +3900,110 @@ if (outputEl) {{
 <span id="cb9-10"><a href="#cb9-10"></a>avg_player_salary_by_pos.sort_values(by<span class="op">=</span>[<span class="st">&#39;avg_salary&#39;</span>, <span class="st">&#39;Position&#39;</span>], ascending<span class="op">=</span><span class="va">False</span>).reset_index(</span>
 <span id="cb9-11"><a href="#cb9-11"></a>    drop<span class="op">=</span><span class="va">True</span>).style.<span class="bu">format</span>(precision<span class="op">=</span><span class="dv">2</span>, thousands<span class="op">=</span><span class="st">&quot;,&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="47">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <style type="text/css">
 </style>
 
-<table id="T_00c03" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_ebd1d" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_00c03_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Team</th>
-<th id="T_00c03_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Position</th>
-<th id="T_00c03_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">avg_salary</th>
+<th id="T_ebd1d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Team</th>
+<th id="T_ebd1d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Position</th>
+<th id="T_ebd1d_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">avg_salary</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_00c03_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_00c03_row0_col0" class="data row0 col0">New York Yankees</td>
-<td id="T_00c03_row0_col1" class="data row0 col1">1B</td>
-<td id="T_00c03_row0_col2" class="data row0 col2">5,353,727.09</td>
+<td id="T_ebd1d_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_ebd1d_row0_col0" class="data row0 col0">New York Yankees</td>
+<td id="T_ebd1d_row0_col1" class="data row0 col1">1B</td>
+<td id="T_ebd1d_row0_col2" class="data row0 col2">5,353,727.09</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_00c03_row1_col0" class="data row1 col0">New York Yankees</td>
-<td id="T_00c03_row1_col1" class="data row1 col1">3B</td>
-<td id="T_00c03_row1_col2" class="data row1 col2">4,348,392.01</td>
+<td id="T_ebd1d_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_ebd1d_row1_col0" class="data row1 col0">New York Yankees</td>
+<td id="T_ebd1d_row1_col1" class="data row1 col1">3B</td>
+<td id="T_ebd1d_row1_col2" class="data row1 col2">4,348,392.01</td>
 </tr>
 <tr class="odd">
-<td id="T_00c03_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_00c03_row2_col0" class="data row2 col0">New York Yankees</td>
-<td id="T_00c03_row2_col1" class="data row2 col1">SS</td>
-<td id="T_00c03_row2_col2" class="data row2 col2">4,223,990.22</td>
+<td id="T_ebd1d_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_ebd1d_row2_col0" class="data row2 col0">New York Yankees</td>
+<td id="T_ebd1d_row2_col1" class="data row2 col1">SS</td>
+<td id="T_ebd1d_row2_col2" class="data row2 col2">4,223,990.22</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_00c03_row3_col0" class="data row3 col0">New York Yankees</td>
-<td id="T_00c03_row3_col1" class="data row3 col1">OF</td>
-<td id="T_00c03_row3_col2" class="data row3 col2">3,781,239.37</td>
+<td id="T_ebd1d_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_ebd1d_row3_col0" class="data row3 col0">New York Yankees</td>
+<td id="T_ebd1d_row3_col1" class="data row3 col1">OF</td>
+<td id="T_ebd1d_row3_col2" class="data row3 col2">3,781,239.37</td>
 </tr>
 <tr class="odd">
-<td id="T_00c03_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_00c03_row4_col0" class="data row4 col0">New York Yankees</td>
-<td id="T_00c03_row4_col1" class="data row4 col1">P</td>
-<td id="T_00c03_row4_col2" class="data row4 col2">3,515,733.32</td>
+<td id="T_ebd1d_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_ebd1d_row4_col0" class="data row4 col0">New York Yankees</td>
+<td id="T_ebd1d_row4_col1" class="data row4 col1">P</td>
+<td id="T_ebd1d_row4_col2" class="data row4 col2">3,515,733.32</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_00c03_row5_col0" class="data row5 col0">Boston Red Sox</td>
-<td id="T_00c03_row5_col1" class="data row5 col1">1B</td>
-<td id="T_00c03_row5_col2" class="data row5 col2">3,417,392.71</td>
+<td id="T_ebd1d_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_ebd1d_row5_col0" class="data row5 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row5_col1" class="data row5 col1">1B</td>
+<td id="T_ebd1d_row5_col2" class="data row5 col2">3,417,392.71</td>
 </tr>
 <tr class="odd">
-<td id="T_00c03_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_00c03_row6_col0" class="data row6 col0">Boston Red Sox</td>
-<td id="T_00c03_row6_col1" class="data row6 col1">OF</td>
-<td id="T_00c03_row6_col2" class="data row6 col2">3,265,647.96</td>
+<td id="T_ebd1d_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_ebd1d_row6_col0" class="data row6 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row6_col1" class="data row6 col1">OF</td>
+<td id="T_ebd1d_row6_col2" class="data row6 col2">3,265,647.96</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
-<td id="T_00c03_row7_col0" class="data row7 col0">New York Yankees</td>
-<td id="T_00c03_row7_col1" class="data row7 col1">C</td>
-<td id="T_00c03_row7_col2" class="data row7 col2">2,881,212.10</td>
+<td id="T_ebd1d_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_ebd1d_row7_col0" class="data row7 col0">New York Yankees</td>
+<td id="T_ebd1d_row7_col1" class="data row7 col1">C</td>
+<td id="T_ebd1d_row7_col2" class="data row7 col2">2,881,212.10</td>
 </tr>
 <tr class="odd">
-<td id="T_00c03_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
-<td id="T_00c03_row8_col0" class="data row8 col0">Boston Red Sox</td>
-<td id="T_00c03_row8_col1" class="data row8 col1">P</td>
-<td id="T_00c03_row8_col2" class="data row8 col2">2,653,076.31</td>
+<td id="T_ebd1d_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
+<td id="T_ebd1d_row8_col0" class="data row8 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row8_col1" class="data row8 col1">P</td>
+<td id="T_ebd1d_row8_col2" class="data row8 col2">2,653,076.31</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
-<td id="T_00c03_row9_col0" class="data row9 col0">Boston Red Sox</td>
-<td id="T_00c03_row9_col1" class="data row9 col1">3B</td>
-<td id="T_00c03_row9_col2" class="data row9 col2">2,267,240.70</td>
+<td id="T_ebd1d_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
+<td id="T_ebd1d_row9_col0" class="data row9 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row9_col1" class="data row9 col1">3B</td>
+<td id="T_ebd1d_row9_col2" class="data row9 col2">2,267,240.70</td>
 </tr>
 <tr class="odd">
-<td id="T_00c03_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
-<td id="T_00c03_row10_col0" class="data row10 col0">New York Yankees</td>
-<td id="T_00c03_row10_col1" class="data row10 col1">2B</td>
-<td id="T_00c03_row10_col2" class="data row10 col2">2,025,167.55</td>
+<td id="T_ebd1d_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
+<td id="T_ebd1d_row10_col0" class="data row10 col0">New York Yankees</td>
+<td id="T_ebd1d_row10_col1" class="data row10 col1">2B</td>
+<td id="T_ebd1d_row10_col2" class="data row10 col2">2,025,167.55</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
-<td id="T_00c03_row11_col0" class="data row11 col0">Boston Red Sox</td>
-<td id="T_00c03_row11_col1" class="data row11 col1">C</td>
-<td id="T_00c03_row11_col2" class="data row11 col2">2,023,300.81</td>
+<td id="T_ebd1d_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
+<td id="T_ebd1d_row11_col0" class="data row11 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row11_col1" class="data row11 col1">C</td>
+<td id="T_ebd1d_row11_col2" class="data row11 col2">2,023,300.81</td>
 </tr>
 <tr class="odd">
-<td id="T_00c03_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
-<td id="T_00c03_row12_col0" class="data row12 col0">Boston Red Sox</td>
-<td id="T_00c03_row12_col1" class="data row12 col1">SS</td>
-<td id="T_00c03_row12_col2" class="data row12 col2">1,865,799.92</td>
+<td id="T_ebd1d_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
+<td id="T_ebd1d_row12_col0" class="data row12 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row12_col1" class="data row12 col1">SS</td>
+<td id="T_ebd1d_row12_col2" class="data row12 col2">1,865,799.92</td>
 </tr>
 <tr class="even">
-<td id="T_00c03_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
-<td id="T_00c03_row13_col0" class="data row13 col0">Boston Red Sox</td>
-<td id="T_00c03_row13_col1" class="data row13 col1">2B</td>
-<td id="T_00c03_row13_col2" class="data row13 col2">1,764,983.05</td>
+<td id="T_ebd1d_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
+<td id="T_ebd1d_row13_col0" class="data row13 col0">Boston Red Sox</td>
+<td id="T_ebd1d_row13_col1" class="data row13 col1">2B</td>
+<td id="T_ebd1d_row13_col2" class="data row13 col2">1,764,983.05</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <p>And what position would earn you the most?</p>
-<div id="c61c8ff2" class="cell" data-execution_count="12">
+<div id="3ff8d753" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>fig<span class="op">=</span>px.bar(</span>
@@ -4202,9 +4034,9 @@ if (outputEl) {{
 <span id="cb10-26"><a href="#cb10-26"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>                            <div id="5f8690e7-bfa5-4c7e-8325-870795feca5e" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("5f8690e7-bfa5-4c7e-8325-870795feca5e")) {                    Plotly.newPlot(                        "5f8690e7-bfa5-4c7e-8325-870795feca5e",                        [{"alignmentgroup":"True","hovertemplate":"Team=Boston Red Sox\u003cbr\u003ePosition=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Boston Red Sox","marker":{"color":"#BD3039","pattern":{"shape":""}},"name":"Boston Red Sox","offsetgroup":"Boston Red Sox","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":["1B","2B","3B","C","OF","P","SS"],"xaxis":"x","y":[3417392.71,1764983.05,2267240.7,2023300.81,3265647.96,2653076.31,1865799.92],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Team=New York Yankees\u003cbr\u003ePosition=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"New York Yankees","marker":{"color":"#003087","pattern":{"shape":""}},"name":"New York Yankees","offsetgroup":"New York Yankees","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":["1B","2B","3B","C","OF","P","SS"],"xaxis":"x","y":[5353727.09,2025167.55,4348392.01,2881212.1,3781239.37,3515733.32,4223990.22],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Position"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Salary"},"tickprefix":"$"},"legend":{"title":{"text":""},"tracegroupgap":0,"orientation":"h","yanchor":"top","y":0.95,"xanchor":"left","x":0.7},"title":{"text":"Player Salary by Position"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="964bb8c8-2833-4e4e-9aba-1ebcb8f37589" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("964bb8c8-2833-4e4e-9aba-1ebcb8f37589")) {                    Plotly.newPlot(                        "964bb8c8-2833-4e4e-9aba-1ebcb8f37589",                        [{"alignmentgroup":"True","hovertemplate":"Team=Boston Red Sox\u003cbr\u003ePosition=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Boston Red Sox","marker":{"color":"#BD3039","pattern":{"shape":""}},"name":"Boston Red Sox","offsetgroup":"Boston Red Sox","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":["1B","2B","3B","C","OF","P","SS"],"xaxis":"x","y":[3417392.71,1764983.05,2267240.7,2023300.81,3265647.96,2653076.31,1865799.92],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Team=New York Yankees\u003cbr\u003ePosition=%{x}\u003cbr\u003eavg_salary=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"New York Yankees","marker":{"color":"#003087","pattern":{"shape":""}},"name":"New York Yankees","offsetgroup":"New York Yankees","orientation":"v","showlegend":true,"textposition":"auto","texttemplate":"%{y:$.2s}","x":["1B","2B","3B","C","OF","P","SS"],"xaxis":"x","y":[5353727.09,2025167.55,4348392.01,2881212.1,3781239.37,3515733.32,4223990.22],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Position"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Salary"},"tickprefix":"$"},"legend":{"title":{"text":""},"tracegroupgap":0,"orientation":"h","yanchor":"top","y":0.95,"xanchor":"left","x":0.7},"title":{"text":"Player Salary by Position"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('5f8690e7-bfa5-4c7e-8325-870795feca5e');
+var gd = document.getElementById('964bb8c8-2833-4e4e-9aba-1ebcb8f37589');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -4767,7 +4599,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-52"><a href="#cb11-52"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb11-53"><a href="#cb11-53"></a></span>
 <span id="cb11-54"><a href="#cb11-54"></a><span class="co"># careful to list your path to the file or save it in the same place as your .qmd or .py file</span></span>
-<span id="cb11-55"><a href="#cb11-55"></a>sqlite_file <span class="op">=</span> <span class="vs">r&quot;./Data/lahmansbaseballdb.sqlite&quot;</span></span>
+<span id="cb11-55"><a href="#cb11-55"></a>sqlite_file <span class="op">=</span> <span class="st">&quot;./Data/lahmansbaseballdb.sqlite&quot;</span></span>
 <span id="cb11-56"><a href="#cb11-56"></a>con <span class="op">=</span> sqlite3.<span class="ex">connect</span>(sqlite_file)</span>
 <span id="cb11-57"><a href="#cb11-57"></a></span>
 <span id="cb11-58"><a href="#cb11-58"></a><span class="co"># Quick check to make sure we&#39;re all connected.</span></span>
@@ -4809,8 +4641,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-98"><a href="#cb11-98"></a><span class="st">           salaries.yearID AS `Year`,</span></span>
 <span id="cb11-99"><a href="#cb11-99"></a><span class="st">           salaries.salary AS `Salary`</span></span>
 <span id="cb11-100"><a href="#cb11-100"></a><span class="st">    FROM people</span></span>
-<span id="cb11-101"><a href="#cb11-101"></a><span class="st">    JOIN collegeplaying ON people.playerID = collegeplaying.playerID</span></span>
-<span id="cb11-102"><a href="#cb11-102"></a><span class="st">    JOIN salaries ON people.playerID = salaries.playerID</span></span>
+<span id="cb11-101"><a href="#cb11-101"></a><span class="st">    FULL JOIN collegeplaying ON people.playerID = collegeplaying.playerID</span></span>
+<span id="cb11-102"><a href="#cb11-102"></a><span class="st">    FULL JOIN salaries ON people.playerID = salaries.playerID</span></span>
 <span id="cb11-103"><a href="#cb11-103"></a><span class="st">    WHERE schoolID = &#39;idbyuid&#39;</span></span>
 <span id="cb11-104"><a href="#cb11-104"></a><span class="st">    ORDER BY salary DESC</span></span>
 <span id="cb11-105"><a href="#cb11-105"></a><span class="st">    &quot;&quot;&quot;</span></span>
@@ -4822,7 +4654,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-111"><a href="#cb11-111"></a></span>
 <span id="cb11-112"><a href="#cb11-112"></a><span class="co"># Do some formatting</span></span>
 <span id="cb11-113"><a href="#cb11-113"></a>player_info <span class="op">=</span> player_info.replace(<span class="st">&quot;idbyuid&quot;</span>, <span class="st">&quot;Brigham Young University-Idaho&quot;</span>)</span>
-<span id="cb11-114"><a href="#cb11-114"></a>player_info[<span class="st">&quot;Salary&quot;</span>] <span class="op">=</span> player_info[<span class="st">&quot;Salary&quot;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="ss">f&quot;$ </span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb11-114"><a href="#cb11-114"></a>player_info[<span class="st">&quot;Salary&quot;</span>] <span class="op">=</span> player_info[<span class="st">&quot;Salary&quot;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x:  <span class="ss">f&quot;$ </span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">&quot;</span>)</span>
 <span id="cb11-115"><a href="#cb11-115"></a></span>
 <span id="cb11-116"><a href="#cb11-116"></a>player_info.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb11-117"><a href="#cb11-117"></a><span class="in">```</span></span>
@@ -4887,153 +4719,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-182"><a href="#cb11-182"></a>    <span class="st">&quot;batting_average&quot;</span>, ascending<span class="op">=</span><span class="va">False</span>).head().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb11-183"><a href="#cb11-183"></a><span class="in">```</span></span>
 <span id="cb11-184"><a href="#cb11-184"></a></span>
-<span id="cb11-185"><a href="#cb11-185"></a></span>
-<span id="cb11-186"><a href="#cb11-186"></a><span class="co">&lt;!--</span></span>
-<span id="cb11-189"><a href="#cb11-189"></a><span class="in">```{python}</span></span>
-<span id="cb11-190"><a href="#cb11-190"></a><span class="co">q = &quot;&quot;&quot;--sql</span></span>
-<span id="cb11-191"><a href="#cb11-191"></a><span class="co">    SELECT salaries.yearID AS `Year`,</span></span>
-<span id="cb11-192"><a href="#cb11-192"></a><span class="co">           salaries.teamID AS `Team ID`,</span></span>
-<span id="cb11-193"><a href="#cb11-193"></a><span class="co">           teams.name AS `Team Name`,</span></span>
-<span id="cb11-194"><a href="#cb11-194"></a><span class="co">           salaries.playerID AS `Player ID`,</span></span>
-<span id="cb11-195"><a href="#cb11-195"></a><span class="co">           people.nameGiven AS `Player Name`,</span></span>
-<span id="cb11-196"><a href="#cb11-196"></a><span class="co">           fielding.POS as `Position`,</span></span>
-<span id="cb11-197"><a href="#cb11-197"></a><span class="co">           salaries.salary AS `Salary`</span></span>
-<span id="cb11-198"><a href="#cb11-198"></a><span class="co">    FROM salaries</span></span>
-<span id="cb11-199"><a href="#cb11-199"></a><span class="co">    JOIN fielding</span></span>
-<span id="cb11-200"><a href="#cb11-200"></a><span class="co">        USING (yearID, teamID, playerID)</span></span>
-<span id="cb11-201"><a href="#cb11-201"></a><span class="co">    INNER JOIN people on salaries.playerID=people.playerID</span></span>
-<span id="cb11-202"><a href="#cb11-202"></a><span class="co">    INNER JOIN teams on salaries.teamID=teams.teamID</span></span>
-<span id="cb11-203"><a href="#cb11-203"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb11-204"><a href="#cb11-204"></a></span>
-<span id="cb11-205"><a href="#cb11-205"></a><span class="co">teams_players_pos = pd.read_sql_query(q, con)</span></span>
-<span id="cb11-206"><a href="#cb11-206"></a><span class="co">teams_players_pos</span></span>
-<span id="cb11-207"><a href="#cb11-207"></a><span class="co">```</span></span>
-<span id="cb11-208"><a href="#cb11-208"></a><span class="co">--&gt;</span></span>
-<span id="cb11-209"><a href="#cb11-209"></a></span>
-<span id="cb11-210"><a href="#cb11-210"></a><span class="fu">## Comparing Salaries</span></span>
+<span id="cb11-185"><a href="#cb11-185"></a><span class="fu">## Comparing Salaries</span></span>
+<span id="cb11-186"><a href="#cb11-186"></a></span>
+<span id="cb11-187"><a href="#cb11-187"></a>*Of the Boston Red Sox and New York Yankees*</span>
+<span id="cb11-188"><a href="#cb11-188"></a></span>
+<span id="cb11-189"><a href="#cb11-189"></a>First, let&#39;s grab all the data related to the Red Sox<span class="ot">[^1]</span> and the Yankees<span class="ot">[^2]</span>.</span>
+<span id="cb11-190"><a href="#cb11-190"></a></span>
+<span id="cb11-191"><a href="#cb11-191"></a><span class="ot">[^1]: </span>Designated by the <span class="in">`teamID`</span>: <span class="in">`BOS`</span></span>
+<span id="cb11-192"><a href="#cb11-192"></a></span>
+<span id="cb11-193"><a href="#cb11-193"></a><span class="ot">[^2]: </span>Designated by the <span class="in">`teamID`</span>: <span class="in">`NYA`</span></span>
+<span id="cb11-194"><a href="#cb11-194"></a></span>
+<span id="cb11-197"><a href="#cb11-197"></a><span class="in">```{python}</span></span>
+<span id="cb11-198"><a href="#cb11-198"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
+<span id="cb11-199"><a href="#cb11-199"></a><span class="st">    SELECT salaries.yearID AS `Year`,</span></span>
+<span id="cb11-200"><a href="#cb11-200"></a><span class="st">           salaries.teamID AS `Team`,</span></span>
+<span id="cb11-201"><a href="#cb11-201"></a><span class="st">           salaries.playerID AS `Player ID`,</span></span>
+<span id="cb11-202"><a href="#cb11-202"></a><span class="st">           people.nameGiven AS `Player Name`,</span></span>
+<span id="cb11-203"><a href="#cb11-203"></a><span class="st">           fielding.POS as `Position`,</span></span>
+<span id="cb11-204"><a href="#cb11-204"></a><span class="st">           salaries.salary AS `Salary`</span></span>
+<span id="cb11-205"><a href="#cb11-205"></a><span class="st">    FROM salaries</span></span>
+<span id="cb11-206"><a href="#cb11-206"></a><span class="st">    JOIN fielding</span></span>
+<span id="cb11-207"><a href="#cb11-207"></a><span class="st">        USING (yearID, teamID, playerID)</span></span>
+<span id="cb11-208"><a href="#cb11-208"></a><span class="st">    INNER JOIN people on salaries.playerID=people.playerID</span></span>
+<span id="cb11-209"><a href="#cb11-209"></a><span class="st">    WHERE salaries.teamID IN (&#39;BOS&#39;, &#39;NYA&#39;)</span></span>
+<span id="cb11-210"><a href="#cb11-210"></a><span class="st">    &quot;&quot;&quot;</span></span>
 <span id="cb11-211"><a href="#cb11-211"></a></span>
-<span id="cb11-212"><a href="#cb11-212"></a>*Of the Boston Red Sox and New York Yankees*</span>
-<span id="cb11-213"><a href="#cb11-213"></a></span>
-<span id="cb11-214"><a href="#cb11-214"></a>First, let&#39;s grab all the data related to the Red Sox<span class="ot">[^1]</span> and the Yankees<span class="ot">[^2]</span>.</span>
-<span id="cb11-215"><a href="#cb11-215"></a></span>
-<span id="cb11-216"><a href="#cb11-216"></a><span class="ot">[^1]: </span>Designated by the <span class="in">`teamID`</span>: <span class="in">`BOS`</span></span>
-<span id="cb11-217"><a href="#cb11-217"></a></span>
-<span id="cb11-218"><a href="#cb11-218"></a><span class="ot">[^2]: </span>Designated by the <span class="in">`teamID`</span>: <span class="in">`NYA`</span></span>
-<span id="cb11-219"><a href="#cb11-219"></a></span>
-<span id="cb11-222"><a href="#cb11-222"></a><span class="in">```{python}</span></span>
-<span id="cb11-223"><a href="#cb11-223"></a>q <span class="op">=</span> <span class="st">&quot;&quot;&quot;--sql</span></span>
-<span id="cb11-224"><a href="#cb11-224"></a><span class="st">    SELECT salaries.yearID AS `Year`,</span></span>
-<span id="cb11-225"><a href="#cb11-225"></a><span class="st">           salaries.teamID AS `Team`,</span></span>
-<span id="cb11-226"><a href="#cb11-226"></a><span class="st">           salaries.playerID AS `Player ID`,</span></span>
-<span id="cb11-227"><a href="#cb11-227"></a><span class="st">           people.nameGiven AS `Player Name`,</span></span>
-<span id="cb11-228"><a href="#cb11-228"></a><span class="st">           fielding.POS as `Position`,</span></span>
-<span id="cb11-229"><a href="#cb11-229"></a><span class="st">           salaries.salary AS `Salary`</span></span>
-<span id="cb11-230"><a href="#cb11-230"></a><span class="st">    FROM salaries</span></span>
-<span id="cb11-231"><a href="#cb11-231"></a><span class="st">    JOIN fielding</span></span>
-<span id="cb11-232"><a href="#cb11-232"></a><span class="st">        USING (yearID, teamID, playerID)</span></span>
-<span id="cb11-233"><a href="#cb11-233"></a><span class="st">    INNER JOIN people on salaries.playerID=people.playerID</span></span>
-<span id="cb11-234"><a href="#cb11-234"></a><span class="st">    WHERE salaries.teamID IN (&#39;BOS&#39;, &#39;NYA&#39;)</span></span>
-<span id="cb11-235"><a href="#cb11-235"></a><span class="st">    &quot;&quot;&quot;</span></span>
-<span id="cb11-236"><a href="#cb11-236"></a></span>
-<span id="cb11-237"><a href="#cb11-237"></a>mlb_players <span class="op">=</span> pd.read_sql_query(q, con)</span>
-<span id="cb11-238"><a href="#cb11-238"></a>mlb_players[<span class="st">&quot;Team&quot;</span>] <span class="op">=</span> mlb_players[<span class="st">&quot;Team&quot;</span>].replace(</span>
-<span id="cb11-239"><a href="#cb11-239"></a>    [<span class="st">&quot;BOS&quot;</span>, <span class="st">&quot;NYA&quot;</span>], [<span class="st">&quot;Boston Red Sox&quot;</span>, <span class="st">&quot;New York Yankees&quot;</span>]</span>
-<span id="cb11-240"><a href="#cb11-240"></a>)</span>
-<span id="cb11-241"><a href="#cb11-241"></a>mlb_players</span>
-<span id="cb11-242"><a href="#cb11-242"></a><span class="in">```</span></span>
-<span id="cb11-243"><a href="#cb11-243"></a></span>
-<span id="cb11-244"><a href="#cb11-244"></a><span class="fu">### By Year</span></span>
-<span id="cb11-245"><a href="#cb11-245"></a></span>
-<span id="cb11-246"><a href="#cb11-246"></a>Now that we have the relevant data, let&#39;s see how much the average salary is for each team. It looks like if you get drafted by the Yankees, you will have a significantly higher paying contract!</span>
-<span id="cb11-247"><a href="#cb11-247"></a></span>
-<span id="cb11-250"><a href="#cb11-250"></a><span class="in">```{python}</span></span>
-<span id="cb11-251"><a href="#cb11-251"></a>avg_player_salary <span class="op">=</span> (</span>
-<span id="cb11-252"><a href="#cb11-252"></a>    mlb_players.groupby([<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Team&quot;</span>]).agg(avg_salary<span class="op">=</span>(<span class="st">&quot;Salary&quot;</span>, np.mean))</span>
-<span id="cb11-253"><a href="#cb11-253"></a>).reset_index()</span>
-<span id="cb11-254"><a href="#cb11-254"></a>avg_player_salary[<span class="st">&quot;avg_salary&quot;</span>] <span class="op">=</span> avg_player_salary[<span class="st">&quot;avg_salary&quot;</span>].<span class="bu">map</span>(</span>
-<span id="cb11-255"><a href="#cb11-255"></a>    <span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb11-256"><a href="#cb11-256"></a>)</span>
-<span id="cb11-257"><a href="#cb11-257"></a><span class="in">```</span></span>
-<span id="cb11-258"><a href="#cb11-258"></a></span>
-<span id="cb11-261"><a href="#cb11-261"></a><span class="in">```{python}</span></span>
-<span id="cb11-262"><a href="#cb11-262"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb11-263"><a href="#cb11-263"></a>    avg_player_salary,</span>
-<span id="cb11-264"><a href="#cb11-264"></a>    x<span class="op">=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb11-265"><a href="#cb11-265"></a>    y<span class="op">=</span><span class="st">&quot;avg_salary&quot;</span>,</span>
-<span id="cb11-266"><a href="#cb11-266"></a>    color<span class="op">=</span><span class="st">&quot;Team&quot;</span>,</span>
-<span id="cb11-267"><a href="#cb11-267"></a>    title<span class="op">=</span><span class="st">&quot;Player Salary | 1985-2016&quot;</span>,</span>
-<span id="cb11-268"><a href="#cb11-268"></a>    barmode<span class="op">=</span><span class="st">&quot;group&quot;</span>,</span>
-<span id="cb11-269"><a href="#cb11-269"></a>    text_auto<span class="op">=</span><span class="st">&quot;$.2s&quot;</span>,</span>
-<span id="cb11-270"><a href="#cb11-270"></a>    color_discrete_map<span class="op">=</span>{<span class="st">&quot;Boston Red Sox&quot;</span>: <span class="st">&quot;#BD3039&quot;</span>,</span>
-<span id="cb11-271"><a href="#cb11-271"></a>                        <span class="st">&quot;New York Yankees&quot;</span>: <span class="st">&quot;#003087&quot;</span>},</span>
-<span id="cb11-272"><a href="#cb11-272"></a>)</span>
-<span id="cb11-273"><a href="#cb11-273"></a></span>
-<span id="cb11-274"><a href="#cb11-274"></a>fig.update_xaxes(insiderange<span class="op">=</span>[<span class="fl">1984.5</span>, <span class="fl">2016.5</span>])</span>
-<span id="cb11-275"><a href="#cb11-275"></a></span>
-<span id="cb11-276"><a href="#cb11-276"></a>fig.update_yaxes(title<span class="op">=</span><span class="st">&quot;Average Salary&quot;</span>, tickprefix<span class="op">=</span><span class="st">&quot;$&quot;</span>)</span>
-<span id="cb11-277"><a href="#cb11-277"></a></span>
-<span id="cb11-278"><a href="#cb11-278"></a>fig.update_layout(</span>
-<span id="cb11-279"><a href="#cb11-279"></a>    legend<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="cb11-280"><a href="#cb11-280"></a>        title<span class="op">=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb11-281"><a href="#cb11-281"></a>        orientation<span class="op">=</span><span class="st">&quot;h&quot;</span>,</span>
-<span id="cb11-282"><a href="#cb11-282"></a>        yanchor<span class="op">=</span><span class="st">&quot;top&quot;</span>,</span>
-<span id="cb11-283"><a href="#cb11-283"></a>        y<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb11-284"><a href="#cb11-284"></a>        xanchor<span class="op">=</span><span class="st">&quot;left&quot;</span>,</span>
-<span id="cb11-285"><a href="#cb11-285"></a>        x<span class="op">=</span><span class="fl">0.005</span>,</span>
-<span id="cb11-286"><a href="#cb11-286"></a>    )</span>
-<span id="cb11-287"><a href="#cb11-287"></a>)</span>
-<span id="cb11-288"><a href="#cb11-288"></a></span>
-<span id="cb11-289"><a href="#cb11-289"></a>fig.show()</span>
-<span id="cb11-290"><a href="#cb11-290"></a><span class="in">```</span></span>
-<span id="cb11-291"><a href="#cb11-291"></a></span>
-<span id="cb11-292"><a href="#cb11-292"></a><span class="fu">### By Position</span></span>
-<span id="cb11-293"><a href="#cb11-293"></a></span>
-<span id="cb11-296"><a href="#cb11-296"></a><span class="in">```{python}</span></span>
-<span id="cb11-297"><a href="#cb11-297"></a>avg_player_salary_by_pos <span class="op">=</span> (</span>
-<span id="cb11-298"><a href="#cb11-298"></a>    mlb_players.groupby([<span class="st">&quot;Team&quot;</span>, <span class="st">&quot;Position&quot;</span>]).agg(</span>
-<span id="cb11-299"><a href="#cb11-299"></a>        avg_salary<span class="op">=</span>(<span class="st">&quot;Salary&quot;</span>, np.mean))</span>
-<span id="cb11-300"><a href="#cb11-300"></a>).reset_index()</span>
+<span id="cb11-212"><a href="#cb11-212"></a>mlb_players <span class="op">=</span> pd.read_sql_query(q, con)</span>
+<span id="cb11-213"><a href="#cb11-213"></a>mlb_players[<span class="st">&quot;Team&quot;</span>] <span class="op">=</span> mlb_players[<span class="st">&quot;Team&quot;</span>].replace(</span>
+<span id="cb11-214"><a href="#cb11-214"></a>    [<span class="st">&quot;BOS&quot;</span>, <span class="st">&quot;NYA&quot;</span>], [<span class="st">&quot;Boston Red Sox&quot;</span>, <span class="st">&quot;New York Yankees&quot;</span>]</span>
+<span id="cb11-215"><a href="#cb11-215"></a>)</span>
+<span id="cb11-216"><a href="#cb11-216"></a>mlb_players</span>
+<span id="cb11-217"><a href="#cb11-217"></a><span class="in">```</span></span>
+<span id="cb11-218"><a href="#cb11-218"></a></span>
+<span id="cb11-219"><a href="#cb11-219"></a><span class="fu">### By Year</span></span>
+<span id="cb11-220"><a href="#cb11-220"></a></span>
+<span id="cb11-221"><a href="#cb11-221"></a>Now that we have the relevant data, let&#39;s see how much the average salary is for each team. It looks like if you get drafted by the Yankees, you will have a significantly higher paying contract!</span>
+<span id="cb11-222"><a href="#cb11-222"></a></span>
+<span id="cb11-225"><a href="#cb11-225"></a><span class="in">```{python}</span></span>
+<span id="cb11-226"><a href="#cb11-226"></a>avg_player_salary <span class="op">=</span> (</span>
+<span id="cb11-227"><a href="#cb11-227"></a>    mlb_players.groupby([<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Team&quot;</span>]).agg(avg_salary<span class="op">=</span>(<span class="st">&quot;Salary&quot;</span>, np.mean))</span>
+<span id="cb11-228"><a href="#cb11-228"></a>).reset_index()</span>
+<span id="cb11-229"><a href="#cb11-229"></a>avg_player_salary[<span class="st">&quot;avg_salary&quot;</span>] <span class="op">=</span> avg_player_salary[<span class="st">&quot;avg_salary&quot;</span>].<span class="bu">map</span>(</span>
+<span id="cb11-230"><a href="#cb11-230"></a>    <span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb11-231"><a href="#cb11-231"></a>)</span>
+<span id="cb11-232"><a href="#cb11-232"></a><span class="in">```</span></span>
+<span id="cb11-233"><a href="#cb11-233"></a></span>
+<span id="cb11-236"><a href="#cb11-236"></a><span class="in">```{python}</span></span>
+<span id="cb11-237"><a href="#cb11-237"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb11-238"><a href="#cb11-238"></a>    avg_player_salary,</span>
+<span id="cb11-239"><a href="#cb11-239"></a>    x<span class="op">=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb11-240"><a href="#cb11-240"></a>    y<span class="op">=</span><span class="st">&quot;avg_salary&quot;</span>,</span>
+<span id="cb11-241"><a href="#cb11-241"></a>    color<span class="op">=</span><span class="st">&quot;Team&quot;</span>,</span>
+<span id="cb11-242"><a href="#cb11-242"></a>    title<span class="op">=</span><span class="st">&quot;Player Salary | 1985-2016&quot;</span>,</span>
+<span id="cb11-243"><a href="#cb11-243"></a>    barmode<span class="op">=</span><span class="st">&quot;group&quot;</span>,</span>
+<span id="cb11-244"><a href="#cb11-244"></a>    text_auto<span class="op">=</span><span class="st">&quot;$.2s&quot;</span>,</span>
+<span id="cb11-245"><a href="#cb11-245"></a>    color_discrete_map<span class="op">=</span>{<span class="st">&quot;Boston Red Sox&quot;</span>: <span class="st">&quot;#BD3039&quot;</span>,</span>
+<span id="cb11-246"><a href="#cb11-246"></a>                        <span class="st">&quot;New York Yankees&quot;</span>: <span class="st">&quot;#003087&quot;</span>},</span>
+<span id="cb11-247"><a href="#cb11-247"></a>)</span>
+<span id="cb11-248"><a href="#cb11-248"></a></span>
+<span id="cb11-249"><a href="#cb11-249"></a>fig.update_xaxes(insiderange<span class="op">=</span>[<span class="fl">1984.5</span>, <span class="fl">2016.5</span>])</span>
+<span id="cb11-250"><a href="#cb11-250"></a></span>
+<span id="cb11-251"><a href="#cb11-251"></a>fig.update_yaxes(title<span class="op">=</span><span class="st">&quot;Average Salary&quot;</span>, tickprefix<span class="op">=</span><span class="st">&quot;$&quot;</span>)</span>
+<span id="cb11-252"><a href="#cb11-252"></a></span>
+<span id="cb11-253"><a href="#cb11-253"></a>fig.update_layout(</span>
+<span id="cb11-254"><a href="#cb11-254"></a>    legend<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb11-255"><a href="#cb11-255"></a>        title<span class="op">=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb11-256"><a href="#cb11-256"></a>        orientation<span class="op">=</span><span class="st">&quot;h&quot;</span>,</span>
+<span id="cb11-257"><a href="#cb11-257"></a>        yanchor<span class="op">=</span><span class="st">&quot;top&quot;</span>,</span>
+<span id="cb11-258"><a href="#cb11-258"></a>        y<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb11-259"><a href="#cb11-259"></a>        xanchor<span class="op">=</span><span class="st">&quot;left&quot;</span>,</span>
+<span id="cb11-260"><a href="#cb11-260"></a>        x<span class="op">=</span><span class="fl">0.005</span>,</span>
+<span id="cb11-261"><a href="#cb11-261"></a>    )</span>
+<span id="cb11-262"><a href="#cb11-262"></a>)</span>
+<span id="cb11-263"><a href="#cb11-263"></a></span>
+<span id="cb11-264"><a href="#cb11-264"></a>fig.show()</span>
+<span id="cb11-265"><a href="#cb11-265"></a><span class="in">```</span></span>
+<span id="cb11-266"><a href="#cb11-266"></a></span>
+<span id="cb11-267"><a href="#cb11-267"></a><span class="fu">### By Position</span></span>
+<span id="cb11-268"><a href="#cb11-268"></a></span>
+<span id="cb11-271"><a href="#cb11-271"></a><span class="in">```{python}</span></span>
+<span id="cb11-272"><a href="#cb11-272"></a>avg_player_salary_by_pos <span class="op">=</span> (</span>
+<span id="cb11-273"><a href="#cb11-273"></a>    mlb_players.groupby([<span class="st">&quot;Team&quot;</span>, <span class="st">&quot;Position&quot;</span>]).agg(</span>
+<span id="cb11-274"><a href="#cb11-274"></a>        avg_salary<span class="op">=</span>(<span class="st">&quot;Salary&quot;</span>, np.mean))</span>
+<span id="cb11-275"><a href="#cb11-275"></a>).reset_index()</span>
+<span id="cb11-276"><a href="#cb11-276"></a></span>
+<span id="cb11-277"><a href="#cb11-277"></a>avg_player_salary_by_pos[<span class="st">&quot;avg_salary&quot;</span>] <span class="op">=</span> avg_player_salary_by_pos[<span class="st">&quot;avg_salary&quot;</span>].<span class="bu">map</span>(</span>
+<span id="cb11-278"><a href="#cb11-278"></a>    <span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb11-279"><a href="#cb11-279"></a>)</span>
+<span id="cb11-280"><a href="#cb11-280"></a></span>
+<span id="cb11-281"><a href="#cb11-281"></a>avg_player_salary_by_pos.sort_values(by<span class="op">=</span>[<span class="st">&#39;avg_salary&#39;</span>, <span class="st">&#39;Position&#39;</span>], ascending<span class="op">=</span><span class="va">False</span>).reset_index(</span>
+<span id="cb11-282"><a href="#cb11-282"></a>    drop<span class="op">=</span><span class="va">True</span>).style.<span class="bu">format</span>(precision<span class="op">=</span><span class="dv">2</span>, thousands<span class="op">=</span><span class="st">&quot;,&quot;</span>)</span>
+<span id="cb11-283"><a href="#cb11-283"></a><span class="in">```</span></span>
+<span id="cb11-284"><a href="#cb11-284"></a></span>
+<span id="cb11-285"><a href="#cb11-285"></a>And what position would earn you the most?</span>
+<span id="cb11-286"><a href="#cb11-286"></a></span>
+<span id="cb11-289"><a href="#cb11-289"></a><span class="in">```{python}</span></span>
+<span id="cb11-290"><a href="#cb11-290"></a>fig<span class="op">=</span>px.bar(</span>
+<span id="cb11-291"><a href="#cb11-291"></a>    avg_player_salary_by_pos,</span>
+<span id="cb11-292"><a href="#cb11-292"></a>    x<span class="op">=</span><span class="st">&quot;Position&quot;</span>,</span>
+<span id="cb11-293"><a href="#cb11-293"></a>    y<span class="op">=</span><span class="st">&quot;avg_salary&quot;</span>,</span>
+<span id="cb11-294"><a href="#cb11-294"></a>    color<span class="op">=</span><span class="st">&quot;Team&quot;</span>,</span>
+<span id="cb11-295"><a href="#cb11-295"></a>    title<span class="op">=</span><span class="st">&quot;Player Salary by Position&quot;</span>,</span>
+<span id="cb11-296"><a href="#cb11-296"></a>    text_auto<span class="op">=</span><span class="st">&quot;$.2s&quot;</span>,</span>
+<span id="cb11-297"><a href="#cb11-297"></a>    barmode<span class="op">=</span><span class="st">&quot;group&quot;</span>,</span>
+<span id="cb11-298"><a href="#cb11-298"></a>    color_discrete_map<span class="op">=</span>{<span class="st">&quot;Boston Red Sox&quot;</span>: <span class="st">&quot;#BD3039&quot;</span>,</span>
+<span id="cb11-299"><a href="#cb11-299"></a>        <span class="st">&quot;New York Yankees&quot;</span>: <span class="st">&quot;#003087&quot;</span>},</span>
+<span id="cb11-300"><a href="#cb11-300"></a>)</span>
 <span id="cb11-301"><a href="#cb11-301"></a></span>
-<span id="cb11-302"><a href="#cb11-302"></a>avg_player_salary_by_pos[<span class="st">&quot;avg_salary&quot;</span>] <span class="op">=</span> avg_player_salary_by_pos[<span class="st">&quot;avg_salary&quot;</span>].<span class="bu">map</span>(</span>
-<span id="cb11-303"><a href="#cb11-303"></a>    <span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb11-304"><a href="#cb11-304"></a>)</span>
-<span id="cb11-305"><a href="#cb11-305"></a></span>
-<span id="cb11-306"><a href="#cb11-306"></a>avg_player_salary_by_pos.sort_values(by<span class="op">=</span>[<span class="st">&#39;avg_salary&#39;</span>, <span class="st">&#39;Position&#39;</span>], ascending<span class="op">=</span><span class="va">False</span>).reset_index(</span>
-<span id="cb11-307"><a href="#cb11-307"></a>    drop<span class="op">=</span><span class="va">True</span>).style.<span class="bu">format</span>(precision<span class="op">=</span><span class="dv">2</span>, thousands<span class="op">=</span><span class="st">&quot;,&quot;</span>)</span>
-<span id="cb11-308"><a href="#cb11-308"></a><span class="in">```</span></span>
-<span id="cb11-309"><a href="#cb11-309"></a></span>
-<span id="cb11-310"><a href="#cb11-310"></a>And what position would earn you the most?</span>
-<span id="cb11-311"><a href="#cb11-311"></a></span>
-<span id="cb11-314"><a href="#cb11-314"></a><span class="in">```{python}</span></span>
-<span id="cb11-315"><a href="#cb11-315"></a>fig<span class="op">=</span>px.bar(</span>
-<span id="cb11-316"><a href="#cb11-316"></a>    avg_player_salary_by_pos,</span>
-<span id="cb11-317"><a href="#cb11-317"></a>    x<span class="op">=</span><span class="st">&quot;Position&quot;</span>,</span>
-<span id="cb11-318"><a href="#cb11-318"></a>    y<span class="op">=</span><span class="st">&quot;avg_salary&quot;</span>,</span>
-<span id="cb11-319"><a href="#cb11-319"></a>    color<span class="op">=</span><span class="st">&quot;Team&quot;</span>,</span>
-<span id="cb11-320"><a href="#cb11-320"></a>    title<span class="op">=</span><span class="st">&quot;Player Salary by Position&quot;</span>,</span>
-<span id="cb11-321"><a href="#cb11-321"></a>    text_auto<span class="op">=</span><span class="st">&quot;$.2s&quot;</span>,</span>
-<span id="cb11-322"><a href="#cb11-322"></a>    barmode<span class="op">=</span><span class="st">&quot;group&quot;</span>,</span>
-<span id="cb11-323"><a href="#cb11-323"></a>    color_discrete_map<span class="op">=</span>{<span class="st">&quot;Boston Red Sox&quot;</span>: <span class="st">&quot;#BD3039&quot;</span>,</span>
-<span id="cb11-324"><a href="#cb11-324"></a>        <span class="st">&quot;New York Yankees&quot;</span>: <span class="st">&quot;#003087&quot;</span>},</span>
-<span id="cb11-325"><a href="#cb11-325"></a>)</span>
-<span id="cb11-326"><a href="#cb11-326"></a></span>
-<span id="cb11-327"><a href="#cb11-327"></a>fig.update_yaxes(title<span class="op">=</span><span class="st">&quot;Average Salary&quot;</span>, tickprefix<span class="op">=</span><span class="st">&quot;$&quot;</span>)</span>
-<span id="cb11-328"><a href="#cb11-328"></a></span>
-<span id="cb11-329"><a href="#cb11-329"></a>fig.update_layout(</span>
-<span id="cb11-330"><a href="#cb11-330"></a>    legend<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="cb11-331"><a href="#cb11-331"></a>        title<span class="op">=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb11-332"><a href="#cb11-332"></a>        orientation<span class="op">=</span><span class="st">&quot;h&quot;</span>,</span>
-<span id="cb11-333"><a href="#cb11-333"></a>        yanchor<span class="op">=</span><span class="st">&quot;top&quot;</span>,</span>
-<span id="cb11-334"><a href="#cb11-334"></a>        y<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb11-335"><a href="#cb11-335"></a>        xanchor<span class="op">=</span><span class="st">&quot;left&quot;</span>,</span>
-<span id="cb11-336"><a href="#cb11-336"></a>        x<span class="op">=</span><span class="fl">0.7</span>,</span>
-<span id="cb11-337"><a href="#cb11-337"></a>    )</span>
-<span id="cb11-338"><a href="#cb11-338"></a>)</span>
-<span id="cb11-339"><a href="#cb11-339"></a></span>
-<span id="cb11-340"><a href="#cb11-340"></a>fig.show()</span>
-<span id="cb11-341"><a href="#cb11-341"></a><span class="in">```</span></span>
-<span id="cb11-342"><a href="#cb11-342"></a></span>
-<span id="cb11-343"><a href="#cb11-343"></a>It looks like the First Baseman get&#39;s the most on average. I always thought the pitcher would earn the highest, but from these two teams, that is not the case.</span>
+<span id="cb11-302"><a href="#cb11-302"></a>fig.update_yaxes(title<span class="op">=</span><span class="st">&quot;Average Salary&quot;</span>, tickprefix<span class="op">=</span><span class="st">&quot;$&quot;</span>)</span>
+<span id="cb11-303"><a href="#cb11-303"></a></span>
+<span id="cb11-304"><a href="#cb11-304"></a>fig.update_layout(</span>
+<span id="cb11-305"><a href="#cb11-305"></a>    legend<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb11-306"><a href="#cb11-306"></a>        title<span class="op">=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb11-307"><a href="#cb11-307"></a>        orientation<span class="op">=</span><span class="st">&quot;h&quot;</span>,</span>
+<span id="cb11-308"><a href="#cb11-308"></a>        yanchor<span class="op">=</span><span class="st">&quot;top&quot;</span>,</span>
+<span id="cb11-309"><a href="#cb11-309"></a>        y<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb11-310"><a href="#cb11-310"></a>        xanchor<span class="op">=</span><span class="st">&quot;left&quot;</span>,</span>
+<span id="cb11-311"><a href="#cb11-311"></a>        x<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb11-312"><a href="#cb11-312"></a>    )</span>
+<span id="cb11-313"><a href="#cb11-313"></a>)</span>
+<span id="cb11-314"><a href="#cb11-314"></a></span>
+<span id="cb11-315"><a href="#cb11-315"></a>fig.show()</span>
+<span id="cb11-316"><a href="#cb11-316"></a><span class="in">```</span></span>
+<span id="cb11-317"><a href="#cb11-317"></a></span>
+<span id="cb11-318"><a href="#cb11-318"></a>It looks like the First Baseman get&#39;s the most on average. I always thought the pitcher would earn the highest, but from these two teams, that is not the case.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
