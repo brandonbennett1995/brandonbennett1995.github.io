@@ -24,6 +24,8 @@ format:
       caption: See Code
 execute:
   warning: false
+editor:
+  render-on-save: true
 ---
 
 # Elevator Pitch {.unnumbered}
@@ -51,7 +53,6 @@ import plotly.express as px
 # | fig-cap: Sample of the data
 
 file = "https://raw.githubusercontent.com/byuidatascience/data4names/master/data-raw/names_year/names_year.csv"
-# file = r'./names_year.csv'
 # Reading in the data
 df = pd.read_csv(file)
 
@@ -67,7 +68,7 @@ df = df.astype({"Total": "int32"})
 
 # Changing the 'Total' column to an int because we can't have
 # .5 kids named something
-df = df.astype({'Total': 'int32'})
+df = df.astype({"Total": "int32"})
 ```
 
 # Hi, My Name is...
@@ -96,9 +97,7 @@ fig = px.line(
     x='Year',
     y='Total',
     title="Popularity of 'Brandon'",
-    labels={
-        'Year': 'Year'
-    }
+    labels={'Year': 'Year'}
 )
 
 # Adding a line to indicate my birth year
@@ -149,11 +148,7 @@ fig = px.line(
 
 fig.add_vline(
     x=1990,
-    label=dict(
-        text="Peak Brittany's",
-        textposition="middle left",
-        font=dict(size=16)
-    )
+    label=dict(text="Peak Brittany's", textposition="middle left", font=dict(size=16)),
 )
 
 fig.show()
@@ -181,20 +176,23 @@ ch_names = df.query("Name in @names & (1920 <= Year <= 2000)")
 
 fig = px.line(
     ch_names,
-    x='Year',
-    y='Total',
+    x="Year",
+    y="Total",
     title="Mary, Martha, Paul, and, Peter",
-    color='Name',
-    labels={
-        'Year': 'Year',
-        'Name': 'Name'
-    }
+    color="Name",
+    labels={"Year": "Year", "Name": "Name"},
 )
 
-fig.add_vline(x=1950)
-fig.add_vline(x=1950)
-fig.add_vline(x=1950)
-fig.add_vline(x=1950)
+fig.add_vline(
+    x=1947, line_dash="dash", line_color="blue", label=dict(text="Martha Peak")
+)
+fig.add_vline(x=1950, line_dash="dash", line_color="red", label=dict(text="Mary Peak"))
+fig.add_vline(
+    x=1954, line_dash="dash", line_color="green", label=dict(text="Paul Peak")
+)
+fig.add_vline(
+    x=1956, line_dash="dash", line_color="purple", label=dict(text="Peter Peak")
+)
 
 fig.show()
 ```
